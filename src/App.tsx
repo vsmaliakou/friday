@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Header} from "./main/ui/header/Header";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {Login} from "./main/ui/components/auth/login/Login";
+import {Register} from "./main/ui/components/auth/register/Register";
+import {Profile} from "./main/ui/components/profile/Profile";
+import {ForgotPassword} from "./main/ui/components/auth/forgotPassword/ForgotPassword";
+import {SetPassword} from "./main/ui/components/auth/setPassword/SetPassword";
+import {Test} from "./main/ui/components/test/Test";
 
 const App = () => {
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <Header/>
+            <div className="App-content">
+                <Switch>
+                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path='/registration' render={() => <Register/>}/>
+                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/forgot' render={() => <ForgotPassword/>}/>
+                    <Route path='/new-password' render={() => <SetPassword/>}/>
+                    <Route path='/test' render={() => <Test/>}/>
+                    <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
+                    <Route path='*' render={() => <Redirect to={'/404'}/>}/>
+                </Switch>
+            </div>
         </div>
     );
 }
