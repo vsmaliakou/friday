@@ -6,6 +6,7 @@ export const Register = () => {
             Registration
             {/*test commit*/}
             TEST2
+            Test3
         </div>
     )
 }
