@@ -7,6 +7,7 @@ export const Register = () => {
             {/*test commit*/}
             TEST2
             Test3
+            <h1>Привет Алексей</h1>
         </div>
     )
 }
