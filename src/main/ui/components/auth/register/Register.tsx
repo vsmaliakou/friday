@@ -4,6 +4,7 @@ export const Register = () => {
     return (
         <div>
             Registration
+            {/*test commit*/}
         </div>
     )
 }
