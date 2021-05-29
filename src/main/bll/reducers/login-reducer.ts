@@ -2,36 +2,34 @@ import {Dispatch} from "redux";
 import {loginAPI, LoginType} from "../../dal/auth/login/loginApi";
 
 export type LoginActionType = ReturnType<typeof loginAC>
-export type LoginInitialStateType = typeof initialState
+// export type LoginInitialStateType = typeof initialState
 
-let initialState = {
-    // avatar: '',
-    // created: ,
-    // email: '',
-    // isAdmin: false,
-    // name: '',
-    // publicCardPacksCount: 0,
-    // rememberMe: false,
-    // token: '',
-    // tokenDeathTime: 0,
-    // updated: ,
-    // verified: false,
-    // __v: number,
-    // _id: string,
+let initialState: LoginType = {
+    avatar: '',
+    created: {} as Date,
+    email: '',
+    isAdmin: false,
+    name: '',
+    publicCardPacksCount: 0,
+    rememberMe: false,
+    token: '',
+    tokenDeathTime: 0,
+    updated: {} as Date,
+    verified: false,
+    __v: 0,
+    _id: ''
 }
 
-const loginReducer = (state = initialState, action: LoginActionType): LoginInitialStateType => {
+const loginReducer = (state = initialState, action: LoginActionType): LoginType => {
     switch (action.type) {
         case 'login/POST_LOGIN_DATA':
-            return {
-                ...state
-            }
+            return {...state = action.dataUser}
         default:
             return state
     }
 }
 
-export const loginAC = (dataUser: any) => ({
+export const loginAC = (dataUser: LoginType) => ({
     type: 'login/POST_LOGIN_DATA',
     dataUser
 } as const)
@@ -40,9 +38,9 @@ export const postUserDataTC = (email: string, password: string, rememberMe: bool
     return (dispatch: Dispatch) => {
         loginAPI.postLogin(email, password, rememberMe)
             .then((res) => {
-                dispatch(loginAC(res))
-                debugger
+                dispatch(loginAC(res.data))
             })
+
     }
 }
 
