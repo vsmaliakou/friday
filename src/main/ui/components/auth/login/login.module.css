@@ -1,0 +1,52 @@
+.formLogin {
+    margin-top: 100px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 413px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.formLogin > h1 {
+    margin-top: 25px;
+    color: #2D2E46;
+    margin-bottom: 32px;
+}
+
+.inputArea {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 347px;
+    margin-bottom: 48px;
+}
+
+.formLogin > button {
+    width: 266px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.linkForgot {
+    font-size: 14px;
+    width: 103px;
+    line-height: 16px;
+    margin-left: auto;
+    margin-right: 51px;
+    text-decoration: none;
+    color: #2D2E46;
+    margin-bottom: 92px;
+}
+
+.formLogin > p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 31px;
+}
+
