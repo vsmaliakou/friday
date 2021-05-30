@@ -1,33 +1,49 @@
 import {Dispatch} from "redux";
-import {PayloadType, registerAPI} from "../../dal/auth/register/registerAPI";
+import {registerAPI} from "../../dal/auth/register/registerAPI";
 
-export type RegisterActionType = ReturnType<typeof registerAC>
+export type RegisterActionType = ReturnType<typeof setEmailAC>
+    | ReturnType<typeof setErrorAC>
+    | ReturnType<typeof setRegistrationSuccessAC>
 export type RegisterInitialStateType = typeof initialState
 
 let initialState = {
-    email: null as string | null,
-    password: null as string | null
+    email: "",
+    error: "",
+    registrationSuccess: false
 }
 
 const registerReducer = (state = initialState, action: RegisterActionType): RegisterInitialStateType => {
     switch (action.type) {
-        case 'CARDS/REGISTER/SET-REGISTRATION-DATA':
+        case 'CARDS/REGISTER/SET-EMAIL':
             return {
                 ...state,
-                ...action.payload
+                email: action.email
             }
-
+        case 'CARDS/REGISTER/SET-ERROR':
+            return {
+                ...state, error: action.error
+            }
+        case 'CARDS/REGISTER/REGISTRATION-SUCCESS':
+            return {
+                ...state, registrationSuccess: action.registrationSuccess
+            }
         default:
             return state
     }
 }
 
-export const registerAC = (payload: PayloadType) => ({type: 'CARDS/REGISTER/SET-REGISTRATION-DATA', payload} as const)
+export const setEmailAC = (email: string) => ({type: 'CARDS/REGISTER/SET-EMAIL', email} as const)
+export const setErrorAC = (error: string) => ({type: 'CARDS/REGISTER/SET-ERROR', error} as const)
+export const setRegistrationSuccessAC = (registrationSuccess: boolean) => ({type: 'CARDS/REGISTER/REGISTRATION-SUCCESS', registrationSuccess} as const)
 
 export const setRegistrationDataTC = (email: string, password: string) => (dispatch: Dispatch) => {
-    return registerAPI.setRegisterData({email, password})
+    return registerAPI.setRegisterData(email, password)
         .then(response => {
-            dispatch(registerAC(response.data))
+            console.log(response.data.addedUser.email)
+            dispatch(setEmailAC(response.data.addedUser.email))
+            dispatch(setRegistrationSuccessAC(true))
+        }).catch(e => {
+            dispatch(setErrorAC(e.response.data.error))
         })
 }
 
