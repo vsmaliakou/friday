@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import {Header} from "./main/ui/header/Header";
 import {Redirect, Route, Switch} from "react-router-dom";
-import {Login} from "./main/ui/components/auth/login/Login";
 import {Profile} from "./main/ui/components/profile/Profile";
 import {ForgotPassword} from "./main/ui/components/auth/forgotPassword/ForgotPassword";
 import {SetPassword} from "./main/ui/components/auth/setPassword/SetPassword";
 import {Test} from "./main/ui/components/test/Test";
 import {RegisterContainer} from "./main/ui/components/auth/register/RegisterContainer";
+import {LoginContainer} from "./main/ui/components/auth/login/LoginContainer";
 
 const App = () => {
     return (
@@ -15,7 +15,7 @@ const App = () => {
             <Header/>
             <div className="App-content">
                 <Switch>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path='/login' render={() => <LoginContainer/>}/>
                     <Route path='/registration' render={() => <RegisterContainer/>}/>
                     <Route path='/profile' render={() => <Profile/>}/>
                     <Route path='/forgot' render={() => <ForgotPassword/>}/>

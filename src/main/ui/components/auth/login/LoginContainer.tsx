@@ -2,7 +2,11 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "./login.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
-import {LoginInitialStateType, postUserDataTC, setErrorPageAC} from '../../../../bll/reducers/login-reducer';
+import {
+    LoginInitialStateType,
+    newUserDataTC,
+    setErrorPageAC
+} from '../../../../bll/reducers/login-reducer';
 import {NavLink, Redirect} from "react-router-dom";
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
@@ -26,7 +30,7 @@ export const LoginContainer = () => {
     }
 
     const addUserData = () => {
-        dispatch(postUserDataTC(email, password, rememberMe))
+        dispatch(newUserDataTC(email, password, rememberMe))
     }
     const addNewEmail = (newEmail: string) => {
         setEmail(newEmail)
