@@ -8,8 +8,8 @@ export const Login = () => {
             sadfvadfasdrasifagrfi
 
             ВАВЫЗАЛШВЫОАВЩЫАЩВЫИОЩЫОАВЩЫ
-             {/* test commit 2 */}
-             123456789п
+            {/* test commit 2 */}
+            123456789п
         </div>
     )
 }

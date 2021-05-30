@@ -2,49 +2,54 @@ import {Dispatch} from "redux";
 import {loginAPI, LoginType} from "../../dal/auth/login/loginApi";
 
 export type LoginActionType = ReturnType<typeof loginAC>
+    | ReturnType<typeof setErrorPageAC>
 export type LoginInitialStateType = typeof initialState
 
 let initialState = {
-    // avatar: '',
-    // created: ,
-    // email: '',
-    // isAdmin: false,
-    // name: '',
-    // publicCardPacksCount: 0,
-    // rememberMe: false,
-    // token: '',
-    // tokenDeathTime: 0,
-    // updated: ,
-    // verified: false,
-    // __v: number,
-    // _id: string,
+    dataUser: null as LoginType | null,
+    errorMessage: ''
 }
 
 const loginReducer = (state = initialState, action: LoginActionType): LoginInitialStateType => {
     switch (action.type) {
-        case 'login/POST_LOGIN_DATA':
+        case 'CARDS/LOGIN/POST-LOGIN-DATA':
             return {
-                ...state
+                ...state,
+                dataUser: action.dataUser
+            }
+        case "CARDS/LOGIN/SET-ERROR-MESSAGE":
+            return {
+                ...state,
+                errorMessage: action.error
             }
         default:
             return state
     }
 }
 
-export const loginAC = (dataUser: any) => ({
-    type: 'login/POST_LOGIN_DATA',
+export const loginAC = (dataUser: LoginType) => ({
+    type: 'CARDS/LOGIN/POST-LOGIN-DATA',
     dataUser
 } as const)
 
-export const postUserDataTC = (email: string, password: string, rememberMe: boolean) => {
+export const setErrorPageAC = (error: string) => ({
+    type: 'CARDS/LOGIN/SET-ERROR-MESSAGE',
+    error
+} as const)
+
+export const newUserDataTC = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch) => {
         loginAPI.postLogin(email, password, rememberMe)
             .then((res) => {
-                dispatch(loginAC(res))
-                debugger
+                dispatch(loginAC(res.data))
+            })
+            .catch((e) => {
+                dispatch(setErrorPageAC(e.response
+                    ? e.response.data.error
+                    : (e.message + ', more details in the console')
+                ))
             })
     }
 }
-
 
 export default loginReducer
