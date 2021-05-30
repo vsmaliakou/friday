@@ -12,12 +12,12 @@ let initialState = {
 
 const loginReducer = (state = initialState, action: LoginActionType): LoginInitialStateType => {
     switch (action.type) {
-        case 'login/POST_LOGIN_DATA':
+        case 'CARDS/LOGIN/POST-LOGIN-DATA':
             return {
                 ...state,
                 dataUser: action.dataUser
             }
-        case "login/SET_ERROR_MESSAGE":
+        case "CARDS/LOGIN/SET-ERROR-MESSAGE":
             return {
                 ...state,
                 errorMessage: action.error
@@ -28,24 +28,26 @@ const loginReducer = (state = initialState, action: LoginActionType): LoginIniti
 }
 
 export const loginAC = (dataUser: LoginType) => ({
-    type: 'login/POST_LOGIN_DATA',
+    type: 'CARDS/LOGIN/POST-LOGIN-DATA',
     dataUser
 } as const)
 
 export const setErrorPageAC = (error: string) => ({
-    type: 'login/SET_ERROR_MESSAGE',
+    type: 'CARDS/LOGIN/SET-ERROR-MESSAGE',
     error
 } as const)
 
-export const postUserDataTC = (email: string, password: string, rememberMe: boolean) => {
+export const newUserDataTC = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch) => {
         loginAPI.postLogin(email, password, rememberMe)
             .then((res) => {
                 dispatch(loginAC(res.data))
             })
             .catch((e) => {
-                const error = e.response.data.error
-                dispatch(setErrorPageAC(error))
+                dispatch(setErrorPageAC(e.response
+                    ? e.response.data.error
+                    : (e.message + ', more details in the console')
+                ))
             })
     }
 }
