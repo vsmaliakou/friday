@@ -2,25 +2,32 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "./login.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
-import {postUserDataTC} from '../../../../bll/reducers/login-reducer';
-import {NavLink} from "react-router-dom";
+import {LoginInitialStateType, postUserDataTC, setErrorPageAC} from '../../../../bll/reducers/login-reducer';
+import {NavLink, Redirect} from "react-router-dom";
+import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
+import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
 
 export const LoginContainer = () => {
+
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
-
     const dispatch = useDispatch()
 
-    dispatch(postUserDataTC(email, password, rememberMe))
+    const dataLogin = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
+
+    useEffect(() => {
+        dispatch(setErrorPageAC(''))
+    }, [email, password])
+
+
+    if (dataLogin.dataUser !== null) {
+        return <Redirect to={'/profile'}/>
+    }
 
     const addUserData = () => {
         dispatch(postUserDataTC(email, password, rememberMe))
     }
-
-    // useEffect(() => {
-    //     dispatch(postUserDataTC('nya-admin@nya.nya', '1qazxcvBG', true))
-    // }, [])
     const addNewEmail = (newEmail: string) => {
         setEmail(newEmail)
     }
@@ -30,7 +37,6 @@ export const LoginContainer = () => {
     const changeRememberMe = (newValue: boolean) => {
         setRememberMe(newValue)
     }
-
 
     const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         addNewEmail(e.currentTarget.value)
@@ -42,38 +48,37 @@ export const LoginContainer = () => {
         changeRememberMe(e.currentTarget.checked)
     }
 
-    const dataUser = useSelector<AppRootStateType, {}>(state => state.login)
-    console.log(`dataUser:${dataUser}`)
-    console.log(`email:${email}`)
-    console.log(`password:${password}`)
-    console.log(`rememberMe:${rememberMe}`)
-
     return (
         <div className={s.formLogin}>
             <h1>IT-Incubator</h1>
             <h2>Sign in</h2>
             <div className={s.inputArea}>
                 Email:
-                <input type="text"
-                       onChange={onChangeEmailHandler}
+                <SuperInputText type={'email'}
+                                setError={x => x}
+                                onChange={onChangeEmailHandler}
                 />
                 Password:
-                <input type="password"
-                       onChange={onChangePasswordHandler}
+                <SuperInputText type={'password'}
+                                setError={x => x}
+                                onChange={onChangePasswordHandler}
                 />
                 <div className={s.rememberMeArea}>
-                    <input type="checkbox"
-                           onChange={onChangeRememberMeHandler}
+                    <SuperCheckbox type={'checkbox'}
+                                   onChange={onChangeRememberMeHandler}
                     />
                     Remember me
                 </div>
+                <span>{dataLogin.errorMessage}</span>
             </div>
             <NavLink to={'/forgot'} className={s.linkForgot}>Forgot Password</NavLink>
             <button onClick={addUserData}>
                 Login
             </button>
             <p>Don't have an account?</p>
+
             {/*<Login/>*/}
+
         </div>
     )
 }
