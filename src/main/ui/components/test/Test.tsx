@@ -7,7 +7,7 @@ import SuperCheckbox from "../../common/c3-SuperCheckbox/SuperCheckbox";
 export const Test = () => {
     return (
         <div className={style.test}>
-            {/*<div><SuperInputText setError={x => x}/></div>*/}
+            <div><SuperInputText setError={x => x} label={"label"}/></div>
             <div><SuperButton/></div>
             <div><SuperCheckbox/></div>
         </div>
