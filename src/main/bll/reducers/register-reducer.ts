@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {registerAPI} from "../../dal/auth/register/registerAPI";
+import { setRequestStatusAC } from "./app-reduser";
 
 export type RegisterActionType = ReturnType<typeof setEmailAC>
     | ReturnType<typeof setErrorAC>
@@ -9,7 +10,7 @@ export type RegisterInitialStateType = typeof initialState
 let initialState = {
     email: "",
     error: "",
-    registrationSuccess: false
+    registrationSuccess: false,
 }
 
 const registerReducer = (state = initialState, action: RegisterActionType): RegisterInitialStateType => {
@@ -37,13 +38,16 @@ export const setErrorAC = (error: string) => ({type: 'CARDS/REGISTER/SET-ERROR',
 export const setRegistrationSuccessAC = (registrationSuccess: boolean) => ({type: 'CARDS/REGISTER/REGISTRATION-SUCCESS', registrationSuccess} as const)
 
 export const setRegistrationDataTC = (email: string, password: string) => (dispatch: Dispatch) => {
+    dispatch(setRequestStatusAC('loading'))
     return registerAPI.setRegisterData(email, password)
         .then(response => {
             console.log(response.data.addedUser.email)
             dispatch(setEmailAC(response.data.addedUser.email))
             dispatch(setRegistrationSuccessAC(true))
+            dispatch(setRequestStatusAC('success'))
         }).catch(e => {
             dispatch(setErrorAC(e.response.data.error))
+            dispatch(setRequestStatusAC('success'))
         })
 }
 

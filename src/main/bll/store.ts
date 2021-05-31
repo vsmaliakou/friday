@@ -5,6 +5,7 @@ import registerReducer, {RegisterActionType} from "./reducers/register-reducer";
 import profileReducer, {ProfileActionType} from "./reducers/profile-reducer";
 import forgotPasswordReducer, {ForgotPasswordActionType} from "./reducers/forgotPassword-reducer";
 import setPasswordReducer, {SetPasswordActionType} from "./reducers/setPassword-reducer";
+import appReducer, {AppActionType} from "./reducers/app-reduser";
 
 
 export let rootReducer = combineReducers({
@@ -12,7 +13,8 @@ export let rootReducer = combineReducers({
     register: registerReducer,
     profile: profileReducer,
     forgotPassword: forgotPasswordReducer,
-    setPassword: setPasswordReducer
+    setPassword: setPasswordReducer,
+    app: appReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -24,6 +26,7 @@ export type AppActionsType = LoginActionType
     | ProfileActionType
     | ForgotPasswordActionType
     | SetPasswordActionType
+    | AppActionType
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionsType>
 
