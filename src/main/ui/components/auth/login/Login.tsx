@@ -1,8 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import s from './_Login.module.scss';
 import logo from './../../../../../assets/img/logo.png';
-// import {Email} from '../authComponents/Email';
-// import {Password} from '../authComponents/Password';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";

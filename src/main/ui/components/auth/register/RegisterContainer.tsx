@@ -2,10 +2,9 @@ import React, {ChangeEvent, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {setErrorAC, setRegistrationDataTC} from "../../../../bll/reducers/register-reducer";
 import style from "./RegisterPage_vit.module.css";
-import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
-import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 import {AppRootStateType} from "../../../../bll/store";
 import {Redirect, useHistory} from "react-router-dom";
+import {Register} from "./Register";
 
 export const RegisterContainer = () => {
 
@@ -52,22 +51,16 @@ export const RegisterContainer = () => {
 
     return (
         <div className={style.registerPage}>
-            {/*<div>*/}
-            {/*    <SuperInputText placeholder="email" type={"email"} setError={x => x} onChange={onChangeEmail}/>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <SuperInputText placeholder="password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangePassword}/>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <SuperInputText placeholder="confirm password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangeSecondPassword}/>*/}
-
-            {/*</div>*/}
-            <input type="checkbox" onClick={viewPassword}/>view password
-            <div>
-                <SuperButton onClick={closeRegister}>cancel</SuperButton>
-                <SuperButton onClick={onSubmit}>sign up</SuperButton>
-            </div>
-            {error && <div>{error}</div>}
+            <Register
+                error={error}
+                isChecked={isChecked}
+                onChangeEmail={onChangeEmail}
+                onChangePassword={onChangePassword}
+                onChangeSecondPassword={onChangeSecondPassword}
+                viewPassword={viewPassword}
+                closeRegister={closeRegister}
+                onSubmit={onSubmit}
+            />
         </div>
     )
 }
