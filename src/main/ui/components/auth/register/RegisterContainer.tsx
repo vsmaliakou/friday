@@ -52,16 +52,16 @@ export const RegisterContainer = () => {
 
     return (
         <div className={style.registerPage}>
-            <div>
-                <SuperInputText placeholder="email" type={"email"} setError={x => x} onChange={onChangeEmail}/>
-            </div>
-            <div>
-                <SuperInputText placeholder="password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangePassword}/>
-            </div>
-            <div>
-                <SuperInputText placeholder="confirm password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangeSecondPassword}/>
+            {/*<div>*/}
+            {/*    <SuperInputText placeholder="email" type={"email"} setError={x => x} onChange={onChangeEmail}/>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <SuperInputText placeholder="password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangePassword}/>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <SuperInputText placeholder="confirm password" type={isChecked ? "text" : "password"} setError={x => x} onChange={onChangeSecondPassword}/>*/}
 
-            </div>
+            {/*</div>*/}
             <input type="checkbox" onClick={viewPassword}/>view password
             <div>
                 <SuperButton onClick={closeRegister}>cancel</SuperButton>

@@ -41,10 +41,10 @@ export const ForgotPasswordContainer = () => {
 
                 <form className={s.form}>
                     Email:
-                    <SuperInputText setError={x=>x}
-                                    type={email}
-                                    onChange={onChangeEmailHandler}
-                    />
+                    {/*<SuperInputText setError={x=>x}*/}
+                    {/*                type={email}*/}
+                    {/*                onChange={onChangeEmailHandler}*/}
+                    {/*/>*/}
                     {error && <span>{error}</span>}
                     <span className={s.text}>
                         Enter your email address and we will 

@@ -7,9 +7,8 @@ import {
     newUserDataTC,
     setErrorPageAC
 } from '../../../../bll/reducers/login-reducer';
-import {NavLink, Redirect} from "react-router-dom";
-import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
-import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
+import {Redirect} from "react-router-dom";
+import {Login} from "./Login";
 
 export const LoginContainer = () => {
 
@@ -54,35 +53,14 @@ export const LoginContainer = () => {
 
     return (
         <div className={s.formLogin}>
-            <h1>IT-Incubator</h1>
-            <h2>Sign in</h2>
-            <div className={s.inputArea}>
-                Email:
-                <SuperInputText type={'email'}
-                                setError={x => x}
-                                onChange={onChangeEmailHandler}
-                />
-                Password:
-                <SuperInputText type={'password'}
-                                setError={x => x}
-                                onChange={onChangePasswordHandler}
-                />
-                <div className={s.rememberMeArea}>
-                    <SuperCheckbox type={'checkbox'}
-                                   onChange={onChangeRememberMeHandler}
-                    />
-                    Remember me
-                </div>
-                <span>{dataLogin.errorMessage}</span>
-            </div>
-            <NavLink to={'/forgot'} className={s.linkForgot}>Forgot Password</NavLink>
-            <button onClick={addUserData}>
-                Login
-            </button>
-            <p>Don't have an account?</p>
-
-            {/*<Login/>*/}
-
+            <Login
+                title="Sign in"
+                onChangeEmailHandler={onChangeEmailHandler}
+                onChangePasswordHandler={onChangePasswordHandler}
+                addUserData={addUserData}
+                onChangeRememberMeHandler={onChangeRememberMeHandler}
+                dataLogin={dataLogin}
+            />
         </div>
     )
 }
