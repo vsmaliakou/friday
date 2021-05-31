@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import s from './Login.module.scss';
+import s from './_Login.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 // import {Email} from '../authComponents/Email';
 // import {Password} from '../authComponents/Password';
@@ -27,6 +27,8 @@ export const Login: React.FC<PropsType> = (props) => {
 
                 <h2 className={s.title}>Sign In</h2>
 
+                <span className={s.error}>{props.dataLogin.errorMessage}</span>
+
                 <form className={s.form}>
                     <SuperInputText type={'email'}
                                     setError={x => x}
@@ -42,14 +44,14 @@ export const Login: React.FC<PropsType> = (props) => {
                     <SuperCheckbox type={'checkbox'}
                                    onChange={props.onChangeRememberMeHandler}
                     />
-                    Remember me
-                    <span>{props.dataLogin.errorMessage}</span>
+                    
+                    
                     <NavLink to={'/forgot'} className={s.forgot}>Forgot Password</NavLink>
                     <button className={s.loginBtn} onClick={props.addUserData}>Login</button>
-                    <p>Don't have an account?</p>
+                    <span className={s.account} >Don't have an account?</span>
                 </form>
 
-                <NavLink to={'/registration'}>Sign up</NavLink>
+                <NavLink className={s.reg} to={'/registration'}>Sign up</NavLink>
 
 
             </div>

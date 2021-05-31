@@ -4,3 +4,14 @@
 .spanClassName {
 
 }
+.SuperCheckboxLabel{
+    display:flex;
+    position: relative;
+    top: 15px;
+    align-self: flex-end;
+}
+.finalInputClassName{
+    width: auto;
+    height: auto;
+    margin-right: 5px;
+}
