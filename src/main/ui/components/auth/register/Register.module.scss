@@ -49,18 +49,23 @@
         background-color: #D7D8EF;
         color:#21268F;
         width: 120px;
+        border: none;
+        border-radius:20px;
+        height: 35px;
         
         &:hover{
             background-color: #a8a9be;
         }
     }
     .register{
-        background-color: rgb(70, 18, 168);
+        background-color: rgb(48, 64, 206);
         width: 190px;
-        background-color: #21268F;
         color: #fff;
+        border: none;
+        border-radius:20px;
+        height: 35px;
         &:hover{
-            background-color: #373ca1;
+            background-color: rgb(82, 97, 235);
         }
     }
 }
