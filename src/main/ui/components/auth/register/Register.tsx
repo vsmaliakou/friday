@@ -25,7 +25,7 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
 
                 <form className={s.form}>
 
-                    {props.error && <span>{props.error}</span>}
+                    {props.error && <span className={s.error}>{props.error}</span>}
                     <SuperInputText
                         type={"email"}
                         setError={x => x}
@@ -44,7 +44,7 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                         onChange={props.onChangeSecondPassword}
                         label={"Confirm password"}
                     />
-                    <span onClick={props.viewPassword}>View password</span>
+                    <span className={s.view} onClick={props.viewPassword}>View password</span>
 
                     <div className={s.btnWrap}>
 
