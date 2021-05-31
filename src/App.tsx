@@ -8,6 +8,7 @@ import {SetPassword} from "./main/ui/components/auth/setPassword/SetPassword";
 import {Test} from "./main/ui/components/test/Test";
 import {RegisterContainer} from "./main/ui/components/auth/register/RegisterContainer";
 import {LoginContainer} from "./main/ui/components/auth/login/LoginContainer";
+import { ForgotPasswordContainer } from './main/ui/components/auth/forgotPassword/ForgotPasswordContainer';
 
 const App = () => {
     return (
@@ -18,7 +19,7 @@ const App = () => {
                     <Route path='/login' render={() => <LoginContainer/>}/>
                     <Route path='/registration' render={() => <RegisterContainer/>}/>
                     <Route path='/profile' render={() => <Profile/>}/>
-                    <Route path='/forgot' render={() => <ForgotPassword/>}/>
+                    <Route path='/forgot' render={() => <ForgotPasswordContainer/>}/>
                     <Route path='/new-password' render={() => <SetPassword/>}/>
                     <Route path='/test' render={() => <Test/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
