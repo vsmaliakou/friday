@@ -2,7 +2,6 @@ import React from 'react';
 import s from './ForgotPassword.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import email from './../../../../../assets/img/ce.png';
-import { Email } from '../authComponents/Email';
 
 export const ForgotPassword = () => {
     return (
@@ -22,7 +21,7 @@ export const ForgotPassword = () => {
                 <h2 className={s.title}>Forgot your password?</h2>
 
                 <form className={s.form}>
-                    <Email/>
+                    Email  {/*компонента SuperInput*/}
 
                     <span className={s.text}>
                         Enter your email address and we will 

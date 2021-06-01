@@ -2,7 +2,6 @@ import React, {ChangeEvent, useState} from 'react';
 import s from './ForgotPassword.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import email from './../../../../../assets/img/ce.png';
-import { Email } from '../authComponents/Email';
 import { NavLink } from 'react-router-dom';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {useDispatch, useSelector} from "react-redux";
@@ -44,6 +43,7 @@ export const ForgotPasswordContainer = () => {
                     <SuperInputText setError={x=>x}
                                     type={email}
                                     onChange={onChangeEmailHandler}
+                                    label={"Email"}
                     />
                     {error && <span>{error}</span>}
                     <span className={s.text}>
