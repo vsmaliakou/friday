@@ -5,6 +5,7 @@ import style from "./RegisterPage_vit.module.css";
 import {AppRootStateType} from "../../../../bll/store";
 import {Redirect, useHistory} from "react-router-dom";
 import {Register} from "./Register";
+import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 
 export const RegisterContainer = () => {
 
@@ -14,6 +15,7 @@ export const RegisterContainer = () => {
     const [isChecked, setIsChek] = useState(false)
 
     const error = useSelector<AppRootStateType, string>(state => state.register.error)
+    const requestStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const registrationSuccess = useSelector<AppRootStateType>(state => state.register.registrationSuccess)
 
     const dispatch = useDispatch()
@@ -53,6 +55,7 @@ export const RegisterContainer = () => {
         <div className={style.registerPage}>
             <Register
                 error={error}
+                requestStatus={requestStatus}
                 isChecked={isChecked}
                 onChangeEmail={onChangeEmail}
                 onChangePassword={onChangePassword}

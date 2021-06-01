@@ -3,9 +3,11 @@ import s from './Register.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
+import { RequestStatusType } from '../../../../bll/reducers/app-reduser';
 
 type RegisterPropsType = {
     error: string
+    requestStatus: RequestStatusType
     isChecked: boolean
     onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void
     onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void
@@ -26,6 +28,7 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                 <form className={s.form}>
 
                     {props.error && <span className={s.error}>{props.error}</span>}
+                    {props.requestStatus === "loading" && <span>loading...</span>}
                     <SuperInputText
                         type={"email"}
                         setError={x => x}
@@ -49,7 +52,10 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                     <div className={s.btnWrap}>
 
                         <SuperButton className={s.cancel} onClick={props.closeRegister}>Cancel</SuperButton>
-                        <SuperButton className={s.register} onClick={props.onSubmit}>Sign up</SuperButton>
+                        <SuperButton
+                            disabled={props.requestStatus === "loading" ? true : false}
+                            className={s.register}
+                            onClick={props.onSubmit}>Sign up</SuperButton>
 
                     </div>
 
