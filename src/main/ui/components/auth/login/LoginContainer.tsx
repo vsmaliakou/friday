@@ -1,14 +1,10 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
-import {
-    LoginInitialStateType,
-    newUserDataTC,
-    setErrorPageAC
-} from '../../../../bll/reducers/login-reducer';
+import {LoginInitialStateType, newUserDataTC, setErrorPageAC} from '../../../../bll/reducers/login-reducer';
 import {Redirect} from "react-router-dom";
 import {Login} from "./Login";
-import {RequestStatusType, setRequestStatusAC} from "../../../../bll/reducers/app-reduser";
+import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 
 export const LoginContainer = () => {
 

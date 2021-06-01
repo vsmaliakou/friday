@@ -5,8 +5,8 @@ import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
-import preloader from './preloader.gif'
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
+import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 
 type PropsType = {
     title: string
@@ -51,10 +51,12 @@ export const Login: React.FC<PropsType> = (props) => {
                     />
 
                     <NavLink to={'/forgot'} className={s.forgot}>Forgot Password</NavLink>
-                    <button className={s.loginBtn}
-                            onClick={props.addUserData}
-                            disabled={props.dataLogin.loginButtonDisable}>Login
-                    </button>
+
+                    <SuperButton disabled={props.dataLogin.loginButtonDisable}
+                                 className={s.loginBtn}
+                                 onClick={props.addUserData}>Login
+                    </SuperButton>
+
                     <span className={s.account}>Don't have an account?</span>
                 </form>
 
