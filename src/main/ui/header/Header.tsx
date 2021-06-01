@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Header.module.css'
-import {forgot, login, newPassword, profile, registration, test} from "../common/links";
+import {forgot, login, profile, registration, test} from "../common/links";
 
 export const Header = () => {
     return (
@@ -8,7 +8,6 @@ export const Header = () => {
             {login}
             {registration}
             {forgot}
-            {newPassword}
             {profile}
             {test}
         </div>

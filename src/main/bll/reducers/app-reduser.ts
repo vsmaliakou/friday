@@ -1,6 +1,6 @@
 export type AppActionType = ReturnType<typeof setRequestStatusAC>
 export type AppInitialStateType = typeof initialState
-export type RequestStatusType = "loading" | "success"
+export type RequestStatusType = "loading" | "success" | "fail"
 
 let initialState = {
     requestStatus: "success" as RequestStatusType

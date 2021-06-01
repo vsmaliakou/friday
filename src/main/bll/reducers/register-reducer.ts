@@ -41,7 +41,6 @@ export const setRegistrationDataTC = (email: string, password: string) => (dispa
     dispatch(setRequestStatusAC('loading'))
     return registerAPI.setRegisterData(email, password)
         .then(response => {
-            console.log(response.data.addedUser.email)
             dispatch(setEmailAC(response.data.addedUser.email))
             dispatch(setRegistrationSuccessAC(true))
             dispatch(setRequestStatusAC('success'))

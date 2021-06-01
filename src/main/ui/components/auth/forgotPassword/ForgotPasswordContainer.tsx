@@ -10,7 +10,7 @@ export const ForgotPasswordContainer = () => {
     const from = 'test-front-admin vsmaliakou@yandex.by'
     const message = `<div style="background-color: lime; padding: 15px">	
 	password recovery link: 
-	<a href='http://localhost:7542/2.0/set-new-password/$token$'>
+	<a href='http://localhost:3000/friday#/set-new-password/$token$'>
     Link</a></div>`
 
 
