@@ -6,7 +6,7 @@ import profileReducer, {ProfileActionType} from "./reducers/profile-reducer";
 import forgotPasswordReducer, {ForgotPasswordActionType} from "./reducers/forgotPassword-reducer";
 import setPasswordReducer, {SetPasswordActionType} from "./reducers/setPassword-reducer";
 import appReducer, {AppActionType} from "./reducers/app-reduser";
-import logOutReducer from "./reducers/logOut-reducer";
+// import logOutReducer from "./reducers/logOut-reducer";
 
 
 export let rootReducer = combineReducers({
@@ -16,7 +16,7 @@ export let rootReducer = combineReducers({
     forgotPassword: forgotPasswordReducer,
     setPassword: setPasswordReducer,
     app: appReducer,
-    logOut: logOutReducer
+    // logOut: logOutReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
