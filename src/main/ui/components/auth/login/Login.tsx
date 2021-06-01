@@ -17,6 +17,7 @@ type PropsType = {
 
 export const Login: React.FC<PropsType> = (props) => {
     return (
+
         <div className={s.login}>
 
             <div className={s.card}>
@@ -42,11 +43,15 @@ export const Login: React.FC<PropsType> = (props) => {
                     <SuperCheckbox type={'checkbox'}
                                    onChange={props.onChangeRememberMeHandler}
                     />
-                    
-                    
+
+
                     <NavLink to={'/forgot'} className={s.forgot}>Forgot Password</NavLink>
-                    <button className={s.loginBtn} onClick={props.addUserData}>Login</button>
-                    <span className={s.account} >Don't have an account?</span>
+                    <button className={s.loginBtn}
+                            onClick={props.addUserData}
+                            disabled={props.dataLogin.loginButtonDisable}
+                    >Login
+                    </button>
+                    <span className={s.account}>Don't have an account?</span>
                 </form>
 
                 <NavLink className={s.reg} to={'/registration'}>Sign up</NavLink>

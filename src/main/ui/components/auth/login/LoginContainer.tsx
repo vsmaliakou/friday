@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from "./login.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {
@@ -52,15 +51,13 @@ export const LoginContainer = () => {
     }
 
     return (
-        <div className={s.formLogin}>
-            <Login
-                title="Sign in"
-                onChangeEmailHandler={onChangeEmailHandler}
-                onChangePasswordHandler={onChangePasswordHandler}
-                addUserData={addUserData}
-                onChangeRememberMeHandler={onChangeRememberMeHandler}
-                dataLogin={dataLogin}
-            />
-        </div>
+        <Login
+            title="Sign in"
+            onChangeEmailHandler={onChangeEmailHandler}
+            onChangePasswordHandler={onChangePasswordHandler}
+            addUserData={addUserData}
+            onChangeRememberMeHandler={onChangeRememberMeHandler}
+            dataLogin={dataLogin}
+        />
     )
 }
