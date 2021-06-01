@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import s from "./login.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {
@@ -9,6 +8,7 @@ import {
 } from '../../../../bll/reducers/login-reducer';
 import {Redirect} from "react-router-dom";
 import {Login} from "./Login";
+import {RequestStatusType, setRequestStatusAC} from "../../../../bll/reducers/app-reduser";
 
 export const LoginContainer = () => {
 
@@ -18,11 +18,11 @@ export const LoginContainer = () => {
     const dispatch = useDispatch()
 
     const dataLogin = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
+    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
 
     useEffect(() => {
         dispatch(setErrorPageAC(''))
     }, [email, password])
-
 
     if (dataLogin.dataUser !== null) {
         return <Redirect to={'/profile'}/>
@@ -52,15 +52,14 @@ export const LoginContainer = () => {
     }
 
     return (
-        <div className={s.formLogin}>
-            <Login
-                title="Sign in"
-                onChangeEmailHandler={onChangeEmailHandler}
-                onChangePasswordHandler={onChangePasswordHandler}
-                addUserData={addUserData}
-                onChangeRememberMeHandler={onChangeRememberMeHandler}
-                dataLogin={dataLogin}
-            />
-        </div>
+        <Login
+            title="Sign in"
+            onChangeEmailHandler={onChangeEmailHandler}
+            onChangePasswordHandler={onChangePasswordHandler}
+            addUserData={addUserData}
+            onChangeRememberMeHandler={onChangeRememberMeHandler}
+            dataLogin={dataLogin}
+            preloader={loading}
+        />
     )
 }

@@ -1,11 +1,4 @@
-import axios from "axios";
-
-const instance = axios.create({
-     baseURL: 'http://localhost:7542/2.0/', // local
-    //baseURL: 'https://neko-back.herokuapp.com/2.0', // heroku
-    withCredentials: true,
-    headers: {}
-})
+import {instance} from "../instance";
 
 export type LoginType = {
     avatar?: string

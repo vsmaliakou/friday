@@ -5,6 +5,8 @@ import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
+import preloader from './preloader.gif'
+import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 
 type PropsType = {
     title: string
@@ -13,13 +15,18 @@ type PropsType = {
     addUserData: () => void
     onChangeRememberMeHandler: (e: ChangeEvent<HTMLInputElement>) => void
     dataLogin: LoginInitialStateType
+    preloader: RequestStatusType
 }
 
 export const Login: React.FC<PropsType> = (props) => {
+
     return (
+
         <div className={s.login}>
 
             <div className={s.card}>
+
+                {props.preloader === "loading" ? <span>Loading...</span> : null}
 
                 <img className={s.logo} src={logo} alt="logo"/>
 
@@ -42,15 +49,16 @@ export const Login: React.FC<PropsType> = (props) => {
                     <SuperCheckbox type={'checkbox'}
                                    onChange={props.onChangeRememberMeHandler}
                     />
-                    
-                    
+
                     <NavLink to={'/forgot'} className={s.forgot}>Forgot Password</NavLink>
-                    <button className={s.loginBtn} onClick={props.addUserData}>Login</button>
-                    <span className={s.account} >Don't have an account?</span>
+                    <button className={s.loginBtn}
+                            onClick={props.addUserData}
+                            disabled={props.dataLogin.loginButtonDisable}>Login
+                    </button>
+                    <span className={s.account}>Don't have an account?</span>
                 </form>
 
                 <NavLink className={s.reg} to={'/registration'}>Sign up</NavLink>
-
 
             </div>
 
