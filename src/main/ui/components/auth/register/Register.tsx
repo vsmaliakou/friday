@@ -33,6 +33,5 @@ export const Register = () => {
 
             </div>
         </div>
->>>>>>>>> Temporary merge branch 2
     )
 }
