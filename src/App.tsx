@@ -3,7 +3,6 @@ import './App.css';
 import {Header} from "./main/ui/header/Header";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {Profile} from "./main/ui/components/profile/Profile";
-import {SetPassword} from "./main/ui/components/auth/setPassword/SetPassword";
 import {Test} from "./main/ui/components/test/Test";
 import {RegisterContainer} from "./main/ui/components/auth/register/RegisterContainer";
 import {LoginContainer} from "./main/ui/components/auth/login/LoginContainer";
