@@ -58,7 +58,6 @@ export const newUserDataTC = (email: string, password: string, rememberMe: boole
         loginAPI.postLogin(email, password, rememberMe)
             .then((res) => {
                 dispatch(loginAC(res.data))
-                dispatch(setRequestStatusAC('success'))
                 dispatch(loginizationStatusAC(false))
             })
             .catch((e) => {
@@ -66,9 +65,12 @@ export const newUserDataTC = (email: string, password: string, rememberMe: boole
                     ? e.response.data.error
                     : (e.message + ', more details in the console')
                 ))
-                dispatch(setRequestStatusAC('success'))
                 dispatch(loginizationStatusAC(false))
-            })
+            }).finally(() => {
+                dispatch(setRequestStatusAC('success'))
+            }
+        )
+
     }
 }
 
