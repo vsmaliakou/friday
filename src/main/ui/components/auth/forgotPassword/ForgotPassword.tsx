@@ -6,8 +6,6 @@ import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 
-
-
 type ForgotPasswordType = {
     addNewPassword: ()=>void
     onChangeEmailHandler: (e: ChangeEvent<HTMLInputElement>) => void
@@ -22,19 +20,11 @@ export const ForgotPassword: React.FC<ForgotPasswordType> = ({requestStatus,addN
 
                 <img className={s.logo} src={logo} alt="logo"/>
 
-                {/* <img className={s.logo} src={email} alt="logo"/>
-                                                                                ( карточка с информацией о отправленном письме на мыло)
-                <span className={s.check}>Check Email</span>
-
-                <span className={s.checkText}>
-                    We’ve sent an Email with instructions to example@mail.com
-                </span> */}
-
                 <h2 className={s.title}>Forgot your password?</h2>
 
                 <form className={s.form}>
-                    {error && <span>{error}</span>}
                     {requestStatus === "loading" && <span>loading...</span>}
+                    {error && <span>{error}</span>}
                     <SuperInputText setError={x=>x}
                                     type={email}
                                     onChange={onChangeEmailHandler}

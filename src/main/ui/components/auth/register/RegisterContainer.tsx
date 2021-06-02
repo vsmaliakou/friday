@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {setErrorAC, setRegistrationDataTC} from "../../../../bll/reducers/register-reducer";
 import style from "./RegisterPage_vit.module.css";
@@ -20,6 +20,10 @@ export const RegisterContainer = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()
+
+    useEffect(() => {
+        dispatch(setErrorAC(''))
+    }, [email, password, secondPassword])
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
