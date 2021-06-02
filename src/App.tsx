@@ -9,6 +9,7 @@ import {ForgotPasswordContainer} from './main/ui/components/auth/forgotPassword/
 import {SetPasswordContainer} from "./main/ui/components/auth/setPassword/SetPasswordContainer";
 import {Packs} from "./main/ui/components/packs/Packs";
 import {Cards} from "./main/ui/components/packs/cards/Cards";
+import {ProfileContainer} from "./main/ui/components/profile/ProfileContainer";
 
 const App = () => {
     return (
@@ -18,7 +19,7 @@ const App = () => {
                 <Switch>
                     <Route path='/login' render={() => <LoginContainer/>}/>
                     <Route path='/registration' render={() => <RegisterContainer/>}/>
-                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/profile' render={() => <ProfileContainer/>}/>
                     <Route path='/forgot' render={() => <ForgotPasswordContainer/>}/>
                     <Route path='/set-new-password/:token' render={() => <SetPasswordContainer/>}/>
                     <Route path='/packs' render={() => <Packs/>}/>

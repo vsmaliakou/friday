@@ -8,6 +8,7 @@ import setPasswordReducer, {SetPasswordActionType} from "./reducers/setPassword-
 import appReducer, {AppActionType} from "./reducers/app-reduser";
 import packsReducer, {PacksActionType} from "./reducers/packs-reducer";
 import cardsReducer, {CardsActionType} from "./reducers/cards-reducer";
+import logOutReducer from "./reducers/logOut-reducer";
 // import logOutReducer from "./reducers/logOut-reducer";
 
 
@@ -19,8 +20,8 @@ export let rootReducer = combineReducers({
     setPassword: setPasswordReducer,
     app: appReducer,
     packs: packsReducer,
-    cards: cardsReducer
-    // logOut: logOutReducer
+    cards: cardsReducer,
+    logOut: logOutReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
