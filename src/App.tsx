@@ -8,6 +8,7 @@ import {Profile} from "./main/ui/components/profile/Profile";
 import {ForgotPassword} from "./main/ui/components/auth/forgotPassword/ForgotPassword";
 import {SetPassword} from "./main/ui/components/auth/setPassword/SetPassword";
 import {Test} from "./main/ui/components/test/Test";
+import { PackList } from './main/ui/components/packList/PackList';
 
 const App = () => {
     return (
@@ -21,8 +22,11 @@ const App = () => {
                     <Route path='/forgot' render={() => <ForgotPassword/>}/>
                     <Route path='/new-password' render={() => <SetPassword/>}/>
                     <Route path='/test' render={() => <Test/>}/>
+                    <Route path='/packList' render={() => <PackList/>}/>   
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
+                    
+                    
                 </Switch>
             </div>
         </div>

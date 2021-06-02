@@ -7,3 +7,4 @@ export const forgot = <Link to='/forgot'>Password recovery</Link>
 export const newPassword = <Link to='/new-password'>New password</Link>
 export const profile = <Link to='/profile'>Profile</Link>
 export const test = <Link to='/test'>Test</Link>
+export const packList = <Link to='/packList'>PackList</Link>

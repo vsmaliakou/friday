@@ -1,0 +1,85 @@
+@import './../../../../styles/sass/mixins.scss';
+
+@import './../../../../styles/sass/vars.scss';
+
+
+.packListWrap{
+    background: $backgroundColor;
+    height: 100vh;
+    
+    .header{
+        background: $backgroundColorLight;
+        .container{
+            max-width: 1010px;
+            margin: 0 auto;
+            .headerInner{
+                @include flex (flex, row, space-between, center);
+                max-width: 600px;
+                
+                .logoWrap{
+                    margin: 15px 0;
+                }
+
+                .headreCards{
+                    @include flex (flex, row, space-between, center);
+                    .packList{
+                        display: flex;
+                        align-items: center;
+                        border: 3px solid rgba(0, 0, 0, .0);;
+                        transition: .3s;
+                        &:hover{
+                            border-bottom: 3px solid #21268F;
+                            background-color: #af8fa1;
+                        }
+                        
+                        .packListImg{
+                            margin: 10px;
+                        }
+                        .packListSpan{
+                            display: block;
+                            margin-right: 10px;
+                        }
+
+                    }
+
+                    .profile{
+                        display: flex;
+                        align-items: center;
+                        border: 3px solid rgba(0, 0, 0, .0);;
+                        transition: .3s;
+                        &:hover{
+                            border-bottom: 3px solid #21268F;
+                            background-color: #af8fa1;
+                        }
+                        .profiltImg{
+                            margin: 10px;
+                        }
+                        .profileSpan{
+                            display: block;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .main{
+        max-width: 1010px;
+        margin: 30px auto;
+        display: flex;
+        background-color: #FFF;
+        border-radius: 20px;
+        .filter{
+            border-radius:20px 0 0 20px ;
+            max-width: 240px;
+            background-color: #956ea7;
+        }
+
+        .content{
+            max-width: 770px;
+        }
+    }
+}

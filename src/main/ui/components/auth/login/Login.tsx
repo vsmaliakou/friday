@@ -3,6 +3,7 @@ import s from './Login.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import { Email } from '../authComponents/Email';
 import { Password } from '../authComponents/Password';
+import { Loading } from '../loading/card/Loading';
 
 // type PropsType = {
 //     title: string
@@ -12,7 +13,7 @@ import { Password } from '../authComponents/Password';
 export const Login = () => {
     return (
         <div className={s.login}>
-
+            <Loading/>
            <div className={s.card}>
 
                <img className={s.logo} src={logo} alt="logo"/>
