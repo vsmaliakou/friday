@@ -36,7 +36,7 @@ const loginReducer = (state = initialState, action: LoginActionType): LoginIniti
     }
 }
 
-export const loginAC = (dataUser: LoginType) => ({
+export const loginAC = (dataUser: LoginType | null) => ({
     type: 'CARDS/LOGIN/POST-LOGIN-DATA',
     dataUser
 } as const)

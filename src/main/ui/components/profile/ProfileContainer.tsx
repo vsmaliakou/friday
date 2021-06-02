@@ -6,15 +6,21 @@ import s from "../auth/login/_Login.module.scss";
 import {logOutTC} from "../../../bll/reducers/logOut-reducer";
 import {checkDataUserTC} from "../../../bll/reducers/profile-reducer";
 import {ProfileInitialStateType} from "../../../bll/reducers/profile-reducer";
+import {Redirect} from "react-router-dom";
+import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
 
 export const ProfileContainer = () => {
     const dispatch = useDispatch()
+    const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const profileData = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
-    const logOutMessage = useSelector<AppRootStateType, null | string>(state => state.logOut.logOutInfo)
 
     useEffect(() => {
         dispatch(checkDataUserTC())
     }, [])
+
+    if (auth.dataUser === null) {
+        return <Redirect to={'/login'}/>
+    }
 
     const logOut = () => {
         dispatch(logOutTC())

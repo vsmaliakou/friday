@@ -10,6 +10,7 @@ import packsReducer, {PacksActionType} from "./reducers/packs-reducer";
 import cardsReducer, {CardsActionType} from "./reducers/cards-reducer";
 import logOutReducer from "./reducers/logOut-reducer";
 
+
 export let rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
