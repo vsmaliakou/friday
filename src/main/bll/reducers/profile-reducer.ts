@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileDataType} from "../../dal/auth/profile/profileApi";
-// import {profileAPI, ProfileDataType} from "../../dal/auth/profile/profileApi";
 
 export type ProfileActionType = ReturnType<typeof getProfileDataAC>
     | ReturnType<typeof setErrorProfilePage>
