@@ -8,6 +8,8 @@ import {RegisterContainer} from "./main/ui/components/auth/register/RegisterCont
 import {LoginContainer} from "./main/ui/components/auth/login/LoginContainer";
 import {ForgotPasswordContainer} from './main/ui/components/auth/forgotPassword/ForgotPasswordContainer';
 import {SetPasswordContainer} from "./main/ui/components/auth/setPassword/SetPasswordContainer";
+import {Packs} from "./main/ui/components/packs/Packs";
+import {Cards} from "./main/ui/components/packs/cards/Cards";
 
 const App = () => {
     return (
@@ -21,6 +23,8 @@ const App = () => {
                     <Route path='/forgot' render={() => <ForgotPasswordContainer/>}/>
                     <Route path='/set-new-password/:token' render={() => <SetPasswordContainer/>}/>
                     <Route path='/test' render={() => <Test/>}/>
+                    <Route path='/packs' render={() => <Packs/>}/>
+                    <Route path='/cards' render={() => <Cards/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
                 </Switch>
