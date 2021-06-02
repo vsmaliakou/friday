@@ -6,7 +6,7 @@ import profileReducer, {ProfileActionType} from "./reducers/profile-reducer";
 import forgotPasswordReducer, {ForgotPasswordActionType} from "./reducers/forgotPassword-reducer";
 import setPasswordReducer, {SetPasswordActionType} from "./reducers/setPassword-reducer";
 import appReducer, {AppActionType} from "./reducers/app-reduser";
-import packsReducer, {PacksActionType} from "./reducers/packs-reducer";
+import cardsPacksReducer, {PacksActionType} from "./reducers/cardsPacks-reducer";
 import cardsReducer, {CardsActionType} from "./reducers/cards-reducer";
 import logOutReducer from "./reducers/logOut-reducer";
 
@@ -18,7 +18,7 @@ export let rootReducer = combineReducers({
     forgotPassword: forgotPasswordReducer,
     setPassword: setPasswordReducer,
     app: appReducer,
-    packs: packsReducer,
+    packs: cardsPacksReducer,
     cards: cardsReducer,
     logOut: logOutReducer
 })

@@ -5,6 +5,7 @@ import email from './../../../../../assets/img/ce.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
+import { LoadingSvg } from '../loading/card/LoadingSvg';
 
 type ForgotPasswordType = {
     addNewPassword: ()=>void
@@ -23,7 +24,7 @@ export const ForgotPassword: React.FC<ForgotPasswordType> = ({requestStatus,addN
                 <h2 className={s.title}>Forgot your password?</h2>
 
                 <form className={s.form}>
-                    {requestStatus === "loading" && <span>loading...</span>}
+                    {requestStatus === "loading" && <LoadingSvg/>}
                     {error && <span>{error}</span>}
                     <SuperInputText setError={x=>x}
                                     type={email}

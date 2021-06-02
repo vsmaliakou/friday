@@ -7,6 +7,7 @@ import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
+import { LoadingSvg } from '../loading/card/LoadingSvg';
 
 type PropsType = {
     title: string
@@ -26,7 +27,7 @@ export const Login: React.FC<PropsType> = (props) => {
 
             <div className={s.card}>
 
-                {props.preloader === "loading" ? <span>Loading...</span> : null}
+                {props.preloader === "loading" ? <LoadingSvg/> : null}
 
                 <img className={s.logo} src={logo} alt="logo"/>
 

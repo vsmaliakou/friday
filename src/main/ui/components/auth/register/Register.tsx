@@ -4,6 +4,7 @@ import logo from './../../../../../assets/img/logo.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 import { RequestStatusType } from '../../../../bll/reducers/app-reduser';
+import { LoadingSvg } from '../loading/card/LoadingSvg';
 
 type RegisterPropsType = {
     error: string
@@ -28,7 +29,7 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                 <form className={s.form}>
 
                     {props.error && <span className={s.error}>{props.error}</span>}
-                    {props.requestStatus === "loading" && <span>loading...</span>}
+                    {props.requestStatus === "loading" && <LoadingSvg/>}
                     <SuperInputText
                         type={"email"}
                         setError={x => x}
