@@ -1,13 +1,22 @@
-.superInput {
-    outline: none;
+.wrap{
+    margin-top: 30px;
+    position: relative;
 }
 
-.errorInput {
-    background-color: red;
-    border: 3px solid red;
-    outline: none;
-}
+label {
+    position: absolute;
+    left: 0;
+    top: -10px;
+    font-size: 13px;
+    color:#24254A;
 
-.error {
-    color: red;
+}
+input{
+
+    width: 345px;
+    border:none;
+    border-bottom: 1px solid #24254A;
+    outline:none;
+    padding: 10px 0;
+
 }

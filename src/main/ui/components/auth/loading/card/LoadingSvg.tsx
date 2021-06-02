@@ -1,9 +1,9 @@
 import React from 'react';
-import s from './_Loading.module.scss'
+import s from './_LoadingSvg.module.scss'
 
 
 
-export const Loading = () => {
+export const LoadingSvg = () => {
     return (
 
         <div className={s.loadingWrap}>

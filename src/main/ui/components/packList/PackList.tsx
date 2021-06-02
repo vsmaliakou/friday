@@ -4,7 +4,7 @@ import logo from './../../../../assets/img/logo.png'
 import card from './../../../../assets/img/packList.png'
 import user from './../../../../assets/img/usre.png'
 import { PackListCard } from './components/row/PackListCard';
-import { Loading } from '../auth/loading/card/Loading';
+import { LoadingSvg } from '../auth/loading/card/LoadingSvg';
 
 
 
@@ -40,7 +40,7 @@ export const PackList = () => {
                 </div>
 
             </div>
-            <Loading/>
+            <LoadingSvg/>
 
             <div className={s.main}>
                 <div className={s.filter}>
