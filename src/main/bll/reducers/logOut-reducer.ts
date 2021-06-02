@@ -1,6 +1,11 @@
 import {Dispatch} from "redux"
-import {logOutAPI, LogOutDataType} from "../../dal/auth/logOut/logOutApi"
+import {logOutAPI} from "../../dal/auth/logOut/logOutApi"
 import {setErrorProfilePage} from "./profile-reducer";
+import {loginAC} from "./login-reducer";
+
+export const auhActionsTypes = {
+    LOGOUT: 'CARDS/LOGOUT/LOG-OUT-OF-PROFILE'
+} as const;
 
 export type LogOutActionType = ReturnType<typeof logOutOfProfileAC>
 
@@ -13,7 +18,7 @@ let initialState = {
 
 const logOutReducer = (state = initialState, action: LogOutActionType): LogOutInitialStateType => {
     switch (action.type) {
-        case "CARDS/LOGOUT/LOG-OUT-OF-PROFILE":
+        case auhActionsTypes.LOGOUT:
             return {
                 ...state,
                 logOutInfo: action.data
@@ -23,14 +28,14 @@ const logOutReducer = (state = initialState, action: LogOutActionType): LogOutIn
     }
 }
 
-export const logOutOfProfileAC = (data: string) => ({type: 'CARDS/LOGOUT/LOG-OUT-OF-PROFILE', data} as const)
+export const logOutOfProfileAC = (data: string) => ({type: auhActionsTypes.LOGOUT, data} as const)
 
 export const logOutTC = () => {
     return (dispatch: Dispatch) => {
         logOutAPI.logOutOfProfile()
             .then(res => {
                 dispatch(logOutOfProfileAC(res.data.info))
-                debugger
+                dispatch(loginAC(null))
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response
