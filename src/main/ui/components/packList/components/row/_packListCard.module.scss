@@ -3,27 +3,30 @@
 @import './../../../../../../styles/sass/vars.scss';
 
 .card{
-    max-width: 670px;
-    max-height: 430px;
+    max-width: 680px;
     margin: 25px 50px;
     // border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr;
     box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px #040303;
-    .rowOne{
+    .rowColor{
         display: grid;
-        grid-template-columns: 160px 80px 120px 140px 170px;
+        grid-template-columns: 160px 80px 120px 140px minmax(auto, 200px);
         grid-template-rows: 50px;
         justify-items: center;
         align-items: center;
         background-color: rgb(238, 218, 218)
     }
-    .rowTwo{
+    .rowWhite{
         display: grid;
-        grid-template-columns: 160px 80px 120px 140px 170px;
+        grid-template-columns: 160px 80px 120px 140px minmax(auto, 200px);
         grid-template-rows: 50px;
         justify-items: center;
         align-items: center;
         background-color: #fff;
     }
+}
+.select{
+    border: none;
+    background: none;
 }

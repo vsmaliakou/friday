@@ -3,14 +3,15 @@ import s from './_packList.module.scss'
 import logo from './../../../../assets/img/logo.png'
 import card from './../../../../assets/img/packList.png'
 import user from './../../../../assets/img/usre.png'
-import { PackListCard } from './components/card/PackListCard';
+import { PackListCard } from './components/row/PackListCard';
 import { Loading } from '../auth/loading/card/Loading';
+
 
 
 export const PackList = () => {
     return (
         <div className={s.packListWrap}>
-            <Loading/>
+            
             <div className={s.header}>
                 <div className={s.container}>
 
@@ -39,7 +40,7 @@ export const PackList = () => {
                 </div>
 
             </div>
-            
+            <Loading/>
 
             <div className={s.main}>
                 <div className={s.filter}>
