@@ -22,16 +22,20 @@ export const PackList = () => {
                         </div>
 
                         <div className={s.headreCards}>
+                            
+                            <input className={s.input1} type="radio" name="name" id="tab1"/>
+                            <input className={s.input2} type="radio" name="name" id="tab2"/>
 
-                            <div className={s.packList}>
+                            <label className={s.packList} htmlFor="tab1">
+                               
                                 <img className={s.packListImg} src={card}/>
                                 <span className={s.packListSpan}>Pack List</span>
-                            </div>
+                            </label>
 
-                            <div className={s.profile}>
+                            <label className={s.profile} htmlFor="tab2" >
                                 <img className={s.profiltImg} src={user}/>
                                 <span className={s.profileSpan}>Profile</span>
-                            </div>
+                            </label>
 
                         </div>
 
@@ -67,6 +71,8 @@ export const PackList = () => {
                 </div>
 
             </div>
+
+            
 
         </div>
     )

@@ -22,7 +22,18 @@
 
                 .headreCards{
                     @include flex (flex, row, space-between, center);
+                    
+                    
+                    .input1, .input2 {
+                        
+                        display: none;
+                    }
+                    .input1:checked ~ .packList {background-color: #af8fa1;};
+                    .input2:checked ~ .profile {background-color: #af8fa1;};
+                    .input1:checked ~ .main {display: flex;};
+
                     .packList{
+                        position:static !important;
                         display: flex;
                         align-items: center;
                         border: 3px solid rgba(0, 0, 0, .0);;
@@ -43,6 +54,7 @@
                     }
 
                     .profile{
+                        position:static !important;
                         display: flex;
                         align-items: center;
                         border: 3px solid rgba(0, 0, 0, .0);;
@@ -69,7 +81,7 @@
     .main{
         max-width: 1010px;
         margin: 30px auto;
-        display: flex;
+        display: none;
         background-color: #FFF;
         border-radius: 20px;
         .filter{
@@ -82,4 +94,11 @@
             max-width: 770px;
         }
     }
+
+   
+
+    
 }
+
+
+
