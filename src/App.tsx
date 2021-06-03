@@ -25,8 +25,6 @@ const App = () => {
                     <Route path='/cards' render={() => <Cards/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
-                    
-                    
                 </Switch>
             </div>
         </div>
