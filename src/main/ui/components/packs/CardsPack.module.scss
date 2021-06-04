@@ -1,0 +1,11 @@
+@import './../../../../styles/sass/mixins';
+@import './../../../../styles/sass/vars';
+
+.rowWhite{
+  display: grid;
+  grid-template-columns: 160px 80px 120px 140px minmax(auto, 200px);
+  grid-template-rows: 50px;
+  justify-items: center;
+  align-items: center;
+  background-color: #fff;
+}

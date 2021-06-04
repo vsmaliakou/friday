@@ -1,9 +1,10 @@
 import React from 'react'
-import s from './PacksContainer.module.css'
+import s from './PacksContainer.module.scss'
 import SuperButton from "../../common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {getCardsPacksTC, CardsPacksType, addNewCardsPackTC, removeCardsPackTC, updateCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
 import {AppRootStateType} from "../../../bll/store";
+import {CardsPack} from "./CardsPack";
 
 export const CardsPacksContainer = () => {
 
@@ -37,53 +38,25 @@ export const CardsPacksContainer = () => {
     return (
         <div>
             <SuperButton onClick={getCardsPacks}>Get packs</SuperButton>
-            <div className={s.tableHeader}>
-                <span>Name</span>
-                <span>cardsCount</span>
-                <span>updated</span>
-                <span>url</span>
-                <button onClick={addNewCardsPack}>add</button>
+            <button onClick={addNewCardsPack}>add</button>
+            <div  className={s.card}>
+                <div  className={s.rowColor}>
+                    <div className={s.item}>Name</div>
+                    <div className={s.item}>Cards</div>
+                    <div className={s.item}>
+                        <select className={s.select}>
+                            <option>Last Updated</option>
+                            <option>One Updated</option>
+                        </select>
+                    </div>
+                    <div className={s.item}>Created by</div>
+                </div>
+                <CardsPack
+                    cardsPacks={cardsPacks}
+                    removeCardsPack={removeCardsPack}
+                    updateCardsPack={updateCardsPack}
+                />
             </div>
-            <CardsPack
-                cardsPacks={cardsPacks}
-                removeCardsPack={removeCardsPack}
-                updateCardsPack={updateCardsPack}
-            />
-        </div>
-    )
-}
-
-type CardsPackPropsType = {
-    cardsPacks: CardsPacksType[]
-    removeCardsPack: (packId: string) => void
-    updateCardsPack: (packId: string) => void
-}
-
-export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
-    return (
-        <div>
-            {
-                props.cardsPacks.map(p => {
-
-                    const removeCardsPack = () => {
-                        props.removeCardsPack(p._id)
-                    }
-                    const updateCardsPack = () => {
-                        props.updateCardsPack(p._id)
-                    }
-
-                    return (
-                        <div className={s.userData}  key={p.user_id}>
-                            <div>{p.user_name}</div>
-                            <div>{p.cardsCount}</div>
-                            <div>{p.updated}</div>
-                            <div>{p.deckCover}</div>
-                            <button onClick={removeCardsPack}>delete</button>
-                            <button onClick={updateCardsPack}>update</button>
-                        </div>
-                    )
-                })
-            }
         </div>
     )
 }

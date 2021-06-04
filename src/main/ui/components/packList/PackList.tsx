@@ -3,7 +3,7 @@ import s from './_packList.module.scss'
 import logo from './../../../../assets/img/logo.png'
 import card from './../../../../assets/img/packList.png'
 import user from './../../../../assets/img/usre.png'
-import { PackListCard } from './components/row/PackListCard';
+import {CardsPacksContainer} from "../packs/CardsPacksContainer";
 import { LoadingSvg } from '../auth/loading/card/LoadingSvg';
 
 
@@ -62,7 +62,7 @@ export const PackList = () => {
                       
                     </div>
 
-                    <PackListCard/>
+                    <CardsPacksContainer/>
                     
                 </div>
 
