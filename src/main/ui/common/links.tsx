@@ -8,4 +8,3 @@ export const profile = <Link to='/profile'>Profile</Link>
 export const packs = <Link to='/packs'>Packs</Link>
 export const cards = <Link to='/cards'>Cards</Link>
 export const packList = <Link to='/packList'>PackList</Link>
-export const setNewPassword = <Link to='/set-new-password/:token'>Set New Password</Link>
