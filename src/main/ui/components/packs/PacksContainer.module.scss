@@ -13,10 +13,22 @@
     grid-template-rows: 50px;
     justify-items: center;
     align-items: center;
-    background-color: rgb(238, 218, 218)
+    // background-color: rgb(238, 218, 218);
+    .item{
+      font-size: 13px;
+        white-space: nowrap; 
+        overflow: hidden; 
+        max-width: 100%;
+        text-overflow: ellipsis; 
+        cursor: pointer;
+        &:hover{
+          overflow:visible;
+        }
+    }
   }
 }
 .select{
   border: none;
   background: none;
 }
+

@@ -34,13 +34,13 @@ export const CardsPacksContainer = () => {
     const updateCardsPack = (packId: string) => {
         dispatch(updateCardsPackTC(packId, "new name"))
     }
-
+    
     return (
         <div>
             <SuperButton onClick={getCardsPacks}>Get packs</SuperButton>
             <button onClick={addNewCardsPack}>add</button>
             <div  className={s.card}>
-                <div  className={s.rowColor}>
+            <div  className={s.rowColor}  style={{backgroundColor:"rgb(238, 218, 218)" }}>
                     <div className={s.item}>Name</div>
                     <div className={s.item}>Cards</div>
                     <div className={s.item}>
