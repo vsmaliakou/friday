@@ -14,7 +14,7 @@ export const EmailPassword = () => {
 
                 <h2 className={s.title}>Check Email</h2>
 
-                <span className={s.checkText}>We’ve sent an Email with instructions to example@mail.com</span>
+                <span className={s.checkText}>We’ve sent an Email with instructions to example@mail.comgit</span>
 
 
                 
