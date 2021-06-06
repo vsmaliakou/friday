@@ -5,25 +5,24 @@ import SuperButton from "../../common/c2-SuperButton/SuperButton";
 import s from "../auth/login/_Login.module.scss";
 import {logOutTC} from "../../../bll/reducers/logOut-reducer";
 import {checkDataUserTC} from "../../../bll/reducers/profile-reducer";
-import {ProfileInitialStateType} from "../../../bll/reducers/profile-reducer";
-import {Redirect} from "react-router-dom";
 import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {Redirect} from "react-router-dom";
 
 export const ProfileContainer = () => {
+
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
-    const profileData = useSelector<AppRootStateType, ProfileInitialStateType>(state => state.profile)
+    const checkAuth = useSelector<AppRootStateType, null | string>(state => state.profile.errorMessage)
 
     useEffect(() => {
-        dispatch(checkDataUserTC())
+        if (auth.dataUser === null) {
+            dispatch(checkDataUserTC())
+        }
     }, [])
 
-    // if () {
-    //
-    // }
-    // if (auth.dataUser === null) {
-    //     return <Redirect to={'/login'}/>
-    // }
+    if (checkAuth) {
+        return <Redirect to={'/login'}/>
+    }
 
     const logOut = () => {
         dispatch(logOutTC())
@@ -31,10 +30,10 @@ export const ProfileContainer = () => {
 
     return (
         <div>
-            <p>name:{profileData.profileData?.name}</p>
-            <p>token:{profileData.profileData?.token}</p>
-            <p>cards:{profileData.profileData?.publicCardPacksCount}</p>
-            <p>email:{profileData.profileData?.email}</p>
+            <p>name:{auth.dataUser?.name}</p>
+            <p>token:{auth.dataUser?.token}</p>
+            <p>avatar:{auth.dataUser?.avatar}</p>
+            <p>email:{auth.dataUser?.email}</p>
             <SuperButton className={s.loginBtn}
                          onClick={logOut}>Log out
             </SuperButton>

@@ -2,15 +2,15 @@ import {Dispatch} from "redux";
 import {loginAPI, LoginType} from "../../dal/auth/login/loginApi";
 import {setRequestStatusAC} from "./app-reduser";
 
-export type LoginActionType = ReturnType<typeof loginAC>
+export type LoginActionType = ReturnType<typeof setUserData>
     | ReturnType<typeof setErrorPageAC>
-    | ReturnType<typeof loginizationStatusAC>
+    | ReturnType<typeof disableButtonAC>
 
 export type LoginInitialStateType = typeof initialState
 
 let initialState = {
     dataUser: null as LoginType | null,
-    errorMessage: '',
+    errorMessage: null as string | null,
     loginButtonDisable: false
 }
 
@@ -36,7 +36,8 @@ const loginReducer = (state = initialState, action: LoginActionType): LoginIniti
     }
 }
 
-export const loginAC = (dataUser: LoginType | null) => ({
+//AC
+export const setUserData = (dataUser: LoginType | null) => ({
     type: 'CARDS/LOGIN/POST-LOGIN-DATA',
     dataUser
 } as const)
@@ -46,30 +47,32 @@ export const setErrorPageAC = (error: string) => ({
     error
 } as const)
 
-export const loginizationStatusAC = (disable: boolean) => ({
+export const disableButtonAC = (disable: boolean) => ({
     type: 'CARDS/LOGIN/LOGIN-BUTTON',
     disable
 } as const)
 
+//TC
 export const newUserDataTC = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: Dispatch) => {
         dispatch(setRequestStatusAC('loading'))
-        dispatch(loginizationStatusAC(true))
+        dispatch(disableButtonAC(true))
         loginAPI.postLogin(email, password, rememberMe)
             .then((res) => {
-                dispatch(loginAC(res.data))
-                dispatch(loginizationStatusAC(false))
+                dispatch(setUserData(res.data))
+                dispatch(disableButtonAC(false))
             })
             .catch((e) => {
                 dispatch(setErrorPageAC(e.response
                     ? e.response.data.error
                     : (e.message + ', more details in the console')
                 ))
-                dispatch(loginizationStatusAC(false))
-            }).finally(() => {
-                dispatch(setRequestStatusAC('success'))
-            }
-        )
+                dispatch(disableButtonAC(false))
+            })
+            .finally(() => {
+                    dispatch(setRequestStatusAC('success'))
+                }
+            )
 
     }
 }

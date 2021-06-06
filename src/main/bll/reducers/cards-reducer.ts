@@ -6,7 +6,8 @@ export type CardsActionType = ReturnType<typeof cardsAC>
 export type CardsInitialStateType = typeof initialState
 
 let initialState = {
-    cards: null
+    cards: null,
+    errorMessage: null as string | null
 }
 
 const cardsReducer = (state = initialState, action: CardsActionType): CardsInitialStateType => {
@@ -27,7 +28,6 @@ export const getNewCardsTC = (id: string | undefined) => {
     return (dispatch: Dispatch) => {
         cardsAPI.getCards(id)
             .then(res => {
-                debugger
                 dispatch(cardsAC(res.data))
             })
             .catch((e) => {

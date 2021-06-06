@@ -1,19 +1,20 @@
 import {Dispatch} from "redux";
 import {profileAPI, ProfileDataType} from "../../dal/auth/profile/profileApi";
+import {setUserData} from "./login-reducer";
 
-export type ProfileActionType = ReturnType<typeof getProfileDataAC>
+export type ProfileActionType = ReturnType<typeof setProfileDataAC>
     | ReturnType<typeof setErrorProfilePage>
 
 export type ProfileInitialStateType = typeof initialState
 
 let initialState = {
     profileData: null as ProfileDataType | null,
-    errorMessage: ''
+    errorMessage: null as string | null
 }
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfileInitialStateType => {
     switch (action.type) {
-        case 'CARDS/PROFILE/GET-PROFILE-DATA':
+        case 'CARDS/PROFILE/SET-PROFILE-DATA':
             return {
                 ...state,
                 profileData: action.data
@@ -28,15 +29,17 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
     }
 }
 
-export const getProfileDataAC = (data: any) => ({type: 'CARDS/PROFILE/GET-PROFILE-DATA', data} as const)
+//AC
+export const setProfileDataAC = (data: ProfileDataType) => ({type: 'CARDS/PROFILE/SET-PROFILE-DATA', data} as const)
 export const setErrorProfilePage = (error: string) => ({type: 'CARDS/PROFILE/SET-ERROR-MESSAGE', error} as const)
 
+//TC
 export const checkDataUserTC = () => {
     return (dispatch: Dispatch) => {
-        profileAPI.getProfileData()
+        profileAPI.authProfileData()
             .then(res => {
-                dispatch(getProfileDataAC(res.data))
-
+                dispatch(setProfileDataAC(res.data))
+                dispatch(setUserData(res.data))
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response

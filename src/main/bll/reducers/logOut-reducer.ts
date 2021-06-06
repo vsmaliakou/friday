@@ -1,7 +1,7 @@
 import {Dispatch} from "redux"
 import {logOutAPI} from "../../dal/auth/logOut/logOutApi"
 import {setErrorProfilePage} from "./profile-reducer";
-import {loginAC} from "./login-reducer";
+import {setUserData} from "./login-reducer";
 
 export const auhActionsTypes = {
     LOGOUT: 'CARDS/LOGOUT/LOG-OUT-OF-PROFILE'
@@ -35,7 +35,7 @@ export const logOutTC = () => {
         logOutAPI.logOutOfProfile()
             .then(res => {
                 dispatch(logOutOfProfileAC(res.data.info))
-                dispatch(loginAC(null))
+                dispatch(setUserData(null))
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response

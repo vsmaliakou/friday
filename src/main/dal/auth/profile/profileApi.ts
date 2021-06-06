@@ -16,7 +16,7 @@ export type ProfileDataType = {
 }
 
 export const profileAPI = {
-    getProfileData() {
+    authProfileData() {
         return instance.post<ProfileDataType>(`auth/me`, {})
     }
 };
