@@ -6,6 +6,8 @@ import user from './../../../../assets/img/usre.png'
 import {CardsPacksContainer} from "../packs/CardsPacksContainer";
 import { LoadingSvg } from '../auth/loading/card/LoadingSvg';
 import { PageNumber } from './PageNumber';
+import { Filter } from './Filter';
+
 
 
 
@@ -39,17 +41,7 @@ export const PackList = () => {
 
                             <div className={s.main}>
 
-                                <div className={s.filter}>
-
-                                    <h4 className={s.filterTitle}>Show packs cards</h4>
-                                    
-                                    <div className={s.filterWrap}>
-
-                                    </div>
-
-                                    <span className={s.filterSpan}>Number of cards</span>
-
-                                </div>
+                               <Filter/>
 
                                 <div className={s.content}>
 
