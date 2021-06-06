@@ -18,9 +18,12 @@ export const ProfileContainer = () => {
         dispatch(checkDataUserTC())
     }, [])
 
-    if (auth.dataUser === null) {
-        return <Redirect to={'/login'}/>
-    }
+    // if () {
+    //
+    // }
+    // if (auth.dataUser === null) {
+    //     return <Redirect to={'/login'}/>
+    // }
 
     const logOut = () => {
         dispatch(logOutTC())

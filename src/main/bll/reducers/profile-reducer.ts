@@ -36,6 +36,7 @@ export const checkDataUserTC = () => {
         profileAPI.getProfileData()
             .then(res => {
                 dispatch(getProfileDataAC(res.data))
+
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response
