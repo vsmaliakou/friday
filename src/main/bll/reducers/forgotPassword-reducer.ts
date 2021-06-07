@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {forgotAPI} from "../../dal/auth/forgotPassword/forgotPasswordApi";
+import {forgotAPI} from "../../dal/auth/forgotPasswordApi";
 import {setRequestStatusAC} from "./app-reduser";
 
 export type ForgotPasswordActionType = ReturnType<typeof forgotPasswordAC> | ReturnType<typeof setErrorAC>

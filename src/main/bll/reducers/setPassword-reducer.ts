@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {setRequestStatusAC} from "./app-reduser";
-import {setPasswordAPI} from "../../dal/auth/setPassword/setPasswordAPI";
+import {setPasswordAPI} from "../../dal/auth/setPasswordAPI";
 
 export type SetPasswordActionType = ReturnType<typeof setErrorMessagedAC> | ReturnType<typeof isSuccessfulAC>
 export type SetPasswordInitialStateType = typeof initialState

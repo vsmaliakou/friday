@@ -4,7 +4,7 @@ import logo from './../../../../../assets/img/logo.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 import { RequestStatusType } from '../../../../bll/reducers/app-reduser';
-import { LoadingSvg } from '../loading/card/LoadingSvg';
+import { LoadingSvg } from '../../../common/loading/LoadingSvg';
 
 type RegisterPropsType = {
     error: string
@@ -32,19 +32,16 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                     {props.requestStatus === "loading" && <LoadingSvg/>}
                     <SuperInputText
                         type={"email"}
-                        setError={x => x}
                         onChange={props.onChangeEmail}
                         label={"Email"}
                     />
                     <SuperInputText
                         type={props.isChecked ? "text" : "password"}
-                        setError={x => x}
                         onChange={props.onChangePassword}
                         label={"Password"}
                     />
                     <SuperInputText
                         type={props.isChecked ? "text" : "password"}
-                        setError={x => x}
                         onChange={props.onChangeSecondPassword}
                         label={"Confirm password"}
                     />

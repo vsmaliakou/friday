@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './EmailPassword.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import email from './../../../../../assets/img/ce.png';

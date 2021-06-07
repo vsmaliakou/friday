@@ -27,7 +27,7 @@ export const ForgotPasswordContainer = () => {
         setEmail(e.currentTarget.value)
     }
     if(enterNewPassword){
-        return <Redirect to='new-password'/>
+        return <Redirect to='/check-email'/>
     }
     return (
         <div>
