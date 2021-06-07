@@ -1,9 +1,8 @@
 import {Dispatch} from "redux";
 import {cardsPacksAPI} from "../../dal/packs/cardsPacksAPI";
+import {ThunkDispatch} from "redux-thunk";
 
 export type PacksActionType = ReturnType<typeof getCardsPacksAC>
-    | ReturnType<typeof addNewCardsPackAC>
-    | ReturnType<typeof removeCardsPackAC>
     | ReturnType<typeof updateCardsPackAC>
 export type PacksInitialStateType = typeof initialState
 
@@ -36,51 +35,49 @@ export type NewCardsPackType = {
     type: string
 }
 
-let initialState: Array<CardsPacksType> = []
+let initialState = {
+    cardsPacks: [] as Array<CardsPacksType>
+}
 
 const cardsPacksReducer = (state = initialState, action: PacksActionType): PacksInitialStateType => {
     switch (action.type) {
         case 'CARDS/PACKS/GET-CARDS-PACKS':
-            return [...state,
-                ...action.cardsPacks]
-        case 'CARDS/PACKS/ADD-NEW-CARDS-PACK':
-            return [action.newCardsPack, ...state]
-        case 'CARDS/PACKS/REMOVE-CARDS-PACK':
-            return state.filter(p => p._id !== action.cardsPackId)
+            return {...state, cardsPacks: action.cardsPacks}
         case 'CARDS/PACKS/UPDATE-CARDS-PACK':
-            return state.map(p => p._id === action.cardsPackId ? {...p, user_name: action.newName} : p)
+            return {
+                ...state,
+                cardsPacks: state.cardsPacks.map(p => p._id === action.cardsPackId ? {...p, user_name: action.newName} : p)
+            }
         default:
             return state
     }
 }
 
 export const getCardsPacksAC = (cardsPacks: Array<CardsPacksType>) => ({type: 'CARDS/PACKS/GET-CARDS-PACKS', cardsPacks} as const)
-export const addNewCardsPackAC = (newCardsPack: CardsPacksType) => ({type: 'CARDS/PACKS/ADD-NEW-CARDS-PACK', newCardsPack} as const)
-export const removeCardsPackAC = (cardsPackId: string) => ({type: 'CARDS/PACKS/REMOVE-CARDS-PACK', cardsPackId} as const)
 export const updateCardsPackAC = (cardsPackId: string, newName: string) => ({type: 'CARDS/PACKS/UPDATE-CARDS-PACK', cardsPackId, newName} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch) => {
     return cardsPacksAPI.getCardsPacks()
-        .then(response => {            
+        .then(response => {
             dispatch(getCardsPacksAC(response.data.cardPacks))
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: Dispatch) => {
+export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: ThunkDispatch<PacksInitialStateType, null,PacksActionType>) => {
     return cardsPacksAPI.addNewCardsPack(cardsPack)
         .then(response => {
-            dispatch(addNewCardsPackAC(response.data.newCardsPack))
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const removeCardsPackTC = (cardsPackId: string) => (dispatch: Dispatch) => {
+export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispatch<PacksInitialStateType, null,PacksActionType>) => {
     return cardsPacksAPI.removeCardsPack(cardsPackId)
         .then(response => {
-            dispatch(removeCardsPackAC(response.data.deletedCardsPack._id))
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent, useState } from 'react'
 import s from './PacksContainer.module.scss'
 import SuperButton from "../../common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,23 +8,33 @@ import {CardsPack} from "./CardsPack";
 
 export const CardsPacksContainer = () => {
 
-    const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs)
+    let packName = ""
+    let min=1
+    let max=9
+    let sortPacks=""
+    let page=1
+    let pageCount=6
+    let user_id = ""
+
+    const newCardsPack = {
+        name: "no Name",
+        path: "/def",
+        grade: 0,
+        shots: 0,
+        rating: 0,
+        deckCover: "url or base64",
+        private: false,
+        type: "pack"
+    }
+
+    const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
 
     const dispatch = useDispatch()
 
     const getCardsPacks = () => {
         dispatch(getCardsPacksTC())
     }
-    const newCardsPack = {
-            name: "no Name",
-            path: "/def",
-            grade: 0,
-            shots: 0,
-            rating: 0,
-            deckCover: "url or base64",
-            private: false,
-            type: "pack"
-    }
+
     const addNewCardsPack = () => {
         dispatch(addNewCardsPackTC(newCardsPack))
     }

@@ -10,9 +10,8 @@ export const ForgotPasswordContainer = () => {
     const from = 'test-front-admin vsmaliakou@yandex.by'
     const message = `<div style="background-color: lime; padding: 15px">	
 	password recovery link: 
-	<a href='http://localhost:3000/friday#/set-new-password/$token$'>
+	<a href='https://vsmaliakou.github.io/friday#/set-new-password/$token$'>
     Link</a></div>`
-
 
     const error = useSelector<AppRootStateType, string>(state=> state.forgotPassword.error)
     const requestStatus = useSelector<AppRootStateType, string>(state=> state.app.requestStatus)
