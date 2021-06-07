@@ -12,11 +12,11 @@ type GetResponseType = {
     tokenDeathTime: number
 
 }
-// type AddResponseType = {
-//     newCardsPack: CardsPacksType
-//     token: string
-//     tokenDeathTime: number
-// }
+type AddResponseType = {
+    newCardsPack: CardsPacksType
+    token: string
+    tokenDeathTime: number
+}
 type RemoveResponseType = {
     deletedCardsPack: CardsPacksType
     token: string
@@ -38,7 +38,7 @@ export const cardsPacksAPI = {
         return instance.get<GetResponseType>('cards/pack')
     },
     addNewCardsPack(cardsPack: NewCardsPackType) {
-        return instance.post/*<AddResponseType>*/('cards/pack', {cardsPack})
+        return instance.post<AddResponseType>('cards/pack', {cardsPack})
     },
     removeCardsPack(id: string) {
         return instance.delete<RemoveResponseType>(`cards/pack/?id=${id}`)

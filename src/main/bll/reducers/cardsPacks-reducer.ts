@@ -36,7 +36,14 @@ export type NewCardsPackType = {
 }
 
 let initialState = {
-    cardsPacks: [] as Array<CardsPacksType>
+    cardsPacks: [] as Array<CardsPacksType>,
+    packName: "",
+    min: 0,
+    max: 9,
+    sortPacks: "",
+    page: 1,
+    pageCount: 6,
+    user_id: "",
 }
 
 const cardsPacksReducer = (state = initialState, action: PacksActionType): PacksInitialStateType => {

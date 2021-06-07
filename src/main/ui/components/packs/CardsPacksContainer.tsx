@@ -1,21 +1,18 @@
-import React, {ChangeEvent, useState } from 'react'
+import React from 'react'
 import s from './PacksContainer.module.scss'
 import SuperButton from "../../common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {getCardsPacksTC, CardsPacksType, addNewCardsPackTC, removeCardsPackTC, updateCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
+import {
+    getCardsPacksTC,
+    CardsPacksType,
+    addNewCardsPackTC,
+    removeCardsPackTC,
+    updateCardsPackTC
+} from "../../../bll/reducers/cardsPacks-reducer";
 import {AppRootStateType} from "../../../bll/store";
 import {CardsPack} from "./CardsPack";
 
 export const CardsPacksContainer = () => {
-
-    let packName = ""
-    let min=1
-    let max=9
-    let sortPacks=""
-    let page=1
-    let pageCount=6
-    let user_id = ""
-
     const newCardsPack = {
         name: "no Name",
         path: "/def",
@@ -44,7 +41,7 @@ export const CardsPacksContainer = () => {
     const updateCardsPack = (packId: string) => {
         dispatch(updateCardsPackTC(packId, "new name"))
     }
-    
+
     return (
         <div>
             <SuperButton onClick={getCardsPacks}>Get packs</SuperButton>
