@@ -37,13 +37,11 @@ export const Login: React.FC<PropsType> = (props) => {
 
                 <form className={s.form}>
                     <SuperInputText type={'email'}
-                                    setError={x => x}
                                     onChange={props.onChangeEmailHandler}
                                     label={'Email'}
                     />
 
                     <SuperInputText type={'password'}
-                                    setError={x => x}
                                     onChange={props.onChangePasswordHandler}
                                     label={'Password'}
                     />

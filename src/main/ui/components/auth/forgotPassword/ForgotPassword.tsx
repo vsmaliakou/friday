@@ -26,7 +26,7 @@ export const ForgotPassword: React.FC<ForgotPasswordType> = ({requestStatus,addN
                 <form className={s.form}>
                     {requestStatus === "loading" && <LoadingSvg/>}
                     {error && <span>{error}</span>}
-                    <SuperInputText setError={x=>x}
+                    <SuperInputText
                                     type={email}
                                     onChange={onChangeEmailHandler}
                                     label={"Email"}

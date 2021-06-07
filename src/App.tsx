@@ -10,6 +10,7 @@ import {CardsPacksContainer} from "./main/ui/components/packs/CardsPacksContaine
 import {ProfileContainer} from "./main/ui/components/profile/ProfileContainer";
 import {PackList} from './main/ui/components/packList/PackList';
 import {CardsContainer} from "./main/ui/components/packs/cards/CardsContainer";
+import {EmailPassword} from "./main/ui/components/auth/forgotPassword/EmailPassword";
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path='/registration' render={() => <RegisterContainer/>}/>
                     <Route path='/profile' render={() => <ProfileContainer/>}/>
                     <Route path='/forgot' render={() => <ForgotPasswordContainer/>}/>
+                    <Route path='/check-email' render={() => <EmailPassword/>}/>
                     <Route path='/set-new-password/:token' render={() => <SetPasswordContainer/>}/>
                     <Route path='/packs' render={() => <CardsPacksContainer/>}/>
                     <Route path='/cards' render={() => <CardsContainer/>}/>

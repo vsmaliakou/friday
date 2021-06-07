@@ -1,4 +1,4 @@
-import {instance} from "../auth/instance";
+import {instance} from "../instance";
 
 export const cardsAPI = {
     getCards(id: string | undefined) {

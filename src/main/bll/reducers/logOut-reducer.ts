@@ -1,5 +1,5 @@
 import {Dispatch} from "redux"
-import {logOutAPI} from "../../dal/auth/logOut/logOutApi"
+import {logOutAPI} from "../../dal/auth/logOutApi"
 import {setErrorProfilePage} from "./profile-reducer";
 import {loginAC} from "./login-reducer";
 

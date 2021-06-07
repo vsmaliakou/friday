@@ -32,19 +32,16 @@ export const Register: React.FC<RegisterPropsType> = (props) => {
                     {props.requestStatus === "loading" && <LoadingSvg/>}
                     <SuperInputText
                         type={"email"}
-                        setError={x => x}
                         onChange={props.onChangeEmail}
                         label={"Email"}
                     />
                     <SuperInputText
                         type={props.isChecked ? "text" : "password"}
-                        setError={x => x}
                         onChange={props.onChangePassword}
                         label={"Password"}
                     />
                     <SuperInputText
                         type={props.isChecked ? "text" : "password"}
-                        setError={x => x}
                         onChange={props.onChangeSecondPassword}
                         label={"Confirm password"}
                     />

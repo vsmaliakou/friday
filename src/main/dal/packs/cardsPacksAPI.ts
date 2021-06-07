@@ -1,4 +1,4 @@
-import {instance} from "../auth/instance";
+import {instance} from "../instance";
 import {CardsPacksType, NewCardsPackType} from "../../bll/reducers/cardsPacks-reducer";
 
 type GetResponseType = {
