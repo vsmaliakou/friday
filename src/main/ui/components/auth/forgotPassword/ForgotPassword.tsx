@@ -5,7 +5,7 @@ import email from './../../../../../assets/img/ce.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
-import { LoadingSvg } from '../loading/card/LoadingSvg';
+import { LoadingSvg } from '../../../common/loading/LoadingSvg';
 
 type ForgotPasswordType = {
     addNewPassword: ()=>void

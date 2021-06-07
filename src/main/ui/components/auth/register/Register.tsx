@@ -4,7 +4,7 @@ import logo from './../../../../../assets/img/logo.png';
 import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
 import { RequestStatusType } from '../../../../bll/reducers/app-reduser';
-import { LoadingSvg } from '../loading/card/LoadingSvg';
+import { LoadingSvg } from '../../../common/loading/LoadingSvg';
 
 type RegisterPropsType = {
     error: string

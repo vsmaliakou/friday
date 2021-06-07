@@ -4,7 +4,7 @@ import logo from './../../../../assets/img/logo.png'
 import card from './../../../../assets/img/packList.png'
 import user from './../../../../assets/img/usre.png'
 import {CardsPacksContainer} from "../packs/CardsPacksContainer";
-import { LoadingSvg } from '../auth/loading/card/LoadingSvg';
+import { LoadingSvg } from '../../common/loading/LoadingSvg';
 import { PageNumber } from './PageNumber';
 import { Filter } from './Filter';
 
