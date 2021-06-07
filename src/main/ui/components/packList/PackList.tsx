@@ -46,10 +46,11 @@ export const PackList = () => {
                                 <div className={s.content}>
 
                                     <h2 className={s.packListTitle}>Packs list</h2>
-                                    <div className={s.iputWrap}>
-                                        <input type="text"/>
+                                    <form className={s.wrap}>
+                                        <input className={s.input} type="text" placeholder="Searh..."/>
+                                        <button className={s.btn}>Add new pack</button>
                                     
-                                    </div>
+                                    </form>
 
                                     <CardsPacksContainer/>
                                     
@@ -57,7 +58,7 @@ export const PackList = () => {
 
                                 </div>
 
-                        </div>
+                            </div>
 
                         </div>
 

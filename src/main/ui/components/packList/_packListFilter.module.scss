@@ -8,8 +8,8 @@
     background-color: #f1d3f1;
 
     .filterTitle{
-        @include text (16px, 400,19px, $textColor);
-        margin-left: 10px;
+        @include text (16px, 600,19px, $textColor);
+        margin:30px 20px 40px 25px;
     }
     .tab1, .tab2 {
         display: none;
@@ -19,7 +19,7 @@
         position:static !important;
         width: 95px;
         padding: 10px 0;
-        margin: 10px;
+        margin-left: 25px;
         background-color:#fff;
         text-align: center;
         border-radius: 2px;
@@ -32,7 +32,7 @@
         position:static !important;
         width: 95px;
         padding: 10px 0;
-        margin: 10px;
+        margin-right: 25px;
         background-color:#fff;
         text-align: center;
         border-radius: 2px;
@@ -43,9 +43,23 @@
 
     .contentMy{
         display: none;
+        margin: 40px 0 0 0;
+        .filterSpan{
+            display: block;
+            margin: 10px;
+            @include text (16px, 800, 19px, $textColor);
+        }
     }
 
     .contentAll{
+        display: none;
+        margin: 40px 0 0 0;
+        .filterSpan{
+            display: block;
+            margin: 10px;
+            @include text (16px, 800, 19px, $textColor);
+        }
+        
 
     }
 }
@@ -58,5 +72,8 @@
     color:#fff;
 }
 .tab1:checked ~ .contentMy{
+    display: block;
+}
+.tab2:checked ~ .contentAll{
     display: block;
 }

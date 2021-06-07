@@ -17,14 +17,17 @@ export const Filter = () => {
                 <label className={s.labelMy} htmlFor="id1">MY</label>
                 <label className={s.labelAll} htmlFor="id2">All</label>
 
-                <span className={s.filterSpan}>Number of cards</span>
+                
 
                 <div className={s.contentMy}>
                     sdfsdfdsf
+
+                    <span className={s.filterSpan}>Number of cards</span>
                 </div>
 
                 <div className={s.contentAll}>
-
+                    1234556445
+                    <span className={s.filterSpan}>Number of cards</span>
                 </div>
 
             </div>
