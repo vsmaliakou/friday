@@ -50,6 +50,7 @@ export const CardsPacksContainer = () => {
                         </select>
                     </div>
                     <div className={s.item}>Created by</div>
+                    <div className={s.item}>Action</div>
                 </div>
                 <CardsPack
                     cardsPacks={cardsPacks}
