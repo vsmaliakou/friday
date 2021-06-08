@@ -7,7 +7,7 @@ import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import SuperButton from "../../../common/c2-SuperButton/SuperButton";
-import { LoadingSvg } from '../loading/card/LoadingSvg';
+import { LoadingSvg } from '../../../common/loading/LoadingSvg';
 
 type PropsType = {
     title: string
@@ -37,13 +37,11 @@ export const Login: React.FC<PropsType> = (props) => {
 
                 <form className={s.form}>
                     <SuperInputText type={'email'}
-                                    setError={x => x}
                                     onChange={props.onChangeEmailHandler}
                                     label={'Email'}
                     />
 
                     <SuperInputText type={'password'}
-                                    setError={x => x}
                                     onChange={props.onChangePasswordHandler}
                                     label={'Password'}
                     />

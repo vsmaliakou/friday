@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {registerAPI} from "../../dal/auth/register/registerAPI";
+import {registerAPI} from "../../dal/auth/registerAPI";
 import { setRequestStatusAC } from "./app-reduser";
 
 export type RegisterActionType = ReturnType<typeof setEmailAC>

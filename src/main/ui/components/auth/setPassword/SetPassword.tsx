@@ -28,7 +28,6 @@ export const SetPassword: React.FC<SetPasswordType> = ({error, isChecked, reques
                     {requestStatus === "loading" && <span>loading...</span>}
                     <SuperInputText
                         type={isChecked ? "text" : "password"}
-                        setError={x => x}
                         onChange={onChangeNewPassword}
                         label={"Password"}
                     />

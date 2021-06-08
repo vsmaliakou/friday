@@ -4,8 +4,10 @@ import logo from './../../../../assets/img/logo.png'
 import card from './../../../../assets/img/packList.png'
 import user from './../../../../assets/img/usre.png'
 import {CardsPacksContainer} from "../packs/CardsPacksContainer";
-import { LoadingSvg } from '../auth/loading/card/LoadingSvg';
+import { LoadingSvg } from '../../common/loading/LoadingSvg';
 import { PageNumber } from './PageNumber';
+import { Filter } from './Filter';
+
 
 
 
@@ -39,25 +41,16 @@ export const PackList = () => {
 
                             <div className={s.main}>
 
-                                <div className={s.filter}>
-
-                                    <h4 className={s.filterTitle}>Show packs cards</h4>
-                                    
-                                    <div className={s.filterWrap}>
-
-                                    </div>
-
-                                    <span className={s.filterSpan}>Number of cards</span>
-
-                                </div>
+                               <Filter/>
 
                                 <div className={s.content}>
 
                                     <h2 className={s.packListTitle}>Packs list</h2>
-                                    <div className={s.iputWrap}>
-                                        <input type="text"/>
+                                    <form className={s.wrap}>
+                                        <input className={s.input} type="text" placeholder="Searh..."/>
+                                        <button className={s.btn}>Add new pack</button>
                                     
-                                    </div>
+                                    </form>
 
                                     <CardsPacksContainer/>
                                     
@@ -65,7 +58,7 @@ export const PackList = () => {
 
                                 </div>
 
-                        </div>
+                            </div>
 
                         </div>
 
