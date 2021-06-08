@@ -19,7 +19,7 @@ const loginReducer = (state = initialState, action: LoginActionType): LoginIniti
         case 'CARDS/LOGIN/POST-LOGIN-DATA':
             return {
                 ...state,
-                dataUser: action.dataUser
+                dataUser: action.dataUser,
             }
         case "CARDS/LOGIN/SET-ERROR-MESSAGE":
             return {
@@ -61,6 +61,7 @@ export const newUserDataTC = (email: string, password: string, rememberMe: boole
             .then((res) => {
                 dispatch(setUserData(res.data))
                 dispatch(disableButtonAC(false))
+                debugger
             })
             .catch((e) => {
                 dispatch(setErrorPageAC(e.response

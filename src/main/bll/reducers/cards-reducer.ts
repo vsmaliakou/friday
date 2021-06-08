@@ -29,6 +29,7 @@ export const getNewCardsTC = (id: string | undefined) => {
         cardsAPI.getCards(id)
             .then(res => {
                 dispatch(cardsAC(res.data))
+                debugger
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response

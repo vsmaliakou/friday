@@ -2,6 +2,7 @@ import {instance} from "../instance";
 
 export type ProfileDataType = {
     created: Date
+    avatar?: string
     email: string
     isAdmin: boolean
     name: string
@@ -14,9 +15,19 @@ export type ProfileDataType = {
     __v: number
     _id: string
 }
+export type ChangeDataProfile = {
+    updateUser: ProfileDataType
+    error?: string
+}
 
 export const profileAPI = {
     authProfileData() {
         return instance.post<ProfileDataType>(`auth/me`, {})
+    },
+    changeAvatarProfile(avatar?: string) {
+        return instance.put<ChangeDataProfile>(`auth/me`, {avatar})
+    },
+    changeNameProfile(name: string) {
+        return instance.put<ChangeDataProfile>(`auth/me`, {name})
     }
 };
