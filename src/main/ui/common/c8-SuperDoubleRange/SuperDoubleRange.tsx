@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import {Slider} from "@material-ui/core";
 import s from './SuperRange.module.css'
 
@@ -12,7 +12,7 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         onChangeRange, value
     }
 ) => {
-    const handleChange = (event: any, newValue: number | number[]) => {
+    const handleChange = (event: ChangeEvent<{}>, newValue: number | number[]) => {
 
         onChangeRange && onChangeRange(newValue as [number, number]);
     };
