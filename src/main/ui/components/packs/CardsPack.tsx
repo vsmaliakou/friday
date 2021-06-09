@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './CardsPack.module.scss'
+import s from './PacksContainer.module.scss'
 import {CardsPacksType} from "../../../bll/reducers/cardsPacks-reducer";
 
 type CardsPackPropsType = {
@@ -22,7 +22,7 @@ export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
                     }
 
                     return (
-                        <div className={s.rowWhite} key={p.user_id}>
+                        <div className={s.rowColor} key={p.user_id}>
                             <div className={s.item}>{p.name}</div>
                             <div className={s.item}>{p.cardsCount}</div>
                             <div className={s.item}>{p.updated}</div>

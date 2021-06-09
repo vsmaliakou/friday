@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {loginAPI, LoginType} from "../../dal/auth/login/loginApi";
+import {loginAPI, LoginType} from "../../dal/auth/loginApi";
 import {setRequestStatusAC} from "./app-reduser";
 
 export type LoginActionType = ReturnType<typeof loginAC>

@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {profileAPI, ProfileDataType} from "../../dal/auth/profile/profileApi";
+import {profileAPI, ProfileDataType} from "../../dal/profile/profileApi";
 
 export type ProfileActionType = ReturnType<typeof getProfileDataAC>
     | ReturnType<typeof setErrorProfilePage>
@@ -36,6 +36,7 @@ export const checkDataUserTC = () => {
         profileAPI.getProfileData()
             .then(res => {
                 dispatch(getProfileDataAC(res.data))
+
             })
             .catch((e) => {
                 dispatch(setErrorProfilePage(e.response

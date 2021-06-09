@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Header.module.css'
-import {cards, forgot, login, packs, profile, registration} from "../common/links";
+import {cards, forgot, login, packList, packs, profile, registration} from "../common/links";
 
 export const Header = () => {
     return (
@@ -11,6 +11,7 @@ export const Header = () => {
             {profile}
             {packs}
             {cards}
+            {packList}
         </div>
     )
 }
