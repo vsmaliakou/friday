@@ -46,6 +46,7 @@ export const CardsPacksContainer = () => {
         <div>
             <SuperButton onClick={getCardsPacks}>Get packs</SuperButton>
             <button onClick={addNewCardsPack}>add</button>
+            <input type="text" placeholder="search" onChange={x => x}/>
             <div  className={s.card}>
             <div  className={s.rowColor}  style={{backgroundColor:"rgb(238, 218, 218)" }}>
                     <div className={s.item}>Name</div>
