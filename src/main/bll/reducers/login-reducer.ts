@@ -5,28 +5,44 @@ import {setRequestStatusAC} from "./app-reduser";
 export type LoginActionType = ReturnType<typeof setUserData>
     | ReturnType<typeof setErrorPageAC>
     | ReturnType<typeof disableButtonAC>
+    | ReturnType<typeof setNewValueAuth>
+
+export const loginActionsTypes = {
+    LOGIN: 'CARDS/LOGIN/POST-LOGIN-DATA',
+    'NEW-VALUE-AUTH': 'CARDS/LOGIN/NEW-VALUE-AUTH',
+    ERROR: 'CARDS/LOGIN/SET-ERROR-MESSAGE',
+    DISABLE: 'CARDS/LOGIN/LOGIN-BUTTON',
+
+} as const;
+
 
 export type LoginInitialStateType = typeof initialState
 
 let initialState = {
     dataUser: null as LoginType | null,
     errorMessage: null as string | null,
-    loginButtonDisable: false
+    loginButtonDisable: false,
+    auth: false
 }
 
 const loginReducer = (state = initialState, action: LoginActionType): LoginInitialStateType => {
     switch (action.type) {
-        case 'CARDS/LOGIN/POST-LOGIN-DATA':
+        case loginActionsTypes.LOGIN:
             return {
                 ...state,
                 dataUser: action.dataUser,
             }
-        case "CARDS/LOGIN/SET-ERROR-MESSAGE":
+        case loginActionsTypes["NEW-VALUE-AUTH"]:
+            return {
+                ...state,
+                auth: action.value
+            }
+        case loginActionsTypes.ERROR:
             return {
                 ...state,
                 errorMessage: action.error
             }
-        case "CARDS/LOGIN/LOGIN-BUTTON":
+        case loginActionsTypes.DISABLE:
             return {
                 ...state,
                 loginButtonDisable: action.disable
@@ -37,20 +53,10 @@ const loginReducer = (state = initialState, action: LoginActionType): LoginIniti
 }
 
 //AC
-export const setUserData = (dataUser: LoginType | null) => ({
-    type: 'CARDS/LOGIN/POST-LOGIN-DATA',
-    dataUser
-} as const)
-
-export const setErrorPageAC = (error: string) => ({
-    type: 'CARDS/LOGIN/SET-ERROR-MESSAGE',
-    error
-} as const)
-
-export const disableButtonAC = (disable: boolean) => ({
-    type: 'CARDS/LOGIN/LOGIN-BUTTON',
-    disable
-} as const)
+export const setUserData = (dataUser: LoginType | null) => ({type: loginActionsTypes.LOGIN, dataUser} as const)
+export const setNewValueAuth = (value: boolean) => ({type: loginActionsTypes["NEW-VALUE-AUTH"], value} as const)
+export const setErrorPageAC = (error: string) => ({type: loginActionsTypes.ERROR, error} as const)
+export const disableButtonAC = (disable: boolean) => ({type: loginActionsTypes.DISABLE, disable} as const)
 
 //TC
 export const newUserDataTC = (email: string, password: string, rememberMe: boolean) => {
@@ -61,7 +67,7 @@ export const newUserDataTC = (email: string, password: string, rememberMe: boole
             .then((res) => {
                 dispatch(setUserData(res.data))
                 dispatch(disableButtonAC(false))
-                debugger
+                dispatch(setNewValueAuth(true))
             })
             .catch((e) => {
                 dispatch(setErrorPageAC(e.response

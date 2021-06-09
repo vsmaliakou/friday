@@ -7,21 +7,23 @@ import {logOutTC} from "../../../bll/reducers/logOut-reducer";
 import {authTC, changeAvatarProfileTC, changeNameProfileTC,} from "../../../bll/reducers/profile-reducer";
 import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
 import {Redirect} from "react-router-dom";
+import {LoadingSvg} from "../../common/loading/LoadingSvg";
+import {RequestStatusType} from "../../../bll/reducers/app-reduser";
 
 export const ProfileContainer = () => {
 
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
-    const checkAuth = useSelector<AppRootStateType, null | string>(state => state.profile.errorMessage)
-    const logOutSuccess = useSelector<AppRootStateType, null | string>(state => state.logOut.logOutInfo)
+    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
+
 
     useEffect(() => {
-        if (auth.dataUser === null) {
+        if (!auth.auth) {
             dispatch(authTC())
         }
     }, [])
 
-    if (logOutSuccess || checkAuth) {
+    if (!auth.auth) {
         return <Redirect to={'/login'}/>
     }
 
@@ -30,7 +32,7 @@ export const ProfileContainer = () => {
     }
 
     const changeAvatarHandler = () => {
-        dispatch(changeNameProfileTC('Eugene'))
+        dispatch(changeNameProfileTC('djfhdsfd'))
     }
     const changeNameHandler = () => {
         dispatch(changeAvatarProfileTC('https://memepedia.ru/wp-content/uploads/2018/07/150412976013508192-kopiya-768x576.jpg')) ///загрузка аватара
@@ -38,6 +40,9 @@ export const ProfileContainer = () => {
 
     return (
         <div>
+
+            {loading === "loading" ? <LoadingSvg/> : null}
+
             avatar:<img src={auth.dataUser?.avatar}/>
             <button onClick={changeAvatarHandler}
             >change image

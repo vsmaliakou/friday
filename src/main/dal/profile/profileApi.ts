@@ -14,6 +14,7 @@ export type ProfileDataType = {
     verified: boolean
     __v: number
     _id: string
+    error?: string;
 }
 export type ChangeDataProfile = {
     updateUser: ProfileDataType

@@ -3,6 +3,11 @@ import {cardsAPI} from "../../dal/packs/cardsAPI";
 import {setErrorProfilePage} from "./profile-reducer";
 
 export type CardsActionType = ReturnType<typeof cardsAC>
+
+export const cardsActionsTypes = {
+    'SET-CARDS': 'CARDS/CARDS/SET-CARDS'
+}
+
 export type CardsInitialStateType = typeof initialState
 
 let initialState = {
@@ -12,7 +17,7 @@ let initialState = {
 
 const cardsReducer = (state = initialState, action: CardsActionType): CardsInitialStateType => {
     switch (action.type) {
-        case 'CARDS/CARDS/GET-CARDS':
+        case cardsActionsTypes["SET-CARDS"]:
             return {
                 ...state,
                 cards: action.cards
@@ -22,7 +27,7 @@ const cardsReducer = (state = initialState, action: CardsActionType): CardsIniti
     }
 }
 
-export const cardsAC = (cards: any) => ({type: 'CARDS/CARDS/GET-CARDS', cards} as const)
+export const cardsAC = (cards: any) => ({type: cardsActionsTypes["SET-CARDS"], cards} as const)
 
 export const getNewCardsTC = (id: string | undefined) => {
     return (dispatch: Dispatch) => {

@@ -2,6 +2,13 @@ import {Dispatch} from "redux";
 import {setUserData} from "./login-reducer";
 import {profileAPI, ProfileDataType} from "../../dal/profile/profileApi";
 
+export const profileActionsTypes = {
+    'SET-DATA': 'CARDS/PROFILE/SET-PROFILE-DATA',
+    ERROR: 'CARDS/PROFILE/SET-ERROR-MESSAGE',
+    'NEW-NAME': 'CARDS/PROFILE/SET-NEW-NAME-PROFILE',
+    'NEW-AVATAR': 'CARDS/PROFILE/SET-NEW-AVATAR-PROFILE'
+} as const;
+
 export type ProfileActionType = ReturnType<typeof setProfileDataAC>
     | ReturnType<typeof setErrorProfilePage>
     | ReturnType<typeof setNewNameProfile>
@@ -16,35 +23,33 @@ let initialState = {
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfileInitialStateType => {
     switch (action.type) {
-        case 'CARDS/PROFILE/SET-PROFILE-DATA':
+        case profileActionsTypes["SET-DATA"]:
             return {
                 ...state,
                 profileData: action.data
             }
-        case "CARDS/PROFILE/SET-ERROR-MESSAGE":
+        case profileActionsTypes.ERROR:
             return {
                 ...state,
                 errorMessage: action.error
             }
-        case "CARDS/PROFILE/SET-NEW-AVATAR-PROFILE":
-            return {
-                ...state,
-                profileData: {...state.profileData, avatar: action.avatar}
-
-            }
+        // case profileActionsTypes["NEW-NAME"]:
+        //     return {
+        //         ...state,
+        //         profileData: {
+        //             ...state.profileData, avatar: action.avatar
+        //         }
+        //     }
         default:
             return state
     }
 }
 
 //AC
-export const setProfileDataAC = (data: ProfileDataType) => ({type: 'CARDS/PROFILE/SET-PROFILE-DATA', data} as const)
-export const setErrorProfilePage = (error: string) => ({type: 'CARDS/PROFILE/SET-ERROR-MESSAGE', error} as const)
-export const setNewNameProfile = (name: string) => ({type: 'CARDS/PROFILE/SET-NEW-NAME-PROFILE', name} as const)
-export const setNewAvatarProfile = (avatar?: string) => ({
-    type: 'CARDS/PROFILE/SET-NEW-AVATAR-PROFILE',
-    avatar
-} as const)
+export const setProfileDataAC = (data: ProfileDataType) => ({type: profileActionsTypes["SET-DATA"], data} as const)
+export const setErrorProfilePage = (error: string) => ({type: profileActionsTypes.ERROR, error} as const)
+export const setNewNameProfile = (name: string) => ({type: profileActionsTypes["NEW-NAME"], name} as const)
+export const setNewAvatarProfile = (avatar?: any) => ({type: profileActionsTypes["NEW-AVATAR"], avatar} as const)
 
 //TC
 export const authTC = () => {

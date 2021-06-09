@@ -15,12 +15,12 @@ export const CardsContainer = () => {
 
 
     useEffect(() => {
-        if (auth.dataUser === null) {
+        if (!auth.auth) {
             dispatch(authTC())
         }
     }, [])
 
-    if (logOutSuccess || checkAuth) {
+    if (!auth.auth) {
         return <Redirect to={'/login'}/>
     }
 
