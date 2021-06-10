@@ -9,6 +9,9 @@ import { AddNewPack } from './AddNewPack';
 import { DeletePack } from './DeletePack';
 import { AddNewCard } from './AddNewCard';
 import { PackName } from './packListContent/PackName';
+import { LearnQuestion } from './LearnQuestion';
+import { LearnAnswer } from './LearnAnswer';
+import { EditProfile } from './EditProfile';
 
 
 
@@ -18,7 +21,8 @@ export const PackList = () => {
     return (
         <div className={s.packListWrap}>
            {/* <DeletePack/> */}
-           {/* <AddNewPack/> */}
+           <AddNewPack/>
+           
 
             <div className={s.header}>
 
@@ -48,6 +52,12 @@ export const PackList = () => {
                 {/* <MyListCard/> */}
 
                 <PackName/>
+
+                {/* <LearnQuestion/> */}
+
+                {/* <LearnAnswer/> */}
+                
+                {/* <EditProfile/> */}
 
                 
 

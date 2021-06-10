@@ -43,69 +43,53 @@ export const PackName = () => {
                         </th>
                         
                     </tr>
+
                     <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th className={s.col}>asdsasdasdasdsdsadasdasdaad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>Pack Name - Name Pack</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>This is how "This" works in JavaScript</span>
+                        </th>
+                        <th className={s.col}>
+                           <span className={s.colSpan}>18.03.2021</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}></span>
+                        </th>
                        
                     </tr>
                     <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>Pack Name - Name Pack</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>This is how "This" works in JavaScript</span>
+                        </th>
+                        <th className={s.col}>
+                           <span className={s.colSpan}>18.03.2021</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}></span>
+                        </th>
                        
                     </tr>
                     <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>Pack Name - Name Pack</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>This is how "This" works in JavaScript</span>
+                        </th>
+                        <th className={s.col}>
+                           <span className={s.colSpan}>18.03.2021</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}></span>
+                        </th>
                        
                     </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
-                    <tr className={s.row}>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                        <th>asdsad</th>
-                       
-                    </tr>
+                    
                     
                 </table>
 

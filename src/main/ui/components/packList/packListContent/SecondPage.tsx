@@ -20,7 +20,7 @@ export const SecondPage = () => {
                 
                 <form className={s.inputWrap}>
                     <input className={s.input} type="text" placeholder="Searh..."/>
-                    <button className={s.btn}>Add new pack</button>
+                    <button className={s.btn}>Add new card</button>
                                         
                 </form>
 
