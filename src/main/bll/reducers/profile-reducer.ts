@@ -17,7 +17,7 @@ export type ProfileActionType = ReturnType<typeof setProfileDataAC>
 export type ProfileInitialStateType = typeof initialState
 
 let initialState = {
-    profileData: null as ProfileDataType | null,
+    profileData: {} /*null as ProfileDataType | null*/,
     errorMessage: null as string | null
 }
 
@@ -33,13 +33,20 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
                 ...state,
                 errorMessage: action.error
             }
-        // case profileActionsTypes["NEW-NAME"]:
-        //     return {
-        //         ...state,
-        //         profileData: {
-        //             ...state.profileData, avatar: action.avatar
-        //         }
-        //     }
+        case profileActionsTypes["NEW-AVATAR"]:
+            return {
+                ...state,
+                profileData: {
+                    ...state.profileData, avatar: action.avatar
+                }
+            }
+        case profileActionsTypes["NEW-NAME"]:
+            return {
+                ...state,
+                profileData: {
+                    ...state.profileData, name: action.name
+                }
+            }
         default:
             return state
     }
@@ -72,8 +79,7 @@ export const changeNameProfileTC = (name: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.changeNameProfile(name)
             .then(res => {
-                dispatch(setNewNameProfile(res.data.updateUser.name))
-                debugger
+                dispatch(setNewNameProfile(res.data.updatedUser.name))
             })
     }
 }
@@ -81,8 +87,7 @@ export const changeAvatarProfileTC = (avatar?: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.changeAvatarProfile(avatar)
             .then(res => {
-                dispatch(setNewAvatarProfile(res.data.updateUser.avatar))
-                debugger
+                dispatch(setNewAvatarProfile(res.data.updatedUser.avatar))
             })
     }
 }

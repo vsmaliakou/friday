@@ -4,15 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
+import {LoadingSvg} from "../../../common/loading/LoadingSvg";
+import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 
 export const CardsContainer = () => {
 
     const dispatch = useDispatch()
-
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
-    const checkAuth = useSelector<AppRootStateType, null | string>(state => state.profile.errorMessage)
-    const logOutSuccess = useSelector<AppRootStateType, null | string>(state => state.logOut.logOutInfo)
-
+    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
 
     useEffect(() => {
         if (!auth.auth) {
@@ -28,6 +27,9 @@ export const CardsContainer = () => {
 
     return (
         <div>
+
+            {loading === "loading" ? <LoadingSvg/> : null}
+
             cards
             {/*<Cards/>*/}
         </div>

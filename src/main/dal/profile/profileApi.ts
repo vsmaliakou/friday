@@ -17,7 +17,7 @@ export type ProfileDataType = {
     error?: string;
 }
 export type ChangeDataProfile = {
-    updateUser: ProfileDataType
+    updatedUser: ProfileDataType
     error?: string
 }
 

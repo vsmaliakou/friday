@@ -5,6 +5,7 @@ import {LoginInitialStateType, newUserDataTC, setErrorPageAC} from '../../../../
 import {Redirect} from "react-router-dom";
 import {Login} from "./Login";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
+import {authTC} from "../../../../bll/reducers/profile-reducer";
 
 export const LoginContainer = () => {
 
@@ -16,12 +17,19 @@ export const LoginContainer = () => {
     const dataLogin = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
 
+    // useEffect(() => {
+    //     if (!dataLogin.auth) {
+    //         dispatch(authTC())
+    //     }
+    // }, [])
+
     if (dataLogin.auth) {
         return <Redirect to={'/profile'}/>
     }
 
     const addUserData = () => {
         dispatch(newUserDataTC(email, password, rememberMe))
+        // dispatch(newUserDataTC('kwin649011@gmail.com', 'qwerasdf', rememberMe))
     }
     const addNewEmail = (newEmail: string) => {
         setEmail(newEmail)
