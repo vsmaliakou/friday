@@ -27,7 +27,7 @@ export const Filter = () => {
 
                 <div className={s.contentAll}>
                     1234556445
-                    <span className={s.filterSpan}>Number of cards</span>
+                    
                 </div>
 
             </div>
