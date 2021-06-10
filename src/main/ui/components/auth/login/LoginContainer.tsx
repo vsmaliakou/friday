@@ -1,11 +1,10 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType, newUserDataTC, setErrorPageAC} from '../../../../bll/reducers/login-reducer';
 import {Redirect} from "react-router-dom";
 import {Login} from "./Login";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
-import {authTC} from "../../../../bll/reducers/profile-reducer";
 
 export const LoginContainer = () => {
 
@@ -16,12 +15,6 @@ export const LoginContainer = () => {
 
     const dataLogin = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
-
-    // useEffect(() => {
-    //     if (!dataLogin.auth) {
-    //         dispatch(authTC())
-    //     }
-    // }, [])
 
     if (dataLogin.auth) {
         return <Redirect to={'/profile'}/>

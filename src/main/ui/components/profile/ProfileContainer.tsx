@@ -65,7 +65,7 @@ export const ProfileContainer = () => {
 
             {editMode
 
-                ? <input onBlur={changeNameInputFocus}
+                ? <input autoFocus onBlur={changeNameInputFocus}
                          onChange={onChangeNewNameHandler}
                 />
 
