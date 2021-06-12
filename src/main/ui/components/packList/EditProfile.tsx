@@ -29,6 +29,8 @@ export const EditProfile: React.FC<PropsType> = (props) =>{
                 </div>
 
                 <form className={s.form}>
+                    <SuperInputText type={'text'}
+                                    label={'Nickname'}/>
                     <SuperInputText type={'email'}
                                     label={'Email'}/>
                 </form>
