@@ -21,7 +21,7 @@ export const PackList = () => {
     return (
         <div className={s.packListWrap}>
            {/* <DeletePack/> */}
-           <AddNewPack/>
+           {/* <AddNewPack/> */}
            
 
             <div className={s.header}>
@@ -43,7 +43,7 @@ export const PackList = () => {
 
             <div className={s.content}>
 
-                {/* <FirstPage/> */}
+                <FirstPage/>
 
                 {/* <SecondPage/> */}
 
@@ -51,7 +51,7 @@ export const PackList = () => {
 
                 {/* <MyListCard/> */}
 
-                <PackName/>
+                {/* <PackName/> */}
 
                 {/* <LearnQuestion/> */}
 
