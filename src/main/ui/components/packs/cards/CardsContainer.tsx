@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react'
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {LoadingSvg} from "../../../common/loading/LoadingSvg";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardsPacksType} from "../../../../bll/reducers/cardsPacks-reducer";
 import {getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
+import {CardsType} from "../../../../dal/packs/cardsAPI";
 
 export const CardsContainer = () => {
 
@@ -15,8 +16,9 @@ export const CardsContainer = () => {
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
-    const packs = useSelector<AppRootStateType, any>(state => state.cards.cards)
-    const idPack = cardsPacks[0]?._id
+    const cards = useSelector<AppRootStateType, Array<CardsType> | null>(state => state.cards.cards)
+
+    const idPack = cardsPacks[2]?._id // айди пака хардкод
 
     useEffect(() => {
         if (!auth.auth) {
@@ -26,20 +28,46 @@ export const CardsContainer = () => {
 
     useEffect(() => {
         dispatch(getNewCardsTC(idPack))
-    })
+    }, [])
 
     if (!auth.auth) {
         return <Redirect to={'/login'}/>
     }
 
-    console.log(idPack)
-    console.log(packs)
-
     return (
         <div>
+
             {loading === "loading" ? <LoadingSvg/> : null}
-            {packs}
-            {/*<Cards/>*/}
+
+            <div>
+                <NavLink to={'/packs'}>
+                    <img src="arrow" alt=""/>
+                    Pack Name
+                </NavLink>
+
+                {
+                    cards?.map(cards => {
+                        return (
+                            <div key={cards._id}>
+                                <div>{cards.question}</div>
+                                <div>{cards.answer}</div>
+                                <div>{cards.updated}</div>
+                                <div>{cards.grade}</div>
+                                <div> Actions:
+                                    <button onClick={() => {
+                                    }}>Delete
+                                    </button>
+                                    <NavLink to={'/#'}>
+                                        <button>Edit
+                                        </button>
+                                    </NavLink>
+                                </div>
+                            </div>
+                        )
+                    })
+
+                }
+            </div>
         </div>
     )
 }

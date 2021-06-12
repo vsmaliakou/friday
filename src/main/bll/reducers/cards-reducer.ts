@@ -20,7 +20,7 @@ const cardsReducer = (state = initialState, action: CardsActionType): CardsIniti
         case cardsActionsTypes["SET-CARDS"]:
             return {
                 ...state,
-                // cards: action.cards
+                cards: action.cards
             }
         default:
             return state
