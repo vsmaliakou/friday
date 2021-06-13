@@ -6,7 +6,6 @@ import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {LoadingSvg} from "../../../common/loading/LoadingSvg";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
-import {CardsPacksType} from "../../../../bll/reducers/cardsPacks-reducer";
 import {getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
 import {CardsType} from "../../../../dal/packs/cardsAPI";
 
@@ -15,8 +14,7 @@ export const CardsContainer = () => {
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
-    const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
-    const cards = useSelector<AppRootStateType, Array<CardsType> | null>(state => state.cards.cards)
+    const cards = useSelector<AppRootStateType, Array<CardsType>>(state => state.cards.cards)
 
     const {_id} = useParams<{ _id: string }>()
 
@@ -40,32 +38,47 @@ export const CardsContainer = () => {
             {loading === "loading" ? <LoadingSvg/> : null}
 
             <div>
-                <NavLink to={'/packs'}>
-                    <img src="arrow" alt=""/>
-                    Pack Name
-                </NavLink>
+                <div>
+                    <NavLink to={'/packs'}>
+                        <img src="arrow" alt=""/>
+                        Pack Name
+                    </NavLink>
+                    {/*если карточки свои то ...*/}
+                    <button>Add new card</button>
+                </div>
+                <div>
+                    <input placeholder="search..."/>
+                </div>
 
-                {
-                    cards?.map(cards => {
-                        return (
-                            <div key={cards._id}>
-                                <div>{cards.question}</div>
-                                <div>{cards.answer}</div>
-                                <div>{cards.updated}</div>
-                                <div>{cards.grade}</div>
-                                <div> Actions:
-                                    <button onClick={() => {
-                                    }}>Delete
-                                    </button>
-                                    <NavLink to={'/#'}>
-                                        <button>Edit
+                {/*проверка на наличие карточек*/}
+                {cards?.length <= 1
+                    ? <p>This pack is empty. Click add new card to fill this pack</p>
+                    : cards?.map(cards => {
+                            return (
+
+                                <div key={cards._id}>
+
+                                    <div>{cards.question}</div>
+                                    <div>{cards.answer}</div>
+                                    <div>{cards.updated}</div>
+                                    <div>{cards.grade}</div>
+
+                                    {/*если карточки свои то...*/}
+                                    <div> Actions:
+                                        <button onClick={() => {
+                                        }}>Delete
                                         </button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        )
-                    })
+                                        <NavLink to={'/#'}>
+                                            <button>Edit
+                                            </button>
+                                        </NavLink>
+                                    </div>
+                                    {/*иначе null*/}
 
+                                </div>
+                            )
+                        }
+                    )
                 }
             </div>
         </div>
