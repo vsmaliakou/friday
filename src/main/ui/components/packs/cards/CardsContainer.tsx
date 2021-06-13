@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink, Redirect, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {LoadingSvg} from "../../../common/loading/LoadingSvg";
@@ -18,7 +18,7 @@ export const CardsContainer = () => {
     const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
     const cards = useSelector<AppRootStateType, Array<CardsType> | null>(state => state.cards.cards)
 
-    const idPack = cardsPacks[2]?._id // айди пака хардкод
+    const {_id} = useParams<{ _id: string }>()
 
     useEffect(() => {
         if (!auth.auth) {
@@ -27,7 +27,7 @@ export const CardsContainer = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(getNewCardsTC(idPack))
+        dispatch(getNewCardsTC(_id))
     }, [])
 
     if (!auth.auth) {

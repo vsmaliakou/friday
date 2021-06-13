@@ -29,11 +29,10 @@ const cardsReducer = (state = initialState, action: CardsActionType): CardsIniti
 
 export const cardsAC = (cards: Array<CardsType>) => ({type: cardsActionsTypes["SET-CARDS"], cards} as const)
 
-export const getNewCardsTC = (id: string | undefined) => {
+export const getNewCardsTC = (id: string) => {
     return (dispatch: Dispatch) => {
         cardsAPI.getCards(id)
             .then(res => {
-                debugger
                 dispatch(cardsAC(res.data.cards))
             })
             .catch((e) => {

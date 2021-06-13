@@ -33,7 +33,7 @@ export type GetCardsType = {
 }
 
 export const cardsAPI = {
-    getCards(id: string | undefined) {
+    getCards(id: string) {
         return instance.get<GetCardsType>(`cards/card?cardsPack_id=${id}`)
     },
 }

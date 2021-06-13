@@ -1,11 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import s from './PacksContainer.module.scss'
-import SuperButton from "../../common/c2-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getCardsPacksTC,
-    CardsPacksType,
     addNewCardsPackTC,
+    CardsPacksType,
+    getCardsPacksTC,
     removeCardsPackTC,
     updateCardsPackTC
 } from "../../../bll/reducers/cardsPacks-reducer";
@@ -28,9 +27,9 @@ export const CardsPacksContainer = () => {
 
     const dispatch = useDispatch()
 
-    const getCardsPacks = () => {
+    useEffect(() => {
         dispatch(getCardsPacksTC())
-    }
+    }, [])
 
     const addNewCardsPack = () => {
         dispatch(addNewCardsPackTC(newCardsPack))
@@ -44,11 +43,9 @@ export const CardsPacksContainer = () => {
 
     return (
         <div>
-            <SuperButton onClick={getCardsPacks}>Get packs</SuperButton>
-            <button onClick={addNewCardsPack}>add</button>
             <input type="text" placeholder="search" onChange={x => x}/>
-            <div  className={s.card}>
-            <div  className={s.rowColor}  style={{backgroundColor:"rgb(238, 218, 218)" }}>
+            <div className={s.card}>
+                <div className={s.rowColor} style={{backgroundColor: "rgb(238, 218, 218)"}}>
                     <div className={s.item}>Name</div>
                     <div className={s.item}>Cards</div>
                     <div className={s.item}>
@@ -58,7 +55,7 @@ export const CardsPacksContainer = () => {
                         </select>
                     </div>
                     <div className={s.item}>Created by</div>
-                    <div className={s.item}>Action</div>
+                    <button onClick={addNewCardsPack}>add</button>
                 </div>
                 <CardsPack
                     cardsPacks={cardsPacks}
