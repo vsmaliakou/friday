@@ -7,8 +7,8 @@ import {
     getCardsPacksTC,
     removeCardsPackTC,
     updateCardsPackTC
-} from "../../../bll/reducers/cardsPacks-reducer";
-import {AppRootStateType} from "../../../bll/store";
+} from "../../../../bll/reducers/cardsPacks-reducer";
+import {AppRootStateType} from "../../../../bll/store";
 import {CardsPack} from "./CardsPack";
 
 export const CardsPacksContainer = () => {

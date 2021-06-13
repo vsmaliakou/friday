@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './_pageNumber.module.scss';
-
-
+import {useDispatch} from "react-redux";
+import {getCardsPacksTC, setPageCountAC} from "../../../bll/reducers/cardsPacks-reducer";
 
 
 export const PageNumber = () => {
+
+    const dispatch = useDispatch()
+
+    const setPageCount = (e: ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setPageCountAC(Number(e.currentTarget.value)))
+        dispatch(getCardsPacksTC())
+    }
+
     return (
         <div className={s.wrap}>
             
@@ -25,10 +33,10 @@ export const PageNumber = () => {
 
             <div className={s.selectWrap}>
                 <span className={s.selectSpan}>Show</span>
-                <select className={s.select}>
-                    <option>10</option>
-                    <option>40</option>
-                    <option>100</option>
+                <select className={s.select} onChange={setPageCount}>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
                 </select>
                 <span className={s.selectSpan}>Cards per Page</span>
             </div>

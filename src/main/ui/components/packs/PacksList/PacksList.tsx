@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './PacksList.module.scss'
 import {Filter} from "../../packList/Filter";
-import {CardsPacksContainer} from "../CardsPacksContainer";
+import {CardsPacksContainer} from "./CardsPacksContainer";
 import {PageNumber} from "../../packList/PageNumber";
+import {Paginator} from "../../../common/Search-and-Paginator/Paginator";
 
 
 export const PacksList = () => {
@@ -22,6 +23,7 @@ export const PacksList = () => {
                 <CardsPacksContainer/>
 
                 <PageNumber/>
+                <Paginator pageSize={6} totalItemCounts={20}/>
 
             </div>
 

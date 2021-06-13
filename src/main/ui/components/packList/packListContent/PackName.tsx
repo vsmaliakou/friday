@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/CardsPacksContainer';
+import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
 import { PageNumber } from '../PageNumber';
 import s from './_packName.module.scss'
 
