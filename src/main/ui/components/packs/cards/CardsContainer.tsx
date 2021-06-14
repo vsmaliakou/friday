@@ -17,7 +17,6 @@ export const CardsContainer = () => {
     const cards = useSelector<AppRootStateType, Array<CardsType>>(state => state.cards.cards)
 
     const {_id} = useParams<{ _id: string }>()
-    const history = useHistory()
 
     useEffect(() => {
         if (!auth.auth) {
