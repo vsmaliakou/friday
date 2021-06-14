@@ -24,7 +24,7 @@ export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
 
                     return (
 
-                        <div className={s.rowColor} key={p.user_id}>
+                        <div className={s.rowColor} key={p._id}>
                                 <div className={s.item}>{p.name}</div>
                                 <div className={s.item}>{p.cardsCount}</div>
                                 <div className={s.item}>{p.updated}</div>

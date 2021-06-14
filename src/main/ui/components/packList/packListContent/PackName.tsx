@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
-import { PageNumber } from '../PageNumber';
+import { PageNumber } from '../../../common/Paginator/PageNumber';
 import s from './_packName.module.scss'
 
 

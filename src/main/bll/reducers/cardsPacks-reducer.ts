@@ -1,11 +1,13 @@
 import {Dispatch} from "redux";
 import {cardsPacksAPI} from "../../dal/packs/cardsPacksAPI";
 import {ThunkDispatch} from "redux-thunk";
-import {AppRootStateType} from "../store";
+import {AppActionsType, AppRootStateType} from "../store";
 
 export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof updateCardsPackAC>
+    | ReturnType<typeof setTotalPacksCountAC>
     | ReturnType<typeof setPageCountAC>
+    | ReturnType<typeof setCurrentPageAC>
 export type PacksInitialStateType = typeof initialState
 
 export type CardsPacksType = {
@@ -46,6 +48,7 @@ let initialState = {
     page: 1,
     pageCount: 5,
     user_id: "",
+    totalPacksCount: 5
 }
 
 const cardsPacksReducer = (state = initialState, action: PacksActionType): PacksInitialStateType => {
@@ -60,25 +63,25 @@ const cardsPacksReducer = (state = initialState, action: PacksActionType): Packs
                     user_name: action.newName
                 } : p)
             }
+        case 'CARDS/PACKS/SET-TOTAL-PACKS-COUNT':
+            return {...state, totalPacksCount: action.totalPacksCount}
         case 'CARDS/PACKS/SET-PAGE-COUNT':
             return {...state, pageCount: action.newPageCount}
+        case 'CARDS/PACKS/SET-CURRENT-PAGE':
+            return {...state, page: action.pageNumber}
         default:
             return state
     }
 }
 
-export const getCardsPacksAC = (cardsPacks: Array<CardsPacksType>) => ({
-    type: 'CARDS/PACKS/GET-CARDS-PACKS',
-    cardsPacks
-} as const)
-export const updateCardsPackAC = (cardsPackId: string, newName: string) => ({
-    type: 'CARDS/PACKS/UPDATE-CARDS-PACK',
-    cardsPackId,
-    newName
-} as const)
+export const getCardsPacksAC = (cardsPacks: Array<CardsPacksType>) => ({type: 'CARDS/PACKS/GET-CARDS-PACKS', cardsPacks} as const)
+export const updateCardsPackAC = (cardsPackId: string, newName: string) => ({type: 'CARDS/PACKS/UPDATE-CARDS-PACK', cardsPackId, newName} as const)
+export const setTotalPacksCountAC = (totalPacksCount: number) => ({type: 'CARDS/PACKS/SET-TOTAL-PACKS-COUNT', totalPacksCount} as const)
 export const setPageCountAC = (newPageCount: number) => ({type: 'CARDS/PACKS/SET-PAGE-COUNT', newPageCount} as const)
+export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+
     const state = getState()
     const packName = state.packs.packName
     const min = state.packs.min
@@ -90,25 +93,26 @@ export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRoo
 
     return cardsPacksAPI.getCardsPacks(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(response => {
+            dispatch(setTotalPacksCountAC(response.data.cardPacksTotalCount))
             dispatch(getCardsPacksAC(response.data.cardPacks))
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: ThunkDispatch<PacksInitialStateType, null, PacksActionType>) => {
+export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
     return cardsPacksAPI.addNewCardsPack(cardsPack)
         .then(response => {
-            // dispatch(getCardsPacksTC())
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispatch<PacksInitialStateType, null, PacksActionType>) => {
+export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
     return cardsPacksAPI.removeCardsPack(cardsPackId)
         .then(response => {
-            // dispatch(getCardsPacksTC())
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)
