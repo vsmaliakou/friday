@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
-import { Filter } from '../Filter';
+import { CardsPacksContainer } from '../../packs/packListPage/packList/cardsPacks/CardsPacksContainer';
+import { Filter } from '../../packs/packListPage/packList/filter/Filter';
 import { FilterProfile } from '../FilterProfile';
-import { PageNumber } from '../../../common/Paginator/PageNumber';
+
 import s from './_firstPage.module.scss'
 
 
@@ -14,7 +14,7 @@ import s from './_firstPage.module.scss'
 export const FirstPage = () => {
     return (
         <div className={s.main}>
-            <Filter/>
+            {/*<Filter/>*/}
             {/* <FilterProfile/> */}
             <div className={s.content}>
             
@@ -26,9 +26,9 @@ export const FirstPage = () => {
                                         
                 </form>
 
-                <CardsPacksContainer/>
+                {/*<CardsPacksContainer/>*/}
 
-                {/*<PageNumber/>*/}
+
 
             </div>
 

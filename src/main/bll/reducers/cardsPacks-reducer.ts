@@ -8,6 +8,7 @@ export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof setTotalPacksCountAC>
     | ReturnType<typeof setPageCountAC>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setUserIdAC>
 export type PacksInitialStateType = typeof initialState
 
 export type CardsPacksType = {
@@ -69,6 +70,8 @@ const cardsPacksReducer = (state = initialState, action: PacksActionType): Packs
             return {...state, pageCount: action.newPageCount}
         case 'CARDS/PACKS/SET-CURRENT-PAGE':
             return {...state, page: action.pageNumber}
+        case 'CARDS/PACKS/SET-USER-ID':
+            return {...state, user_id: action.userId}
         default:
             return state
     }
@@ -79,6 +82,7 @@ export const updateCardsPackAC = (cardsPackId: string, newName: string) => ({typ
 export const setTotalPacksCountAC = (totalPacksCount: number) => ({type: 'CARDS/PACKS/SET-TOTAL-PACKS-COUNT', totalPacksCount} as const)
 export const setPageCountAC = (newPageCount: number) => ({type: 'CARDS/PACKS/SET-PAGE-COUNT', newPageCount} as const)
 export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET-CURRENT-PAGE', pageNumber} as const)
+export const setUserIdAC = (userId: string) => ({type: 'CARDS/PACKS/SET-USER-ID', userId} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
@@ -93,6 +97,7 @@ export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRoo
 
     return cardsPacksAPI.getCardsPacks(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(response => {
+            console.log(response)
             dispatch(setTotalPacksCountAC(response.data.cardPacksTotalCount))
             dispatch(getCardsPacksAC(response.data.cardPacks))
         })

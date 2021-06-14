@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
+import { CardsPacksContainer } from '../../packs/packListPage/packList/cardsPacks/CardsPacksContainer';
 import s from './_myListCard.module.scss'
 
 
@@ -16,17 +16,16 @@ export const MyListCard = () => {
                 <a className={s.close}></a>
                 <h2 className={s.packListTitle}>Pack Name</h2>
             </div>
-                
-             <form className={s.inputWrap}>
+
+            <form className={s.inputWrap}>
                 <input className={s.input} type="text" placeholder="Searh..."/>
             </form>
 
             <div className={s.wrap}>
-                <CardsPacksContainer/>
+                {/*<CardsPacksContainer/>*/}
             </div>
 
         </div>
-        
-        
+
     )
 }
