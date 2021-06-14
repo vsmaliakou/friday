@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import s from './PackList.module.scss'
-import logo from './../../../../assets/img/logo.png'
-import {PacksList} from "./PacksList/PacksList";
-import {authTC} from "../../../bll/reducers/profile-reducer";
+import logo from '../../../../../assets/img/logo.png'
+import {PacksList} from "./packList/PacksList";
+import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../bll/store";
-import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {AppRootStateType} from "../../../../bll/store";
+import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 
 export const PackListPage = () => {
 
@@ -38,7 +38,7 @@ export const PackListPage = () => {
                 </div>
             </div>
             <div className={s.content}>
-                <PacksList/>
+                <PacksList auth={auth}/>
             </div>
         </div>
     )
