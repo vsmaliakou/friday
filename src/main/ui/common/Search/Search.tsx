@@ -1,61 +1,84 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, FormEvent, useState} from "react";
 import SuperDoubleRange from "../c8-SuperDoubleRange/SuperDoubleRange";
+import {CardsPacksType} from "../../../bll/reducers/cardsPacks-reducer";
+import {connect, useDispatch, useSelector} from 'react-redux'
+import {Dispatch} from "redux";
+import {AppRootStateType} from "../../../bll/store";
 
-type StudentType = {
-    id: number
+type CardsPacksItemType = {
+    _id?: string
     name: string
-    age: number
+    cardsCount: number
 }
-const StudentItem = (props: StudentType)=>{
+const Item = (props: CardsPacksItemType) => {
     return <div>
         {props.name}
-        {props.age}
+        {props.cardsCount}
     </div>
 }
 
-const Search =()=>{
+
+type SearchType = {
+    cardsPacks: CardsPacksType[]
+}
+
+const Search = () => {
     const [name, setName] = useState('')
     const [value1, setValue1] = useState(1)
     const [value2, setValue2] = useState(105)
-    const [students, setStudents] = useState<Array<StudentType>>([
-        {id: 1, name:"Vova", age: 20},
-        {id: 2, name:"Dima", age: 62},
-        {id: 3, name:"Alex", age: 41},
-        {id: 4, name:"Mike", age: 13},
-        {id: 1, name:"Vova", age: 20},
-        {id: 2, name:"Dima", age: 62},
-        {id: 3, name:"Alex", age: 41},
-        {id: 4, name:"Mike", age: 13},
-        {id: 1, name:"Vova", age: 20},
-        {id: 2, name:"Dima", age: 62},
-    ])
-
-    const filteredName = students.filter(s => {
-        return s.name.toLowerCase().includes(name.toLowerCase())
-    })
+    const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
 
     const setValue = (value: [number, number]) => {
         setValue1(value[0])
         setValue2(value[1])
     }
-    const searchAge =()=>{
-        const filterAge = filteredName.filter(s=> s.age>value1 && s.age < value2)
-        setStudents(filterAge)
-    }
 
-    return(
+    const newList = cardsPacks.filter(pack => {
+        return pack.name.toLowerCase().includes(name.toLowerCase())
+    })
+
+    return (
         <div>
             <input type={'text'}
                    placeholder='student name'
-                   onChange={(e)=>{setName(e.target.value)}}
+                   onChange={(e) => {
+                       setName(e.target.value)
+                   }}
             />
-            <SuperDoubleRange value={[value1, value2]} onChangeRange={setValue} />
-            <button onClick={searchAge}>Search</button>
-            {
-                filteredName.map((s, index) =><StudentItem id={s.id} age={s.age} name={s.name} />)
-            }
+            <SuperDoubleRange value={[value1, value2]} onChangeRange={setValue}/>
+            <button>Search</button>
+            {newList}
         </div>
     )
 }
-
 export default Search
+
+// const Search = () => {
+//     const [value, setValue] = useState('')
+//
+//     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+//         setValue(e.target.value)
+//     }
+//     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+//         e.preventDefault()
+//         searchPacks(value)
+//     }
+//
+//     return (
+//         <div>
+//             <form onSubmit={handleSubmit}>
+//                 <input type={'text'}
+//                        placeholder='student name'
+//                        onChange={handleChange}
+//                 />
+//             </form>
+//             <button>Search</button>
+//         </div>
+//     )
+// }
+//
+// const searchPacks = (text: string) => (dispatch: Dispatch) => {
+//     dispatch({type: 'CARDS/SEARCH/PACKS', payload: text} as const)
+// }
+//
+// export default connect(null, {searchPacks})(Search)
