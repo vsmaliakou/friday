@@ -33,9 +33,9 @@ export const Paginator: React.FC<PaginatorType> = ({
         <div className={s.wrap}>
             <div className={s.numbers}>
                 {portionNumber > 1 &&
-                <button className={s.arrow} onClick={() => {
+                <a className={s.arrow} onClick={() => {
                     setPortionNumber(portionNumber - 1)
-                }}>Prev</button>}
+                }}></a>}
                 {pages
                     .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map((p) => {
@@ -46,9 +46,9 @@ export const Paginator: React.FC<PaginatorType> = ({
                                      }}>{p}</span>
                     })}
                 {portionCount > portionNumber &&
-                <button className={s.arrowEnd} onClick={() => {
+                <a className={s.arrowEnd} onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}>Next</button>}
+                }}></a>}
             </div>
 
             <div className={s.selectWrap}>

@@ -1,6 +1,8 @@
 import React from 'react';
+import { Paginator } from '../../../common/Paginator/Paginator';
+
 import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
-import { PageNumber } from '../../../common/Paginator/PageNumber';
+
 import s from './_packName.module.scss'
 
 
@@ -93,10 +95,10 @@ export const PackName = () => {
                     
                 </table>
 
-                <PageNumber/>
+
             </div>
 
-            
+        
 
         </div>
         
