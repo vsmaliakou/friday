@@ -33,7 +33,7 @@ export const Login: React.FC<PropsType> = (props) => {
 
                 <h2 className={s.title}>Sign In</h2>
 
-                <span className={s.error}>{props.dataLogin.errorMessage}</span>
+                <span  className={s.error}>{props.dataLogin.errorMessage}</span>
 
                 <form className={s.form}>
                     <SuperInputText type={'email'}
