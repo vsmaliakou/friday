@@ -1,9 +1,14 @@
 import React from 'react';
-import s from './_addNewCard.module.scss';
+import {AddNewCard} from "./AddNewCard";
+import s from "./_addNewCard.module.scss";
 
-export const AddNewCard = () => {
+export const AddNewCardContainer = () => {
+
+    const addNewCard = () => {
+
+    }
+
     return (
-
         <div className={s.card}>
 
             <h2 className={s.title}>Card Info</h2>
@@ -32,7 +37,6 @@ export const AddNewCard = () => {
             </div>
 
         </div>
-
-
+        // <AddNewCard/>
     )
 }

@@ -28,7 +28,7 @@ export const FirstPage = () => {
 
                 <CardsPacksContainer/>
 
-                <PageNumber/>
+                {/*<PageNumber/>*/}
 
             </div>
 

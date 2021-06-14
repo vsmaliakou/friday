@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect, useParams} from "react-router-dom";
+import {NavLink, Redirect, useHistory, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {LoadingSvg} from "../../../common/loading/LoadingSvg";
@@ -17,15 +17,14 @@ export const CardsContainer = () => {
     const cards = useSelector<AppRootStateType, Array<CardsType>>(state => state.cards.cards)
 
     const {_id} = useParams<{ _id: string }>()
+    const history = useHistory()
 
     useEffect(() => {
         if (!auth.auth) {
             dispatch(authTC())
+        } else {
+            dispatch(getNewCardsTC(_id))
         }
-    }, [])
-
-    useEffect(() => {
-        dispatch(getNewCardsTC(_id))
     }, [])
 
     if (!auth.auth) {
@@ -35,6 +34,7 @@ export const CardsContainer = () => {
     return (
         <div>
 
+
             {loading === "loading" ? <LoadingSvg/> : null}
 
             <div>
@@ -43,15 +43,19 @@ export const CardsContainer = () => {
                         <img src="arrow" alt=""/>
                         Pack Name
                     </NavLink>
+
+                    {/*<NavLink to={`/packs/${_id}/newCard`}>*/}
                     {/*если карточки свои то ...*/}
-                    <button>Add new card</button>
+                    <NavLink to={`/packs/${_id}/newCard`}>Add new card</NavLink>
+                    {/*</NavLink>*/}
+
                 </div>
                 <div>
                     <input placeholder="search..."/>
                 </div>
 
                 {/*проверка на наличие карточек*/}
-                {cards?.length <= 1
+                {cards?.length <= 0
                     ? <p>This pack is empty. Click add new card to fill this pack</p>
                     : cards?.map(cards => {
                             return (
