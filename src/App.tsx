@@ -18,6 +18,7 @@ const App = () => {
             <Header/>
             <div className="App-content">
                 <Switch>
+                    <Route exact path='/' render={() => <Redirect to={'/login'}/>}/>
                     <Route path='/login' render={() => <LoginContainer/>}/>
                     <Route path='/registration' render={() => <RegisterContainer/>}/>
                     <Route path='/profile' render={() => <ProfileContainer/>}/>

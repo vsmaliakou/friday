@@ -14,7 +14,7 @@ import s from './_firstPage.module.scss'
 export const FirstPage = () => {
     return (
         <div className={s.main}>
-            <Filter/>
+            {/*<Filter/>*/}
             {/* <FilterProfile/> */}
             <div className={s.content}>
             
@@ -26,7 +26,7 @@ export const FirstPage = () => {
                                         
                 </form>
 
-                <CardsPacksContainer/>
+                {/*<CardsPacksContainer/>*/}
 
 
 
