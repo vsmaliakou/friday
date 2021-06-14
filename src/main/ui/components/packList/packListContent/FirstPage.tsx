@@ -2,7 +2,7 @@ import React from 'react';
 import { CardsPacksContainer } from '../../packs/packListPage/packList/cardsPacks/CardsPacksContainer';
 import { Filter } from '../../packs/packListPage/packList/filter/Filter';
 import { FilterProfile } from '../FilterProfile';
-import { PageNumber } from '../../../common/Paginator/PageNumber';
+
 import s from './_firstPage.module.scss'
 
 
@@ -28,7 +28,7 @@ export const FirstPage = () => {
 
                 <CardsPacksContainer/>
 
-                {/*<PageNumber/>*/}
+
 
             </div>
 

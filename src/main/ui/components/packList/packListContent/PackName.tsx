@@ -93,10 +93,10 @@ export const PackName = () => {
                     
                 </table>
 
-                <PageNumber/>
+
             </div>
 
-            
+
 
         </div>
         
