@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/CardsPacksContainer';
+import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
 import s from './_myListCard.module.scss'
 
 

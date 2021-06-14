@@ -1,8 +1,8 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/CardsPacksContainer';
+import { CardsPacksContainer } from '../../packs/PacksList/CardsPacksContainer';
 import { Filter } from '../Filter';
 import { FilterProfile } from '../FilterProfile';
-import { PageNumber } from '../PageNumber';
+import { PageNumber } from '../../../common/Paginator/PageNumber';
 import s from './_firstPage.module.scss'
 
 

@@ -1,10 +1,13 @@
 import {Dispatch} from "redux";
 import {cardsPacksAPI} from "../../dal/packs/cardsPacksAPI";
+import {ThunkDispatch} from "redux-thunk";
+import {AppActionsType, AppRootStateType} from "../store";
 
 export type PacksActionType = ReturnType<typeof getCardsPacksAC>
-    | ReturnType<typeof addNewCardsPackAC>
-    | ReturnType<typeof removeCardsPackAC>
     | ReturnType<typeof updateCardsPackAC>
+    | ReturnType<typeof setTotalPacksCountAC>
+    | ReturnType<typeof setPageCountAC>
+    | ReturnType<typeof setCurrentPageAC>
 export type PacksInitialStateType = typeof initialState
 
 export type CardsPacksType = {
@@ -36,51 +39,80 @@ export type NewCardsPackType = {
     type: string
 }
 
-let initialState: Array<CardsPacksType> = []
+let initialState = {
+    cardsPacks: [] as Array<CardsPacksType>,
+    packName: "",
+    min: 0,
+    max: 9,
+    sortPacks: "",
+    page: 1,
+    pageCount: 5,
+    user_id: "",
+    totalPacksCount: 5
+}
 
 const cardsPacksReducer = (state = initialState, action: PacksActionType): PacksInitialStateType => {
     switch (action.type) {
         case 'CARDS/PACKS/GET-CARDS-PACKS':
-            return [...state,
-                ...action.cardsPacks]
-        case 'CARDS/PACKS/ADD-NEW-CARDS-PACK':
-            return [action.newCardsPack, ...state]
-        case 'CARDS/PACKS/REMOVE-CARDS-PACK':
-            return state.filter(p => p._id !== action.cardsPackId)
+            return {...state, cardsPacks: action.cardsPacks}
         case 'CARDS/PACKS/UPDATE-CARDS-PACK':
-            return state.map(p => p._id === action.cardsPackId ? {...p, user_name: action.newName} : p)
+            return {
+                ...state,
+                cardsPacks: state.cardsPacks.map(p => p._id === action.cardsPackId ? {
+                    ...p,
+                    user_name: action.newName
+                } : p)
+            }
+        case 'CARDS/PACKS/SET-TOTAL-PACKS-COUNT':
+            return {...state, totalPacksCount: action.totalPacksCount}
+        case 'CARDS/PACKS/SET-PAGE-COUNT':
+            return {...state, pageCount: action.newPageCount}
+        case 'CARDS/PACKS/SET-CURRENT-PAGE':
+            return {...state, page: action.pageNumber}
         default:
             return state
     }
 }
 
 export const getCardsPacksAC = (cardsPacks: Array<CardsPacksType>) => ({type: 'CARDS/PACKS/GET-CARDS-PACKS', cardsPacks} as const)
-export const addNewCardsPackAC = (newCardsPack: CardsPacksType) => ({type: 'CARDS/PACKS/ADD-NEW-CARDS-PACK', newCardsPack} as const)
-export const removeCardsPackAC = (cardsPackId: string) => ({type: 'CARDS/PACKS/REMOVE-CARDS-PACK', cardsPackId} as const)
 export const updateCardsPackAC = (cardsPackId: string, newName: string) => ({type: 'CARDS/PACKS/UPDATE-CARDS-PACK', cardsPackId, newName} as const)
+export const setTotalPacksCountAC = (totalPacksCount: number) => ({type: 'CARDS/PACKS/SET-TOTAL-PACKS-COUNT', totalPacksCount} as const)
+export const setPageCountAC = (newPageCount: number) => ({type: 'CARDS/PACKS/SET-PAGE-COUNT', newPageCount} as const)
+export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 
-export const getCardsPacksTC = () => (dispatch: Dispatch) => {
-    return cardsPacksAPI.getCardsPacks()
-        .then(response => {            
+export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+
+    const state = getState()
+    const packName = state.packs.packName
+    const min = state.packs.min
+    const max = state.packs.max
+    const sortPacks = state.packs.sortPacks
+    const page = state.packs.page
+    const pageCount = state.packs.pageCount
+    const user_id = state.packs.user_id
+
+    return cardsPacksAPI.getCardsPacks(packName, min, max, sortPacks, page, pageCount, user_id)
+        .then(response => {
+            dispatch(setTotalPacksCountAC(response.data.cardPacksTotalCount))
             dispatch(getCardsPacksAC(response.data.cardPacks))
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: Dispatch) => {
+export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
     return cardsPacksAPI.addNewCardsPack(cardsPack)
         .then(response => {
-            dispatch(addNewCardsPackAC(response.data.newCardsPack))
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)
         })
 }
-export const removeCardsPackTC = (cardsPackId: string) => (dispatch: Dispatch) => {
+export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
     return cardsPacksAPI.removeCardsPack(cardsPackId)
         .then(response => {
-            dispatch(removeCardsPackAC(response.data.deletedCardsPack._id))
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)

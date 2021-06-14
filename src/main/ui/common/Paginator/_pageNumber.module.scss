@@ -1,6 +1,6 @@
-@import './../../../../styles/sass/mixins.scss';
+@import '../../../../styles/sass/mixins';
 
-@import './../../../../styles/sass/vars.scss';
+@import '../../../../styles/sass/vars';
 
 a{cursor: pointer;}
 
@@ -16,7 +16,7 @@ a{cursor: pointer;}
             &::before{
                 position: absolute;
                 content: "";
-                background-image: url("./../../../../assets/img/arrowL.png");
+                background-image: url("../../../../assets/img/arrowL.png");
                 background-size: 100%;
                 background-repeat: no-repeat;
                 width: 7px;
@@ -46,7 +46,7 @@ a{cursor: pointer;}
             &::before{
                 position: absolute;
                 content: "";
-                background-image: url("./../../../../assets/img/arrowR.png");
+                background-image: url("../../../../assets/img/arrowR.png");
                 background-size: 100%;
                 background-repeat: no-repeat;
                 width: 7px;
