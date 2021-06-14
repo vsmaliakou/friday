@@ -14,6 +14,7 @@ import {
 } from "../../../../../bll/reducers/cardsPacks-reducer";
 import {Paginator} from "../../../../common/Paginator/Paginator";
 import {LoginInitialStateType} from "../../../../../bll/reducers/login-reducer";
+import Search from "../../../../common/Search/Search";
 
 type PacksListPropsType = {
     auth: LoginInitialStateType
@@ -84,6 +85,7 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
                     <button className={s.btn}>Add new pack</button>
                 </form>
 
+                <Search />
                 <CardsPacksContainer
                     cardsPacks={cardsPacks}
                     auth={auth}
