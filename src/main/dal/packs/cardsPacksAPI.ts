@@ -1,5 +1,4 @@
 import {instance} from "../instance";
-import {CardsPacksType, NewCardsPackType} from "../../bll/reducers/cardsPacks-reducer";
 
 type GetResponseType = {
     cardPacks: CardsPacksType[]
@@ -29,6 +28,27 @@ type UpdateResponseType = {
 }
 type CardsPackType = {
     _id: string
+    name: string
+}
+export type CardsPacksType = {
+    cardsCount: number
+    created: string
+    deckCover: null
+    grade: number
+    more_id: string
+    name: string
+    path: string
+    private: boolean
+    rating: number
+    shots: number
+    type: string
+    updated: string
+    user_id: string
+    user_name: string
+    __v: number
+    _id: string
+}
+export type NewCardsPackType = {
     name: string
 }
 

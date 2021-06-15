@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './PacksContainer.module.scss'
-import {CardsPacksType} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
 import {NavLink} from 'react-router-dom';
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
 

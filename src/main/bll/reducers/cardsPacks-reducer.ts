@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {cardsPacksAPI} from "../../dal/packs/cardsPacksAPI";
+import {cardsPacksAPI, CardsPacksType, NewCardsPackType} from "../../dal/packs/cardsPacksAPI";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType, AppRootStateType} from "../store";
 
@@ -9,36 +9,8 @@ export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof setPageCountAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setUserIdAC>
+    | ReturnType<typeof setSearchAC>
 export type PacksInitialStateType = typeof initialState
-
-export type CardsPacksType = {
-    cardsCount: number
-    created: string
-    deckCover: null
-    grade: number
-    more_id: string
-    name: string
-    path: string
-    private: boolean
-    rating: number
-    shots: number
-    type: string
-    updated: string
-    user_id: string
-    user_name: string
-    __v: number
-    _id: string
-}
-export type NewCardsPackType = {
-    name: string
-    path: string
-    grade: number
-    shots: number
-    rating: number
-    deckCover: string
-    private: boolean
-    type: string
-}
 
 let initialState = {
     cardsPacks: [] as Array<CardsPacksType>,
@@ -72,6 +44,8 @@ const cardsPacksReducer = (state = initialState, action: PacksActionType): Packs
             return {...state, page: action.pageNumber}
         case 'CARDS/PACKS/SET-USER-ID':
             return {...state, user_id: action.userId}
+        case 'CARDS/PACKS/SET-SEARCH':
+            return {...state, packName: action.title}
         default:
             return state
     }
@@ -83,6 +57,7 @@ export const setTotalPacksCountAC = (totalPacksCount: number) => ({type: 'CARDS/
 export const setPageCountAC = (newPageCount: number) => ({type: 'CARDS/PACKS/SET-PAGE-COUNT', newPageCount} as const)
 export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 export const setUserIdAC = (userId: string) => ({type: 'CARDS/PACKS/SET-USER-ID', userId} as const)
+export const setSearchAC = (title: string) => ({type: 'CARDS/PACKS/SET-SEARCH', title} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
 

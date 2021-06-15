@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react'
 import s from './PacksContainer.module.scss'
 import {useDispatch} from "react-redux";
-import {CardsPacksType, getCardsPacksTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {getCardsPacksTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
 import {CardsPack} from "./CardsPack";
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
+import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
 
 type CardsPacksContainerType = {
     cardsPacks: Array<CardsPacksType>
     auth: LoginInitialStateType
-    addNewCardsPack: () => void
+    addWindowOpened: () => void
     removeCardsPack: (packId: string) => void
     updateCardsPack: (packId: string) => void
 }
@@ -34,7 +35,7 @@ export const CardsPacksContainer: React.FC<CardsPacksContainerType> = (props) =>
                         </select>
                     </div>
                     <div className={s.item}>Created by</div>
-                    <button onClick={props.addNewCardsPack}>add</button>
+                    <button onClick={props.addWindowOpened}>add</button>
                 </div>
                 <CardsPack
                     auth={props.auth}
