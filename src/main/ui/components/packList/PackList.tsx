@@ -5,7 +5,7 @@ import { LoadingSvg } from '../../common/loading/LoadingSvg';
 import { FirstPage } from './packListContent/FirstPage';
 import { SecondPage } from './packListContent/SecondPage';
 import { MyListCard } from './packListContent/MyListCard';
-import { AddNewPack } from '../../common/AddWindow/AddNewPack';
+import { AddWindow } from '../../common/AddWindow/AddWindow';
 import { DeletePack } from './DeletePack';
 import { AddNewCard } from './AddNewCard';
 import { PackName } from './packListContent/PackName';
@@ -21,7 +21,7 @@ export const PackList = () => {
     return (
         <div className={s.packListWrap}>
            {/* <DeletePack/> */}
-           {/* <AddNewPack/> */}
+           {/* <AddWindow/> */}
            
 
             <div className={s.header}>

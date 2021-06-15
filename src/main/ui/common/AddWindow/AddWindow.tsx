@@ -10,7 +10,7 @@ type PropsType = {
     addCallback: () => void
 }
 
-export const AddNewPack: React.FC<PropsType> = ({title, placeholder, newTitleCallback, answerCallback, closeCallback, addCallback}) => {
+export const AddWindow: React.FC<PropsType> = ({title, placeholder, newTitleCallback, answerCallback, closeCallback, addCallback}) => {
     return (
         <div className={s.wrap}>
            <div className={s.card}>

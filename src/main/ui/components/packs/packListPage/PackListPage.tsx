@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
-import {AddNewPack} from "../../../common/AddWindow/AddNewPack";
+import {AddWindow} from "../../../common/AddWindow/AddWindow";
 import {addNewCardsPackTC} from "../../../../bll/reducers/cardsPacks-reducer";
 
 export const PackListPage = () => {
@@ -60,7 +60,7 @@ export const PackListPage = () => {
                     auth={auth}
                     addWindowOpened={addWindowOpened}
                 />
-                {addWindow && <AddNewPack
+                {addWindow && <AddWindow
                     title="Add new pack"
                     placeholder="Name"
                     newTitleCallback={addNewPackTitle}
