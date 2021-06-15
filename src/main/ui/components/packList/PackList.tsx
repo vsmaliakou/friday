@@ -5,7 +5,7 @@ import { LoadingSvg } from '../../common/loading/LoadingSvg';
 import { FirstPage } from './packListContent/FirstPage';
 import { SecondPage } from './packListContent/SecondPage';
 import { MyListCard } from './packListContent/MyListCard';
-import { AddNewPack } from './AddNewPack';
+import { AddNewPack } from '../../common/AddWindow/AddNewPack';
 import { DeletePack } from './DeletePack';
 import { AddNewCard } from './AddNewCard';
 import { PackName } from './packListContent/PackName';
