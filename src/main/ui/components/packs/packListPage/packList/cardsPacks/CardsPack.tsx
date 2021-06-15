@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import s from './PacksContainer.module.scss'
 import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
 import {NavLink} from 'react-router-dom';
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
+import {DeleteWindow} from "../../../../../common/DeleteWindow/DeleteWindow";
 
 type CardsPackPropsType = {
     auth: LoginInitialStateType
@@ -12,15 +13,28 @@ type CardsPackPropsType = {
 }
 
 export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
+
+    const [deleteWinOpened, setDeleteWinOpened] = useState(false)
+    const [removePackId, setRemovePackId] = useState("")
+
+    const removeCallback = () => {
+        props.removeCardsPack(removePackId)
+        setDeleteWinOpened(false)
+    }
+    const closeCallback = () => {
+        setDeleteWinOpened(false)
+    }
+
     return (
         <div>
             {
                 props.cardsPacks.map(p => {
 
-                    const removeCardsPack = () => {
-                        props.removeCardsPack(p._id)
+                    const deleteWindowOpened = () => {
+                        setDeleteWinOpened(true)
+                        setRemovePackId(p._id)
                     }
-                    const updateCardsPack = () => {
+                    const updatePack = () => {
                         props.updateCardsPack(p._id)
                     }
 
@@ -33,14 +47,20 @@ export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
                             {
                                 props.auth.dataUser?._id === p.user_id
                                     ? <div className={s.item}>
-                                        <button onClick={removeCardsPack}>delete</button>
-                                        <button onClick={updateCardsPack}>update</button>
+                                        <button onClick={deleteWindowOpened}>delete</button>
+                                        <button onClick={updatePack}>update</button>
                                         <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
                                     </div>
                                     : <div className={s.item}>
                                         <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
                                     </div>
                             }
+                            {deleteWinOpened && <DeleteWindow
+                                title="Delete Pack"
+                                name="pack"
+                                closeCallback={closeCallback}
+                                removeCallback={removeCallback}
+                            />}
                         </div>
                     )
                 })

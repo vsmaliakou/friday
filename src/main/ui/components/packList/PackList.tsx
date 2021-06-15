@@ -6,7 +6,7 @@ import { FirstPage } from './packListContent/FirstPage';
 import { SecondPage } from './packListContent/SecondPage';
 import { MyListCard } from './packListContent/MyListCard';
 import { AddWindow } from '../../common/AddWindow/AddWindow';
-import { DeletePack } from './DeletePack';
+import { DeleteWindow } from '../../common/DeleteWindow/DeleteWindow';
 import { AddNewCard } from './AddNewCard';
 import { PackName } from './packListContent/PackName';
 import { LearnQuestion } from './LearnQuestion';
@@ -20,7 +20,7 @@ import { EditProfile } from './EditProfile';
 export const PackList = () => {
     return (
         <div className={s.packListWrap}>
-           {/* <DeletePack/> */}
+           {/* <DeleteWindow/> */}
            {/* <AddWindow/> */}
            
 

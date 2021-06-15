@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import s from './PacksContainer.module.scss'
-import {useDispatch} from "react-redux";
-import {getCardsPacksTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
 import {CardsPack} from "./CardsPack";
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
 import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
@@ -15,13 +13,6 @@ type CardsPacksContainerType = {
 }
 
 export const CardsPacksContainer: React.FC<CardsPacksContainerType> = (props) => {
-
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getCardsPacksTC())
-    }, [])
-
     return (
         <div>
             <div className={s.card}>
