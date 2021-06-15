@@ -5,8 +5,6 @@ import {CardsPacksContainer} from "./cardsPacks/CardsPacksContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../../bll/store";
 import {
-    addNewCardsPackTC,
-    CardsPacksType,
     getCardsPacksTC, removeCardsPackTC,
     setCurrentPageAC,
     setPageCountAC,
@@ -15,12 +13,14 @@ import {
 import {Paginator} from "../../../../common/Paginator/Paginator";
 import {LoginInitialStateType} from "../../../../../bll/reducers/login-reducer";
 import Search from "../../../../common/Search/Search";
+import {CardsPacksType} from "../../../../../dal/packs/cardsPacksAPI";
 
 type PacksListPropsType = {
     auth: LoginInitialStateType
+    addWindowOpened: () => void
 }
 
-export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
+export const PacksList: React.FC<PacksListPropsType> = (props) => {
 
     const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
     const pageSize = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
@@ -31,8 +31,8 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
 
     // Filter
     const getMyPacks = () => {
-        if(auth.dataUser?._id){
-            dispatch(setUserIdAC(auth.dataUser._id))
+        if(props.auth.dataUser?._id){
+            dispatch(setUserIdAC(props.auth.dataUser._id))
             dispatch(getCardsPacksTC())
         }
     }
@@ -42,19 +42,6 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
     }
 
     // CardsPacksContainer
-    const newCardsPack = {
-        name: "no Name",
-        path: "/def",
-        grade: 0,
-        shots: 0,
-        rating: 0,
-        deckCover: "url or base64",
-        private: false,
-        type: "pack"
-    }
-    const addNewCardsPack = () => {
-        dispatch(addNewCardsPackTC(newCardsPack))
-    }
     const removeCardsPack = (packId: string) => {
         dispatch(removeCardsPackTC(packId))
     }
@@ -88,8 +75,8 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
                 <Search />
                 <CardsPacksContainer
                     cardsPacks={cardsPacks}
-                    auth={auth}
-                    addNewCardsPack={addNewCardsPack}
+                    auth={props.auth}
+                    addWindowOpened={props.addWindowOpened}
                     removeCardsPack={removeCardsPack}
                     updateCardsPack={updateCardsPack}
                 />
@@ -99,7 +86,6 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
                     currentPage={currentPage}
                     onPageChanged={onPageChanged}
                     setPageCount={setPageCount}/>
-
             </div>
         </div>
     )

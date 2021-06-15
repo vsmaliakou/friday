@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {cardsPacksAPI} from "../../dal/packs/cardsPacksAPI";
+import {cardsPacksAPI, CardsPacksType, NewCardsPackType} from "../../dal/packs/cardsPacksAPI";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType, AppRootStateType} from "../store";
 
@@ -11,35 +11,6 @@ export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof setUserIdAC>
     | ReturnType<typeof setSearchAC>
 export type PacksInitialStateType = typeof initialState
-
-export type CardsPacksType = {
-    cardsCount: number
-    created: string
-    deckCover: null
-    grade: number
-    more_id: string
-    name: string
-    path: string
-    private: boolean
-    rating: number
-    shots: number
-    type: string
-    updated: string
-    user_id: string
-    user_name: string
-    __v: number
-    _id: string
-}
-export type NewCardsPackType = {
-    name: string
-    path: string
-    grade: number
-    shots: number
-    rating: number
-    deckCover: string
-    private: boolean
-    type: string
-}
 
 let initialState = {
     cardsPacks: [] as Array<CardsPacksType>,

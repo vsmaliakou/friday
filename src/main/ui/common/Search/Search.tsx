@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import SuperDoubleRange from "../c8-SuperDoubleRange/SuperDoubleRange";
-import {CardsPacksType, getCardsPacksTC, setSearchAC} from "../../../bll/reducers/cardsPacks-reducer";
+import {getCardsPacksTC, setSearchAC} from "../../../bll/reducers/cardsPacks-reducer";
 import {connect, useDispatch, useSelector} from 'react-redux'
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../bll/store";

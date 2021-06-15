@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './_addNewPack.module.scss';
 
+type PropsType = {
+    newTitleCallback: (e: ChangeEvent<HTMLInputElement>) => void
+    addCallback: () => void
+    closeCallback: () => void
+}
 
+export const AddNewPack: React.FC<PropsType> = ({addCallback, closeCallback, newTitleCallback}) => {
 
-
-export const AddNewPack = () => {
     return (
         <div className={s.wrap}>
 
@@ -12,23 +16,19 @@ export const AddNewPack = () => {
 
                 <div className={s.titleWrap}>
                     <h2 className={s.title}>Add new pack</h2>
-                    <a className={s.closeWrap} href="#">
-                        <span className={s.close}></span>
-                        
-                    </a>
                 </div>
                
 
                 <div className={s.inputWrap}>
                     <label className={s.label}>Name pack</label>
-                    <input className={s.input} type="text"/>
+                    <input className={s.input} type="text" onChange={newTitleCallback}/>
 
                 </div>
 
                 <div className={s.btnWrap}>
 
-                    <button className={s.btn}>Cancel</button>
-                    <button className={s.btn}>Save</button>
+                    <button className={s.btn} onClick={closeCallback}>Cancel</button>
+                    <button className={s.btn} onClick={addCallback}>Save</button>
 
                 </div>
 
