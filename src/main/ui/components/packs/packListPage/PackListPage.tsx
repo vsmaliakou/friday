@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
-import {addNewCardsPackTC} from "../../../../bll/reducers/cardsPacks-reducer";
+import {addNewCardsPackTC, getCardsPacksTC} from "../../../../bll/reducers/cardsPacks-reducer";
 
 export const PackListPage = () => {
 
@@ -21,6 +21,8 @@ export const PackListPage = () => {
     useEffect(() => {
         if (!auth.auth) {
             dispatch(authTC())
+        } else {
+            dispatch(getCardsPacksTC())
         }
     }, [])
 
@@ -28,6 +30,7 @@ export const PackListPage = () => {
         return <Redirect to={'/login'}/>
     }
 
+    // add window
     const addWindowOpened = () => {
         setAddWindow(true)
     }

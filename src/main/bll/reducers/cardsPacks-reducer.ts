@@ -72,7 +72,6 @@ export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRoo
 
     return cardsPacksAPI.getCardsPacks(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(response => {
-            console.log(response)
             dispatch(setTotalPacksCountAC(response.data.cardPacksTotalCount))
             dispatch(getCardsPacksAC(response.data.cardPacks))
         })

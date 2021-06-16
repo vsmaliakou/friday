@@ -1,11 +1,12 @@
-@import './../../../../styles/sass/mixins.scss';
+@import '../../../../styles/sass/mixins';
 
-@import './../../../../styles/sass/vars.scss';
+@import '../../../../styles/sass/vars';
 
 .wrap{
     width: 100%;
     min-height: 100%;
     position: fixed;
+    left: 0;
     top:0;
     z-index: 99999;
     background-color: rgba(56, 51, 51, 0.192);
