@@ -1,20 +1,22 @@
 import React, {useEffect} from 'react'
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect, useHistory, useParams} from "react-router-dom";
+import {Redirect, useHistory, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
-import {LoadingSvg} from "../../../common/loading/LoadingSvg";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
-import {getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
-import {CardsType} from "../../../../dal/packs/cardsAPI";
+import {deleteCardTC, getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
+import {Cards} from "./Cards";
+import {CardType} from "../../../../dal/packs/cardsAPI";
 
 export const CardsContainer = () => {
 
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
-    const cards = useSelector<AppRootStateType, Array<CardsType>>(state => state.cards.cards)
+    const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
+    // const idUser = useSelector<AppRootStateType, string | null>(state => state.login.dataUser._id)
+    const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
 
     const {_id} = useParams<{ _id: string }>()
 
@@ -30,60 +32,17 @@ export const CardsContainer = () => {
         return <Redirect to={'/login'}/>
     }
 
+    const deleteCard = (idCard: string) => {
+        dispatch(deleteCardTC(idCard))
+        // dispatch(getNewCardsTC(_id))
+    }
+
     return (
-        <div>
-
-
-            {loading === "loading" ? <LoadingSvg/> : null}
-
-            <div>
-                <div>
-                    <NavLink to={'/packs'}>
-                        <img src="arrow" alt=""/>
-                        Pack Name
-                    </NavLink>
-
-                    {/*<NavLink to={`/packs/${_id}/newCard`}>*/}
-                    {/*если карточки свои то ...*/}
-                    <NavLink to={`/packs/${_id}/newCard`}>Add new card</NavLink>
-                    {/*</NavLink>*/}
-
-                </div>
-                <div>
-                    <input placeholder="search..."/>
-                </div>
-
-                {/*проверка на наличие карточек*/}
-                {cards?.length <= 0
-                    ? <p>This pack is empty. Click add new card to fill this pack</p>
-                    : cards?.map(cards => {
-                            return (
-
-                                <div key={cards._id}>
-
-                                    <div>{cards.question}</div>
-                                    <div>{cards.answer}</div>
-                                    <div>{cards.updated}</div>
-                                    <div>{cards.grade}</div>
-
-                                    {/*если карточки свои то...*/}
-                                    <div> Actions:
-                                        <button onClick={() => {
-                                        }}>Delete
-                                        </button>
-                                        <NavLink to={'/#'}>
-                                            <button>Edit
-                                            </button>
-                                        </NavLink>
-                                    </div>
-                                    {/*иначе null*/}
-
-                                </div>
-                            )
-                        }
-                    )
-                }
-            </div>
-        </div>
+        <Cards idUser={auth.dataUser?._id}
+               idPack={idPack}
+               loading={loading}
+               cards={cards}
+               deleteCard={deleteCard}
+        />
     )
 }

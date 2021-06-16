@@ -18,7 +18,7 @@ export type ProfileActionType = ReturnType<typeof setProfileDataAC>
 export type ProfileInitialStateType = typeof initialState
 
 let initialState = {
-    profileData: {} as ProfileDataType /*null as ProfileDataType | null*/,
+    profileData: {} as ProfileDataType,
     errorMessage: null as string | null
 }
 
@@ -58,7 +58,7 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
 export const setProfileDataAC = (data: ProfileDataType) => ({type: profileActionsTypes["SET-DATA"], data} as const)
 export const setErrorProfilePage = (error: string) => ({type: profileActionsTypes.ERROR, error} as const)
 export const setNewNameProfile = (name: string) => ({type: profileActionsTypes["NEW-NAME"], name} as const)
-export const setNewAvatarProfile = (avatar?: any) => ({type: profileActionsTypes["NEW-AVATAR"], avatar} as const)
+export const setNewAvatarProfile = (avatar?: string) => ({type: profileActionsTypes["NEW-AVATAR"], avatar} as const)
 
 //TC
 export const authTC = () => {
