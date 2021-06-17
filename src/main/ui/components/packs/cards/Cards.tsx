@@ -3,26 +3,32 @@ import {LoadingSvg} from "../../../common/loading/LoadingSvg";
 import {NavLink, useParams} from "react-router-dom";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardType} from '../../../../dal/packs/cardsAPI';
+import {AppRootStateType} from "../../../../bll/store";
+import {useSelector} from 'react-redux';
 
 type CardsPropsType = {
-    idUser: string | undefined
-    idPack: string | undefined
     loading: RequestStatusType
     cards: Array<CardType>
     deleteCard: (idCard: string) => void
+    back: () => void
+    id: string
+    idUser: string | undefined
 }
 
 export const Cards: React.FC<CardsPropsType> = props => {
 
     const {
         idUser,
-        idPack,
         loading,
         cards,
-        deleteCard
+        deleteCard,
+        id
     } = props
 
-    const {_id} = useParams<{ _id: string }>()
+    const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
+
+    console.log(`idPack-${idPack}`)
+    console.log(`idUser-${idUser}`)
 
     return (
         <div>
@@ -37,10 +43,10 @@ export const Cards: React.FC<CardsPropsType> = props => {
                         Pack Name
                     </NavLink>
 
-                    {/*{idPack === idUser || undefined*/}
-                    <NavLink to={`/packs/${_id}/newCard`}>Add new card</NavLink>
-                    {/*: null*/}
-                    {/*}*/}
+                    {idPack === idUser && idPack === undefined
+                        ? <NavLink to={`/packs/${id}/newCard`}>Add new card</NavLink>
+                        : null
+                    }
 
                 </div>
                 <div>

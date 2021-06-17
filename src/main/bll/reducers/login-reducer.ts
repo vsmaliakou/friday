@@ -19,7 +19,7 @@ export const loginActionsTypes = {
 export type LoginInitialStateType = typeof initialState
 
 let initialState = {
-    dataUser: null as LoginType | null,
+    dataUser: {} as LoginType | null,
     errorMessage: null as string | null,
     loginButtonDisable: false,
     auth: false

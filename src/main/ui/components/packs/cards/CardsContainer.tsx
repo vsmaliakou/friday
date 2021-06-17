@@ -15,10 +15,13 @@ export const CardsContainer = () => {
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
-    // const idUser = useSelector<AppRootStateType, string | null>(state => state.login.dataUser._id)
-    const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
 
     const {_id} = useParams<{ _id: string }>()
+    const history = useHistory()
+
+    const back = () => {
+        history.push(`/packs/${_id}`);
+    }
 
     useEffect(() => {
         if (!auth.auth) {
@@ -34,15 +37,15 @@ export const CardsContainer = () => {
 
     const deleteCard = (idCard: string) => {
         dispatch(deleteCardTC(idCard))
-        // dispatch(getNewCardsTC(_id))
     }
 
     return (
-        <Cards idUser={auth.dataUser?._id}
-               idPack={idPack}
-               loading={loading}
+        <Cards loading={loading}
                cards={cards}
                deleteCard={deleteCard}
+               back={back}
+               id={_id}
+               idUser={auth.dataUser?._id}
         />
     )
 }

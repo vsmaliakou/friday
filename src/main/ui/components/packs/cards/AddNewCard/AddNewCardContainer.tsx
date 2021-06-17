@@ -48,8 +48,7 @@ export const AddNewCardContainer = () => {
 
     const addNewCard = () => {
         dispatch(createNewCardTC(card))
-        // {cardsPack_id, question, answer, grade}
-        back()
+        // back()
     }
 
     const onChangeNewValueQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
