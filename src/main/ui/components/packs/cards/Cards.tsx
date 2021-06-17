@@ -26,6 +26,7 @@ export const Cards: React.FC<CardsPropsType> = props => {
     } = props
 
     const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
+    const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
     console.log(`idPack-${idPack}`)
     console.log(`idUser-${idUser}`)
@@ -43,7 +44,9 @@ export const Cards: React.FC<CardsPropsType> = props => {
                         Pack Name
                     </NavLink>
 
-                    {idPack === idUser && idPack === undefined
+                    {/* === idUser && idPack === undefined*/}
+
+                    {idUser
                         ? <NavLink to={`/packs/${id}/newCard`}>Add new card</NavLink>
                         : null
                     }
@@ -71,13 +74,16 @@ export const Cards: React.FC<CardsPropsType> = props => {
                                     <div>Last Updated:{cards.updated}</div>
                                     <div>Grade:{cards.grade}</div>
 
-                                    {idPack === idUser || undefined
+                                    {idPack === idUser
 
                                         ? <div> Actions:
-                                            <button onClick={onClickHandleDelete}>Delete
-                                            </button>
+                                            <button onClick={onClickHandleDelete}
+                                                    disabled={disableButton}
+                                            >Delete </button>
                                             <NavLink to={'/#'}>
-                                                <button>Edit</button>
+                                                <button disabled={disableButton}
+                                                >Edit
+                                                </button>
                                             </NavLink>
                                         </div>
 

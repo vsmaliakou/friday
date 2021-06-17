@@ -80,7 +80,6 @@ export const newUserDataTC = (email: string, password: string, rememberMe: boole
                     dispatch(setRequestStatusAC('success'))
                 }
             )
-
     }
 }
 
