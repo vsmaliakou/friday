@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import {LoadingSvg} from "../../../common/loading/LoadingSvg";
-import {NavLink, useParams} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardType} from '../../../../dal/packs/cardsAPI';
 import {AppRootStateType} from "../../../../bll/store";
 import {useSelector} from 'react-redux';
+import {AddWindow} from "../../../common/AddWindow/AddWindow";
 
 type CardsPropsType = {
     loading: RequestStatusType
@@ -13,6 +14,9 @@ type CardsPropsType = {
     back: () => void
     id: string
     idUser: string | undefined
+    onChangeNewValueAnswerHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    onChangeNewValueQuestionHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    addNewCard: () => void
 }
 
 export const Cards: React.FC<CardsPropsType> = props => {
@@ -22,14 +26,33 @@ export const Cards: React.FC<CardsPropsType> = props => {
         loading,
         cards,
         deleteCard,
-        id
+        id,
+        onChangeNewValueAnswerHandler,
+        onChangeNewValueQuestionHandler,
+        addNewCard,
+        back
     } = props
+
+    const [addWinOpened, setAddWinOpened] = useState(false)
 
     const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
     const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
     console.log(`idPack-${idPack}`)
     console.log(`idUser-${idUser}`)
+
+    const openWindowAddCard = () => {
+        setAddWinOpened(true)
+    }
+
+    const addCardCallback = () => {
+        setAddWinOpened(true)
+        addNewCard()
+    }
+    const closeWindowCallback = () => {
+        setAddWinOpened(false)
+        back()
+    }
 
     return (
         <div>
@@ -46,9 +69,15 @@ export const Cards: React.FC<CardsPropsType> = props => {
 
                     {/* === idUser && idPack === undefined*/}
 
-                    {idUser
-                        ? <NavLink to={`/packs/${id}/newCard`}>Add new card</NavLink>
-                        : null
+                    <button onClick={openWindowAddCard}>Add new card</button>
+
+                    {addWinOpened && <AddWindow title={'Add new card'}
+                                                placeholder={'Name'}
+                                                newTitleCallback={onChangeNewValueQuestionHandler}
+                                                answerCallback={onChangeNewValueAnswerHandler}
+                                                closeCallback={closeWindowCallback}
+                                                addCallback={addCardCallback}
+                    />
                     }
 
                 </div>
