@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from 'react';
-import s from './_Login.module.scss';
+import s from './Login.module.scss';
 import logo from './../../../../../assets/img/logo.png';
-import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
+import SuperInputText from "../../../common/SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
-import SuperCheckbox from "../../../common/c3-SuperCheckbox/SuperCheckbox";
+import SuperCheckbox from "../../../common/SuperCheckbox/SuperCheckbox";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
-import SuperButton from "../../../common/c2-SuperButton/SuperButton";
-import {LoadingSvg} from '../../../common/loading/LoadingSvg';
+import SuperButton from "../../../common/SuperButton/SuperButton";
+import {LoadingSvg} from '../../../common/Loading/LoadingSvg';
 
 type PropsType = {
     title: string

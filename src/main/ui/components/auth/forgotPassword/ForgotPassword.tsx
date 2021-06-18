@@ -2,10 +2,10 @@ import React, {ChangeEvent} from 'react';
 import s from './ForgotPassword.module.scss';
 import logo from './../../../../../assets/img/logo.png';
 import email from './../../../../../assets/img/ce.png';
-import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
+import SuperInputText from "../../../common/SuperInputText/SuperInputText";
 import {NavLink} from "react-router-dom";
-import SuperButton from "../../../common/c2-SuperButton/SuperButton";
-import { LoadingSvg } from '../../../common/loading/LoadingSvg';
+import SuperButton from "../../../common/SuperButton/SuperButton";
+import { LoadingSvg } from '../../../common/Loading/LoadingSvg';
 
 type ForgotPasswordType = {
     addNewPassword: ()=>void

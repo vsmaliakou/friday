@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import s from './SetPassword.module.scss';
 import logo from './../../../../../assets/img/logo.png';
-import SuperInputText from "../../../common/c1-SuperInputText/SuperInputText";
-import SuperButton from "../../../common/c2-SuperButton/SuperButton";
+import SuperInputText from "../../../common/SuperInputText/SuperInputText";
+import SuperButton from "../../../common/SuperButton/SuperButton";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 
 type SetPasswordType = {

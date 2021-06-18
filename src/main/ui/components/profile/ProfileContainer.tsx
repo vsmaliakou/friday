@@ -1,13 +1,13 @@
 import React, {ChangeEvent, FocusEventHandler, KeyboardEventHandler, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
-import SuperButton from "../../common/c2-SuperButton/SuperButton";
-import s from "../auth/login/_Login.module.scss";
+import SuperButton from "../../common/SuperButton/SuperButton";
+import s from "../auth/login/Login.module.scss";
 import {logOutTC} from "../../../bll/reducers/logOut-reducer";
 import {authTC, changeAvatarProfileTC, changeNameProfileTC,} from "../../../bll/reducers/profile-reducer";
 import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
 import {Redirect} from "react-router-dom";
-import {LoadingSvg} from "../../common/loading/LoadingSvg";
+import {LoadingSvg} from "../../common/Loading/LoadingSvg";
 import {RequestStatusType} from "../../../bll/reducers/app-reduser";
 
 export const ProfileContainer = () => {

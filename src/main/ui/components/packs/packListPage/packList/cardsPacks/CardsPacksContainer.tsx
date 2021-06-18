@@ -1,18 +1,36 @@
-import React from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import s from './PacksContainer.module.scss'
 import {CardsPack} from "./CardsPack";
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
-import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
+import {AddWindow} from "../../../../../common/AddWindow/AddWindow";
+import {addNewCardsPackTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {useDispatch} from "react-redux";
 
 type CardsPacksContainerType = {
-    cardsPacks: Array<CardsPacksType>
     auth: LoginInitialStateType
-    addWindowOpened: () => void
-    removeCardsPack: (packId: string) => void
-    updateCardsPack: (packId: string) => void
 }
 
-export const CardsPacksContainer: React.FC<CardsPacksContainerType> = (props) => {
+export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) => {
+
+    const [addWindow, setAddWindow] = useState(false)
+    const [name, setName] = useState("")
+
+    const dispatch = useDispatch()
+
+    const addWindowOpened = () => {
+        setAddWindow(true)
+    }
+    const addNewPackTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value)
+    }
+    const addCallback = () => {
+        dispatch(addNewCardsPackTC({name}))
+        setAddWindow(false)
+    }
+    const closeCallback = () => {
+        setAddWindow(false)
+    }
+
     return (
         <table className={s.table}>
             <tr className={s.title}>
@@ -25,14 +43,18 @@ export const CardsPacksContainer: React.FC<CardsPacksContainerType> = (props) =>
                     </select>
                 </th>
                 <th className={s.col}>Created by</th>
-                <button onClick={props.addWindowOpened}>add</button>
+                <button onClick={addWindowOpened}>add</button>
             </tr>
             <CardsPack
-                auth={props.auth}
-                cardsPacks={props.cardsPacks}
-                removeCardsPack={props.removeCardsPack}
-                updateCardsPack={props.updateCardsPack}
+                auth={auth}
             />
+            {addWindow && <AddWindow
+                title="Add new pack"
+                placeholder="Name"
+                newTitleCallback={addNewPackTitle}
+                closeCallback={closeCallback}
+                addCallback={addCallback}
+            />}
         </table>
     )
 }

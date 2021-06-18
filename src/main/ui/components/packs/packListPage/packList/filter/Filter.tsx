@@ -1,12 +1,28 @@
 import React from 'react';
 import s from './Filter.module.scss';
+import {getCardsPacksTC, setUserIdAC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {useDispatch} from "react-redux";
+import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
+import SuperDoubleRange from "../../../../../common/SuperDoubleRange/SuperDoubleRange";
 
 type FilterPropsType = {
-    getMyPacks: () => void
-    getAllPacks: () => void
+    auth: LoginInitialStateType
 }
 
-export const Filter: React.FC<FilterPropsType> = ({getMyPacks, getAllPacks}) => {
+export const Filter: React.FC<FilterPropsType> = ({auth}) => {
+
+    const dispatch = useDispatch()
+
+    const getMyPacks = () => {
+        if (auth.dataUser?._id) {
+            dispatch(setUserIdAC(auth.dataUser._id))
+            dispatch(getCardsPacksTC())
+        }
+    }
+    const getAllPacks = () => {
+        dispatch(setUserIdAC(""))
+        dispatch(getCardsPacksTC())
+    }
 
     return (
         <div className={s.filter}>
@@ -14,27 +30,8 @@ export const Filter: React.FC<FilterPropsType> = ({getMyPacks, getAllPacks}) => 
             <div className={s.filterWrap}>
                 <button onClick={getMyPacks}>MY</button>
                 <button onClick={getAllPacks}>All</button>
-
-                {/*<input className={s.tab1} checked type="radio" name="tab" id="id1"/>*/}
-                {/*<input className={s.tab2} type="radio" name="tab" id="id2"/>                                 */}
-
-                {/*<label className={s.labelMy} htmlFor="id1">MY</label>*/}
-                {/*<label className={s.labelAll} htmlFor="id2">All</label>*/}
-
-                
-
-                {/*<div className={s.contentMy}>*/}
-                {/*    assdvsdvvsd*/}
-
-                {/*    <span className={s.filterSpan}>Number of cards</span>*/}
-                {/*</div>*/}
-
-                {/*<div className={s.contentAll}>*/}
-                {/*    null*/}
-                {/*    */}
-                {/*</div>*/}
-
             </div>
+            <SuperDoubleRange/>
         </div>
     )
 }

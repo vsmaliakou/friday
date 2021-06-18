@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './_packList.module.scss'
 import logo from './../../../../assets/img/logo.png'
-import { LoadingSvg } from '../../common/loading/LoadingSvg';
+import { LoadingSvg } from '../../common/Loading/LoadingSvg';
 import { FirstPage } from './packListContent/FirstPage';
 import { SecondPage } from './packListContent/SecondPage';
 import { MyListCard } from './packListContent/MyListCard';

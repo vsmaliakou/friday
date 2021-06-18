@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import s from './PackList.module.scss'
 import logo from '../../../../../assets/img/logo.png'
 import {PacksList} from "./packList/PacksList";
@@ -7,14 +7,11 @@ import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
-import {AddWindow} from "../../../common/AddWindow/AddWindow";
-import {addNewCardsPackTC, getCardsPacksTC} from "../../../../bll/reducers/cardsPacks-reducer";
+import {getCardsPacksTC} from "../../../../bll/reducers/cardsPacks-reducer";
 
 export const PackListPage = () => {
 
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
-    const [addWindow, setAddWindow] = useState(false)
-    const [name, setName] = useState("")
 
     const dispatch = useDispatch()
 
@@ -28,21 +25,6 @@ export const PackListPage = () => {
 
     if (!auth.auth) {
         return <Redirect to={'/login'}/>
-    }
-
-    // add window
-    const addWindowOpened = () => {
-        setAddWindow(true)
-    }
-    const addNewPackTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setName(e.currentTarget.value)
-    }
-    const addCallback = () => {
-        dispatch(addNewCardsPackTC({name}))
-        setAddWindow(false)
-    }
-    const closeCallback = () => {
-        setAddWindow(false)
     }
 
     return (
@@ -59,17 +41,7 @@ export const PackListPage = () => {
                 </div>
             </div>
             <div className={s.content}>
-                <PacksList
-                    auth={auth}
-                    addWindowOpened={addWindowOpened}
-                />
-                {addWindow && <AddWindow
-                    title="Add new pack"
-                    placeholder="Name"
-                    newTitleCallback={addNewPackTitle}
-                    closeCallback={closeCallback}
-                    addCallback={addCallback}
-                />}
+                <PacksList auth={auth}/>
             </div>
         </div>
     )

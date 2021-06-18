@@ -1,0 +1,23 @@
+@import '../../../../styles/sass/mixins';
+@import '../../../../styles/sass/vars';
+
+.wrap {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 50px;
+  width: 100%;
+
+  .input {
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0 10px;
+    height: 36px;
+    border: 2px solid $secondaryColor;
+    border-radius: 3px;
+    position: relative;
+
+    &::placeholder {
+      @include text(14px, 400, 24px, $textColorLight);
+    }
+  }
+}

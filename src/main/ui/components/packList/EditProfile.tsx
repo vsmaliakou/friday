@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './_editProfile.module.scss';
 import user from './../../../../assets/img/profilImg.png'
-import SuperInputText from '../../common/c1-SuperInputText/SuperInputText';
+import SuperInputText from '../../common/SuperInputText/SuperInputText';
 
 type PropsType = {
     

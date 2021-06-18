@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react'
-import {LoadingSvg} from "../../../common/loading/LoadingSvg";
+import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
 import {NavLink} from "react-router-dom";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardType} from '../../../../dal/packs/cardsAPI';

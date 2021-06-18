@@ -10,6 +10,7 @@ export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setUserIdAC>
     | ReturnType<typeof setSearchAC>
+    | ReturnType<typeof setMinMaxValueAC>
 export type PacksInitialStateType = typeof initialState
 
 let initialState = {
@@ -46,6 +47,8 @@ const cardsPacksReducer = (state = initialState, action: PacksActionType): Packs
             return {...state, user_id: action.userId}
         case 'CARDS/PACKS/SET-SEARCH':
             return {...state, packName: action.title}
+        case 'CARDS/PACKS/SET-MIN-MAX-VALUE':
+            return {...state, min: action.newMin, max: action.newMax}
         default:
             return state
     }
@@ -58,6 +61,7 @@ export const setPageCountAC = (newPageCount: number) => ({type: 'CARDS/PACKS/SET
 export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 export const setUserIdAC = (userId: string) => ({type: 'CARDS/PACKS/SET-USER-ID', userId} as const)
 export const setSearchAC = (title: string) => ({type: 'CARDS/PACKS/SET-SEARCH', title} as const)
+export const setMinMaxValueAC = ([newMin, newMax]: number[]) => ({type: 'CARDS/PACKS/SET-MIN-MAX-VALUE', newMin, newMax} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
