@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./main/ui/header/Header";
-import {NavLink, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import {RegisterContainer} from "./main/ui/components/auth/register/RegisterContainer";
 import {LoginContainer} from "./main/ui/components/auth/login/LoginContainer";
 import {ForgotPasswordContainer} from './main/ui/components/auth/forgotPassword/ForgotPasswordContainer';
@@ -34,7 +34,6 @@ const App = () => {
                     <Route path='/packList' render={() => <PackList/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
-
                 </Switch>
             </div>
         </div>

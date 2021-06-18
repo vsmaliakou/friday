@@ -3,13 +3,13 @@ import s from './PacksContainer.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {
     addNewCardsPackTC,
-    CardsPacksType,
     getCardsPacksTC,
     removeCardsPackTC,
     updateCardsPackTC
 } from "../../../../bll/reducers/cardsPacks-reducer";
 import {AppRootStateType} from "../../../../bll/store";
 import {CardsPack} from "./CardsPack";
+import { CardsPacksType } from '../../../../dal/packs/cardsPacksAPI';
 
 export const CardsPacksContainer = () => {
     const newCardsPack = {
@@ -43,7 +43,7 @@ export const CardsPacksContainer = () => {
     }
 
     return (
-        
+
             <table className={s.table}>
                 <tr className={s.title}>
                     <th className={s.col}>Name</th>
@@ -77,16 +77,16 @@ export const CardsPacksContainer = () => {
                         <th className={s.col}>
                             <span className={s.colSpan}>Ivan Ivanov</span>
                         </th>
-                        
+
                         <th className={s.col}>
                             <button className={s.btn} style={{backgroundColor:"#F1453D"}}>Delete</button>
                             <button className={s.btn} style={{backgroundColor:"#D7D8EF"}}>Dte</button>
                             <button className={s.btn} style={{backgroundColor:"#D7D8EF"}}>Dee</button>
                         </th>
                     </tr>
-                    
-                  
+
+
             </table>
-        
+
     )
 }

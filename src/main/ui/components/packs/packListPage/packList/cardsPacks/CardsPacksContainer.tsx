@@ -14,27 +14,25 @@ type CardsPacksContainerType = {
 
 export const CardsPacksContainer: React.FC<CardsPacksContainerType> = (props) => {
     return (
-        <div>
-            <div className={s.card}>
-                <div className={s.rowColor} style={{backgroundColor: "rgb(238, 218, 218)"}}>
-                    <div className={s.item}>Name</div>
-                    <div className={s.item}>Cards</div>
-                    <div className={s.item}>
-                        <select className={s.select}>
-                            <option>Last Updated</option>
-                            <option>One Updated</option>
-                        </select>
-                    </div>
-                    <div className={s.item}>Created by</div>
-                    <button onClick={props.addWindowOpened}>add</button>
-                </div>
-                <CardsPack
-                    auth={props.auth}
-                    cardsPacks={props.cardsPacks}
-                    removeCardsPack={props.removeCardsPack}
-                    updateCardsPack={props.updateCardsPack}
-                />
-            </div>
-        </div>
+        <table className={s.table}>
+            <tr className={s.title}>
+                <th className={s.col}>Name</th>
+                <th className={s.col}>Cards</th>
+                <th className={s.col}>
+                    <select className={s.select}>
+                        <option>Last Updated</option>
+                        <option>One Updated</option>
+                    </select>
+                </th>
+                <th className={s.col}>Created by</th>
+                <button onClick={props.addWindowOpened}>add</button>
+            </tr>
+            <CardsPack
+                auth={props.auth}
+                cardsPacks={props.cardsPacks}
+                removeCardsPack={props.removeCardsPack}
+                updateCardsPack={props.updateCardsPack}
+            />
+        </table>
     )
 }

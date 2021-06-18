@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import s from './PacksContainer.module.scss'
-import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
 import {NavLink} from 'react-router-dom';
 import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
 import {DeleteWindow} from "../../../../../common/DeleteWindow/DeleteWindow";
+import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
 
 type CardsPackPropsType = {
     auth: LoginInitialStateType
@@ -26,7 +26,7 @@ export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
     }
 
     return (
-        <div>
+        <>
             {
                 props.cardsPacks.map(p => {
 
@@ -38,33 +38,39 @@ export const CardsPack: React.FC<CardsPackPropsType> = (props) => {
                         props.updateCardsPack(p._id)
                     }
 
-                    return (
-                        <div className={s.rowColor} key={p._id}>
-                            <div className={s.item}>{p.name}</div>
-                            <div className={s.item}>{p.cardsCount}</div>
-                            <div className={s.item}>{p.updated}</div>
-                            <div className={s.item}>{p.user_name}</div>
-                            {
-                                props.auth.dataUser?._id === p.user_id
-                                    ? <div className={s.item}>
-                                        <button onClick={deleteWindowOpened}>delete</button>
-                                        <button onClick={updatePack}>update</button>
-                                        <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
-                                    </div>
-                                    : <div className={s.item}>
-                                        <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
-                                    </div>
-                            }
-                            {deleteWinOpened && <DeleteWindow
-                                title="Delete Pack"
-                                name="pack"
-                                closeCallback={closeCallback}
-                                removeCallback={removeCallback}
-                            />}
-                        </div>
-                    )
+                    return <tr className={s.row}>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>{p.name}</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>{p.cardsCount}</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>{p.updated}</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>{p.user_name}</span>
+                        </th>
+                        {
+                            props.auth.dataUser?._id === p.user_id
+                                ? <div className={s.item}>
+                                    <button className={s.btn} onClick={deleteWindowOpened} style={{backgroundColor: "#F1453D"}}>Delete</button>
+                                    <button className={s.btn} onClick={updatePack} style={{backgroundColor: "#D7D8EF"}}>Dte</button>
+                                    <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
+                                </div>
+                                : <div className={s.item}>
+                                    <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
+                                </div>
+                        }
+                        {deleteWinOpened && <DeleteWindow
+                            title="Delete Pack"
+                            name="pack"
+                            closeCallback={closeCallback}
+                            removeCallback={removeCallback}
+                        />}
+                    </tr>
                 })
             }
-        </div>
+        </>
     )
 }
