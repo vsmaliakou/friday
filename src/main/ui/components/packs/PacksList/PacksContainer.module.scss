@@ -1,34 +1,77 @@
 @import '../../../../../styles/sass/mixins';
 @import '../../../../../styles/sass/vars';
 
-.card{
-  max-width: 680px;
-  margin: 25px 50px;
-  display: grid;
-  grid-template-columns: 1fr;
+.table{
+  width: 680px;
   box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px #040303;
-  .rowColor{
-    display: grid;
-    grid-template-columns: 160px 80px 120px 140px minmax(auto, 200px);
-    grid-template-rows: 50px;
-    justify-items: center;
-    align-items: center;
-    // background-color: rgb(238, 218, 218);
-    .item{
-      font-size: 13px;
-        white-space: nowrap; 
-        overflow: hidden; 
-        max-width: 100%;
-        text-overflow: ellipsis; 
-        cursor: pointer;
-        &:hover{
-          overflow:visible;
-        }
+  border-spacing: 0;
+  margin: 50px 20px;
+  
+  .title{
+    background-color: $backgroundColorLight;
+    th{
+      @include text (13px, 800, 12px, $textColor);
     }
   }
+  tr{
+    height: 50px;
+    // width: 100%;
+  }
+  th{
+    text-align: left;
+    border: none;
+    @include text (13px, 500, 12px, $textColor);
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    cursor: pointer;
+    padding-left: 15px;
+    &:hover{
+      overflow:visible;
+      z-index: 9999;
+    
+    }
+  }
+  th:nth-child(1){
+    min-width: 80px;
+    max-width: 130px;
+  }
+  th:nth-child(2){
+    min-width: 60px;
+    max-width: 100px;
+  }
+  th:nth-child(3){
+    min-width: 80px;
+    max-width: 150px;
+  }
+  th:nth-child(4){
+    min-width: 80px;
+    max-width: 110px;
+  }
+  th:nth-child(5){
+    min-width: 80px;
+    max-width: 150px;
+  }     
+
+  .row:nth-child(2n+1){
+    background-color: change-color($backgroundColorLight, $lightness: 95%);
+    width: 100%;
+  }
+  .select{
+      background-color: $backgroundColorLight;
+      border:none;
+      @include text (13px, 800, 12px, $textColor);
+  }
+  .btn{
+    margin-right: 5px;
+    border-radius: 3px;
+    border: none;
+    padding: 5px 5px;
+  }
+
+
 }
-.select{
-  border: none;
-  background: none;
-}
+
+
+
 

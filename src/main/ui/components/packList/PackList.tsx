@@ -43,7 +43,7 @@ export const PackList = () => {
 
             <div className={s.content}>
 
-                <FirstPage/>
+                {/* <FirstPage/> */}
 
                 {/* <SecondPage/> */}
 

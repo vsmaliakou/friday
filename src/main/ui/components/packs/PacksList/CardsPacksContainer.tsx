@@ -43,26 +43,50 @@ export const CardsPacksContainer = () => {
     }
 
     return (
-        <div>
-            <div className={s.card}>
-                <div className={s.rowColor} style={{backgroundColor: "rgb(238, 218, 218)"}}>
-                    <div className={s.item}>Name</div>
-                    <div className={s.item}>Cards</div>
-                    <div className={s.item}>
+        
+            <table className={s.table}>
+                <tr className={s.title}>
+                    <th className={s.col}>Name</th>
+                    <th className={s.col}>Cards</th>
+                    <th className={s.col}>
                         <select className={s.select}>
                             <option>Last Updated</option>
                             <option>One Updated</option>
                         </select>
-                    </div>
-                    <div className={s.item}>Created by</div>
-                    <button onClick={addNewCardsPack}>add</button>
-                </div>
-                <CardsPack
+                    </th>
+                    <th className={s.col}>Created by</th>
+                    {/* <button onClick={addNewCardsPack}>add</button> */}
+                    <th className={s.col}>Actions</th>
+                </tr>
+                {/* <CardsPack
                     cardsPacks={cardsPacks}
                     removeCardsPack={removeCardsPack}
                     updateCardsPack={updateCardsPack}
-                />
-            </div>
-        </div>
+                /> */}
+
+                    <tr className={s.row}>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>Pack Name</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>8</span>
+                        </th>
+                        <th className={s.col}>
+                           <span className={s.colSpan}>18.03.2021</span>
+                        </th>
+                        <th className={s.col}>
+                            <span className={s.colSpan}>Ivan Ivanov</span>
+                        </th>
+                        
+                        <th className={s.col}>
+                            <button className={s.btn} style={{backgroundColor:"#F1453D"}}>Delete</button>
+                            <button className={s.btn} style={{backgroundColor:"#D7D8EF"}}>Dte</button>
+                            <button className={s.btn} style={{backgroundColor:"#D7D8EF"}}>Dee</button>
+                        </th>
+                    </tr>
+                    
+                  
+            </table>
+        
     )
 }
