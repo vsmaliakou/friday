@@ -140,7 +140,6 @@ export const getNewValueForCard = (card: newValueCardType) => {
         dispatch(disableButton(true))
         cardsAPI.changeValueCard(card)
             .then(res => {
-                debugger
                 dispatch(setNewValueCard(res.data))
                 dispatch(disableButton(false))
                 dispatch(getNewCardsTC(actualIdCard))
