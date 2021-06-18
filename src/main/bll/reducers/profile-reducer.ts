@@ -2,24 +2,30 @@ import {Dispatch} from "redux";
 import {setNewValueAuth, setUserData} from "./login-reducer";
 import {profileAPI, ProfileDataType} from "../../dal/profile/profileApi";
 import {setRequestStatusAC} from "./app-reduser";
+import {ThunkDispatch} from "redux-thunk";
+import {AppActionsType, AppRootStateType} from "../store";
+import {CardsActionType} from "./cards-reducer";
 
 export const profileActionsTypes = {
     'SET-DATA': 'CARDS/PROFILE/SET-PROFILE-DATA',
-    ERROR: 'CARDS/PROFILE/SET-ERROR-MESSAGE',
+    'ERROR': 'CARDS/PROFILE/SET-ERROR-MESSAGE',
     'NEW-NAME': 'CARDS/PROFILE/SET-NEW-NAME-PROFILE',
-    'NEW-AVATAR': 'CARDS/PROFILE/SET-NEW-AVATAR-PROFILE'
+    'NEW-AVATAR': 'CARDS/PROFILE/SET-NEW-AVATAR-PROFILE',
+    'SET-USER-ID': 'CARDS/PROFILE/SET-USER-ID'
 } as const;
 
 export type ProfileActionType = ReturnType<typeof setProfileDataAC>
     | ReturnType<typeof setErrorProfilePage>
     | ReturnType<typeof setNewNameProfile>
     | ReturnType<typeof setNewAvatarProfile>
+    | ReturnType<typeof setUserId>
 
 export type ProfileInitialStateType = typeof initialState
 
 let initialState = {
     profileData: {} as ProfileDataType,
-    errorMessage: null as string | null
+    errorMessage: null as string | null,
+    userId: null as string | null
 }
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfileInitialStateType => {
@@ -49,6 +55,11 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
 
                 }
             }
+        case profileActionsTypes["SET-USER-ID"]:
+            return {
+                ...state,
+                userId: action.userId
+            }
         default:
             return state
     }
@@ -59,6 +70,7 @@ export const setProfileDataAC = (data: ProfileDataType) => ({type: profileAction
 export const setErrorProfilePage = (error: string) => ({type: profileActionsTypes.ERROR, error} as const)
 export const setNewNameProfile = (name: string) => ({type: profileActionsTypes["NEW-NAME"], name} as const)
 export const setNewAvatarProfile = (avatar?: string) => ({type: profileActionsTypes["NEW-AVATAR"], avatar} as const)
+export const setUserId = (userId: string) => ({type: profileActionsTypes["SET-USER-ID"], userId} as const)
 
 //TC
 export const authTC = () => {
@@ -66,6 +78,7 @@ export const authTC = () => {
         profileAPI.authProfileData()
             .then(res => {
                 dispatch(setProfileDataAC(res.data))
+                dispatch(setUserId(res.data._id))
                 dispatch(setUserData(res.data))
                 dispatch(setNewValueAuth(true))
             })
@@ -79,7 +92,7 @@ export const authTC = () => {
 }
 
 export const changeNameProfileTC = (name: string) => {
-    return (dispatch: any) => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>) => {
         dispatch(setRequestStatusAC('loading'))
         profileAPI.changeNameProfile(name)
             .then(res => {

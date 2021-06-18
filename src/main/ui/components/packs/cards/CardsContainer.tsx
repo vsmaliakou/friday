@@ -5,9 +5,9 @@ import {Redirect, useHistory, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
-import {createNewCardTC, deleteCardTC, getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
+import {createNewCardTC, deleteCardTC, getNewCardsTC, getNewValueForCard} from '../../../../bll/reducers/cards-reducer';
 import {Cards} from "./Cards";
-import {CardType} from "../../../../dal/packs/cardsAPI";
+import {CardType, newValueCardType} from "../../../../dal/packs/cardsAPI";
 import {NewCardType} from "./AddNewCard/AddNewCardContainer";
 
 export const CardsContainer = () => {
@@ -17,17 +17,23 @@ export const CardsContainer = () => {
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
 
+    //createNewCard
+    const [question, setQuestion] = useState('')
+    const [answer, setAnswer] = useState('')
+    const [grade, setGrade] = useState(0)
+
+    //newValue
     const [newQuestion, setNewQuestion] = useState('')
     const [newAnswer, setNewAnswer] = useState('')
-    const [grade, setGrade] = useState(0)
 
     const {_id} = useParams<{ _id: string }>()
     const history = useHistory()
 
+    //createNewCard
     const card: NewCardType = {
         cardsPack_id: _id,
-        question: newQuestion,
-        answer: newAnswer,
+        question: question,
+        answer: answer,
         grade: grade,
         shots: 0,
         rating: 0,
@@ -50,14 +56,30 @@ export const CardsContainer = () => {
         return <Redirect to={'/login'}/>
     }
 
+    //createCard
     const addNewCard = () => {
         dispatch(createNewCardTC(card))
-        // back()
     }
-    const onChangeNewValueQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeValueQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setQuestion(e.currentTarget.value)
+    }
+    const onChangeValueAnswerHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setAnswer(e.currentTarget.value)
+    }
+
+    //changeValueCard
+    const editValueCard = (idCard: string) => {
+        const newValueCard: newValueCardType = {
+            _id: idCard,
+            question: newQuestion,
+            answer: newAnswer
+        }
+        dispatch(getNewValueForCard(newValueCard))
+    }
+    const onChangeChangeValueQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewQuestion(e.currentTarget.value)
     }
-    const onChangeNewValueAnswerHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeNewCommentsHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewAnswer(e.currentTarget.value)
     }
 
@@ -74,11 +96,15 @@ export const CardsContainer = () => {
                cards={cards}
                deleteCard={deleteCard}
                back={back}
-               id={_id}
                idUser={auth.dataUser?._id}
-               onChangeNewValueAnswerHandler={onChangeNewValueAnswerHandler}
-               onChangeNewValueQuestionHandler={onChangeNewValueQuestionHandler}
+
+               onChangeNewValueAnswerHandler={onChangeValueQuestionHandler}
+               onChangeNewValueQuestionHandler={onChangeValueAnswerHandler}
                addNewCard={addNewCard}
+
+               onChangeChangeValueQuestionHandler={onChangeChangeValueQuestionHandler}
+               onChangeNewCommentsHandler={onChangeNewCommentsHandler}
+               editValueCard={editValueCard}
         />
     )
 }

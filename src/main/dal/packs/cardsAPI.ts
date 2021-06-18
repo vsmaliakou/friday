@@ -33,6 +33,12 @@ export type GetCardsType = {
     tokenDeathTime: number
 }
 
+export type newValueCardType = {
+    _id: string,
+    question: string
+    answer: string
+}
+
 export const cardsAPI = {
     getCards(id: string) {
         return instance.get<GetCardsType>(`cards/card?cardsPack_id=${id}`)
@@ -42,5 +48,8 @@ export const cardsAPI = {
     },
     deleteCard(idCard: string) {
         return instance.delete<CardType>(`cards/card?id=${idCard}`)
+    },
+    changeValueCard(card: newValueCardType) {
+        return instance.put<CardType>(`cards/card?id=${card._id}`, {card})
     }
 }

@@ -6,17 +6,20 @@ import {CardType} from '../../../../dal/packs/cardsAPI';
 import {AppRootStateType} from "../../../../bll/store";
 import {useSelector} from 'react-redux';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
+import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
 
 type CardsPropsType = {
     loading: RequestStatusType
     cards: Array<CardType>
     deleteCard: (idCard: string) => void
     back: () => void
-    id: string
     idUser: string | undefined
     onChangeNewValueAnswerHandler: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeNewValueQuestionHandler: (e: ChangeEvent<HTMLInputElement>) => void
     addNewCard: () => void
+    onChangeChangeValueQuestionHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    onChangeNewCommentsHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    editValueCard: (idCard: string) => void
 }
 
 export const Cards: React.FC<CardsPropsType> = props => {
@@ -26,32 +29,31 @@ export const Cards: React.FC<CardsPropsType> = props => {
         loading,
         cards,
         deleteCard,
-        id,
-        onChangeNewValueAnswerHandler,
-        onChangeNewValueQuestionHandler,
-        addNewCard,
-        back
+        onChangeNewValueAnswerHandler, onChangeNewValueQuestionHandler, addNewCard,
+        back,
+        onChangeChangeValueQuestionHandler, onChangeNewCommentsHandler, editValueCard
     } = props
 
     const [addWinOpened, setAddWinOpened] = useState(false)
+    const [addWinEdit, setAddWinEdit] = useState(false)
 
     const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
     const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
-    console.log(`idPack-${idPack}`)
-    console.log(`idUser-${idUser}`)
-
     const openWindowAddCard = () => {
         setAddWinOpened(true)
     }
+    const openWindowEditCard = () => {
+        setAddWinEdit(true)
+    }
 
     const addCardCallback = () => {
-        setAddWinOpened(true)
+        setAddWinOpened(false)
         addNewCard()
     }
     const closeWindowCallback = () => {
-        setAddWinOpened(false)
         back()
+        setAddWinOpened(false)
     }
 
     return (
@@ -59,15 +61,13 @@ export const Cards: React.FC<CardsPropsType> = props => {
 
             {loading === "loading" ? <LoadingSvg/> : null}
 
-            <div>
+            <div className={s.card}>
                 <div>
 
                     <NavLink to={'/packs'}>
                         <img src="arrow" alt=""/>
                         Pack Name
                     </NavLink>
-
-                    {/* === idUser && idPack === undefined*/}
 
                     <button onClick={openWindowAddCard}>Add new card</button>
 
@@ -77,15 +77,14 @@ export const Cards: React.FC<CardsPropsType> = props => {
                                                 answerCallback={onChangeNewValueAnswerHandler}
                                                 closeCallback={closeWindowCallback}
                                                 addCallback={addCardCallback}
-                    />
-                    }
-
+                    />}
                 </div>
                 <div>
                     <input placeholder="search..."/>
                 </div>
 
                 {cards?.length <= 0
+
                     ? <p>This pack is empty. Click add new card to fill this pack</p>
 
                     : cards?.map(cards => {
@@ -93,27 +92,43 @@ export const Cards: React.FC<CardsPropsType> = props => {
                             const onClickHandleDelete = () => {
                                 deleteCard(cards._id)
                             }
+                            const onClickHandleEdit = () => {
+                                editValueCard(cards._id)
+                                setAddWinEdit(false)
+                            }
 
                             return (
 
-                                <div key={cards._id}>
+                                <div key={cards._id}
+                                     className={s.rowColor} style={{backgroundColor: "rgb(238, 218, 218)"}}>
 
-                                    <div>Question:{cards.question}</div>
-                                    <div>Answer:{cards.answer}</div>
-                                    <div>Last Updated:{cards.updated}</div>
-                                    <div>Grade:{cards.grade}</div>
+                                    <div className={s.item}>Question:{cards.question}</div>
+                                    <div className={s.item}>Answer:{cards.answer}</div>
+                                    <div className={s.item}>Last Updated:{cards.updated}</div>
+                                    <div className={s.item}>Grade:{cards.grade}</div>
 
                                     {idPack === idUser
 
-                                        ? <div> Actions:
+                                        ? <div className={s.item}> Actions:
+
                                             <button onClick={onClickHandleDelete}
                                                     disabled={disableButton}
-                                            >Delete </button>
-                                            <NavLink to={'/#'}>
-                                                <button disabled={disableButton}
-                                                >Edit
-                                                </button>
-                                            </NavLink>
+                                            >Delete
+                                            </button>
+
+                                            <button onClick={openWindowEditCard}
+                                                    disabled={disableButton}
+                                            >Edit
+                                            </button>
+
+                                            {addWinEdit && <AddWindow title={'Change card'}
+                                                                      placeholder={'Name'}
+                                                                      newTitleCallback={onChangeChangeValueQuestionHandler}
+                                                                      answerCallback={onChangeNewCommentsHandler}
+                                                                      closeCallback={closeWindowCallback}
+                                                                      addCallback={onClickHandleEdit}
+                                            />}
+
                                         </div>
 
                                         : null

@@ -29,9 +29,7 @@ const App = () => {
                     <Route exact path='/packs' render={() => <PackListPage/>}/>
                     <Switch>
                         <Route exact path='/packs/:_id/newCard' render={() => <AddNewCardContainer/>}/>
-                        <Route exact path={'/packs/:_id'} render={() => (
-                            <CardsContainer/>
-                        )}/>
+                        <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
                     </Switch>
                     <Route path='/packList' render={() => <PackList/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
