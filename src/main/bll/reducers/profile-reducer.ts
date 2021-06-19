@@ -77,7 +77,6 @@ export const authTC = () => {
     return (dispatch: Dispatch) => {
         profileAPI.authProfileData()
             .then(res => {
-                dispatch(setProfileDataAC(res.data))
                 dispatch(setUserId(res.data._id))
                 dispatch(setUserData(res.data))
                 dispatch(setNewValueAuth(true))

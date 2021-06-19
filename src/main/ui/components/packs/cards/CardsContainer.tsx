@@ -16,6 +16,8 @@ export const CardsContainer = () => {
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
+    const idUserPack = useSelector<AppRootStateType, string>(state => state.cards.idUserCards)
+    const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
     //createNewCard
     const [question, setQuestion] = useState('')
@@ -97,6 +99,8 @@ export const CardsContainer = () => {
                deleteCard={deleteCard}
                back={back}
                idUser={auth.dataUser?._id}
+               idUserPack={idUserPack}
+               disableButton={disableButton}
 
                onChangeNewValueAnswerHandler={onChangeValueQuestionHandler}
                onChangeNewValueQuestionHandler={onChangeValueAnswerHandler}

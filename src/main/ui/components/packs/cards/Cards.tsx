@@ -3,8 +3,6 @@ import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
 import {NavLink} from "react-router-dom";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardType} from '../../../../dal/packs/cardsAPI';
-import {AppRootStateType} from "../../../../bll/store";
-import {useSelector} from 'react-redux';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
 import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
 
@@ -20,6 +18,8 @@ type CardsPropsType = {
     onChangeChangeValueQuestionHandler: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeNewCommentsHandler: (e: ChangeEvent<HTMLInputElement>) => void
     editValueCard: (idCard: string) => void
+    disableButton: boolean
+    idUserPack: string
 }
 
 export const Cards: React.FC<CardsPropsType> = props => {
@@ -29,6 +29,8 @@ export const Cards: React.FC<CardsPropsType> = props => {
         loading,
         cards,
         deleteCard,
+        disableButton,
+        idUserPack,
         onChangeNewValueAnswerHandler, onChangeNewValueQuestionHandler, addNewCard,
         back,
         onChangeChangeValueQuestionHandler, onChangeNewCommentsHandler, editValueCard
@@ -36,9 +38,6 @@ export const Cards: React.FC<CardsPropsType> = props => {
 
     const [addWinOpened, setAddWinOpened] = useState(false)
     const [addWinEdit, setAddWinEdit] = useState(false)
-
-    const idPack = useSelector<AppRootStateType, string | undefined>(state => state.cards.cards[0]?.user_id)
-    const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
     const openWindowAddCard = () => {
         setAddWinOpened(true)
@@ -69,15 +68,20 @@ export const Cards: React.FC<CardsPropsType> = props => {
                         Pack Name
                     </NavLink>
 
-                    <button onClick={openWindowAddCard}>Add new card</button>
+                    {idUserPack === idUser
+                        ? <>
+                            <button onClick={openWindowAddCard}>Add new card</button>
 
-                    {addWinOpened && <AddWindow title={'Add new card'}
-                                                placeholder={'Name'}
-                                                newTitleCallback={onChangeNewValueQuestionHandler}
-                                                answerCallback={onChangeNewValueAnswerHandler}
-                                                closeCallback={closeWindowCallback}
-                                                addCallback={addCardCallback}
-                    />}
+                            {addWinOpened && <AddWindow title={'Add new card'}
+                                                        placeholder={'Name'}
+                                                        newTitleCallback={onChangeNewValueQuestionHandler}
+                                                        answerCallback={onChangeNewValueAnswerHandler}
+                                                        closeCallback={closeWindowCallback}
+                                                        addCallback={addCardCallback}
+                            />}
+                        </>
+                        : null
+                    }
                 </div>
                 <div>
                     <input placeholder="search..."/>
@@ -107,7 +111,7 @@ export const Cards: React.FC<CardsPropsType> = props => {
                                     <div className={s.item}>Last Updated:{cards.updated}</div>
                                     <div className={s.item}>Grade:{cards.grade}</div>
 
-                                    {idPack === idUser
+                                    {idUserPack === idUser
 
                                         ? <div className={s.item}> Actions:
 

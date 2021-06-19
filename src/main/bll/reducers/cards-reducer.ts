@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {cardsAPI, CardType, newValueCardType} from "../../dal/packs/cardsAPI";
-import {ProfileActionType, setErrorProfilePage} from "./profile-reducer";
+import {setErrorProfilePage} from "./profile-reducer";
 import {NewCardType} from "../../ui/components/packs/cards/AddNewCard/AddNewCardContainer";
 import {setRequestStatusAC} from "./app-reduser";
 import {disableButtonAC} from "./login-reducer";
@@ -13,6 +13,7 @@ let initialState = {
     cards: [] as Array<CardType>,
     buttonDisable: false,
     actualIdCard: '',
+    idUserCards: ''
 }
 
 const cardsReducer = (state = initialState, action: CardsActionType): CardsInitialStateType => {
@@ -42,6 +43,10 @@ const cardsReducer = (state = initialState, action: CardsActionType): CardsIniti
                 card.answer = action.newValueCard.comments
             }
             return {...state}
+        case cardsActionsTypes['SET-ID-USER-CARDS']:
+            return {
+                ...state, idUserCards: action.id
+            }
         default:
             return state
     }
@@ -57,6 +62,8 @@ export const setNewValueCard = (newValueCard: CardType) => ({
     type: cardsActionsTypes["SET-NEW-VALUE-CARD"],
     newValueCard
 } as const)
+export const setIdUserCards = (id: string) => ({type: cardsActionsTypes["SET-ID-USER-CARDS"], id} as const)
+
 
 export type CardsActionType = ReturnType<typeof getCards>
     | ReturnType<typeof setNewCard>
@@ -64,6 +71,7 @@ export type CardsActionType = ReturnType<typeof getCards>
     | ReturnType<typeof disableButton>
     | ReturnType<typeof setIdActualCard>
     | ReturnType<typeof setNewValueCard>
+    | ReturnType<typeof setIdUserCards>
 
 export enum cardsActionsTypes {
     'SET-CARDS' = 'CARDS/CARDS/SET-CARDS',
@@ -71,7 +79,8 @@ export enum cardsActionsTypes {
     'DELETE-CARD' = 'CARDS/CARDS/DELETE-CARD',
     'DISABLE' = 'CARDS/CARDS/BUTTON',
     'SET-ID-ACTUAL-CARD' = 'CARDS/CARDS/SET-ID-ACTUAL-CARD',
-    "SET-NEW-VALUE-CARD" = 'CARDS/CARDS/SET-NEW-VALUE-CARD'
+    "SET-NEW-VALUE-CARD" = 'CARDS/CARDS/SET-NEW-VALUE-CARD',
+    "SET-ID-USER-CARDS" = 'CARDS/CARDS/SET-ID-USER-CARDS'
 }
 
 //TC
@@ -82,6 +91,7 @@ export const getNewCardsTC = (id: string) => {
         dispatch(setIdActualCard(id))
         cardsAPI.getCards(id)
             .then(res => {
+                dispatch(setIdUserCards(res.data.packUserId))
                 dispatch(getCards(res.data.cards))
                 dispatch(disableButton(false))
             })
