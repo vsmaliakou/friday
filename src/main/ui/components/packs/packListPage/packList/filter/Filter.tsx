@@ -28,10 +28,14 @@ export const Filter: React.FC<FilterPropsType> = ({auth}) => {
         <div className={s.filter}>
             <h4 className={s.filterTitle}>Show packs cards</h4>
             <div className={s.filterWrap}>
-                <button onClick={getMyPacks}>MY</button>
-                <button onClick={getAllPacks}>All</button>
+                <button className={s.btnMy} onClick={getMyPacks}>MY</button>
+                <button className={s.btnAll} onClick={getAllPacks}>All</button>
             </div>
-            <SuperDoubleRange/>
+            <div className={s.content}>
+                <span className={s.span}>Number of cards</span>
+                <SuperDoubleRange/>
+            </div>
+            
         </div>
     )
 }

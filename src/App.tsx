@@ -31,7 +31,6 @@ const App = () => {
                         <Route exact path='/packs/:_id/newCard' render={() => <AddNewCardContainer/>}/>
                         <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
                     </Switch>
-                    <Route path='/packList' render={() => <PackList/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
                 </Switch>
