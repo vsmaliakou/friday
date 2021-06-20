@@ -8,10 +8,8 @@ import {ForgotPasswordContainer} from './main/ui/components/auth/forgotPassword/
 import {SetPasswordContainer} from "./main/ui/components/auth/setPassword/SetPasswordContainer";
 import {PackListPage} from "./main/ui/components/packs/packListPage/PackListPage";
 import {ProfileContainer} from "./main/ui/components/profile/ProfileContainer";
-import {PackList} from './main/ui/components/packList/PackList';
-import {CardsContainer} from "./main/ui/components/packs/cards/CardsContainer";
 import {EmailPassword} from "./main/ui/components/auth/forgotPassword/EmailPassword";
-import {AddNewCardContainer} from './main/ui/components/packs/cards/AddNewCard/AddNewCardContainer';
+import { CardsPage } from './main/ui/components/packs/cards/CardsPage';
 
 const App = () => {
     return (
@@ -27,10 +25,7 @@ const App = () => {
                     <Route path='/check-email' render={() => <EmailPassword/>}/>
                     <Route path='/set-new-password/:token' render={() => <SetPasswordContainer/>}/>
                     <Route exact path='/packs' render={() => <PackListPage/>}/>
-                    <Switch>
-                        <Route exact path='/packs/:_id/newCard' render={() => <AddNewCardContainer/>}/>
-                        <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
-                    </Switch>
+                    <Route exact path={'/packs/:_id'} render={() => (<CardsPage/>)}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
                 </Switch>
