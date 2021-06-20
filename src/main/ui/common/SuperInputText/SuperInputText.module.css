@@ -3,7 +3,7 @@
     position: relative;
 }
 
-label {
+.label {
     position: absolute;
     left: 0;
     top: -10px;

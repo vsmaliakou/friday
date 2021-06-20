@@ -29,14 +29,14 @@
     position: absolute;
     @include text(16px, 400, 24px, $textColorLight);
     background-color: #fff;
-    margin-top: 18px;
+    margin-top: 10px;
     margin-left: 20px;
     transition: .5s;
     // padding: 0 5px;
   }
 
   .input:focus ~ .label{
-    margin-top: -2px;
+    margin-top: -12px;
   }
   
 }
