@@ -1,6 +1,5 @@
-import {Dispatch} from "redux";
 import {cardsAPI, CardType, newValueCardType} from "../../dal/packs/cardsAPI";
-import {ProfileActionType, setErrorProfilePage} from "./profile-reducer";
+import {setErrorProfilePage} from "./profile-reducer";
 import {NewCardType} from "../../ui/components/packs/cards/AddNewCard/AddNewCardContainer";
 import {setRequestStatusAC} from "./app-reduser";
 import {disableButtonAC} from "./login-reducer";
@@ -13,6 +12,13 @@ let initialState = {
     cards: [] as Array<CardType>,
     buttonDisable: false,
     actualIdCard: '',
+    idUserCards: '',
+    page: 1,
+    pageCount: 7,
+    min: 1,
+    max: 4,
+    totalCardsCount: 5,
+    sortCards: ''
 }
 
 const cardsReducer = (state = initialState, action: CardsActionType): CardsInitialStateType => {
@@ -42,6 +48,16 @@ const cardsReducer = (state = initialState, action: CardsActionType): CardsIniti
                 card.answer = action.newValueCard.comments
             }
             return {...state}
+        case cardsActionsTypes['SET-ID-USER-CARDS']:
+            return {
+                ...state, idUserCards: action.id
+            }
+        case cardsActionsTypes['SET-PAGE-COUNT-CARDS']:
+            return {...state, pageCount: action.newPageCount}
+        case cardsActionsTypes["SET-CURRENT-PAGE-CARDS"]:
+            return {...state, page: action.pageNumber}
+        case cardsActionsTypes["SET-TOTAL-CARDS-COUNT"]:
+            return {...state, totalCardsCount: action.totalCardsCount}
         default:
             return state
     }
@@ -57,6 +73,20 @@ export const setNewValueCard = (newValueCard: CardType) => ({
     type: cardsActionsTypes["SET-NEW-VALUE-CARD"],
     newValueCard
 } as const)
+export const setIdUserCards = (id: string) => ({type: cardsActionsTypes["SET-ID-USER-CARDS"], id} as const)
+
+//pagination
+export const setPageCountCards = (newPageCount: number) => ({
+    type: cardsActionsTypes["SET-PAGE-COUNT-CARDS"],
+    newPageCount
+} as const)
+export const setCurrentPageCards = (pageNumber: number) => ({
+    type: cardsActionsTypes["SET-CURRENT-PAGE-CARDS"], pageNumber
+} as const)
+export const setTotalCardsCount = (totalCardsCount: number) => ({
+    type: cardsActionsTypes["SET-TOTAL-CARDS-COUNT"],
+    totalCardsCount
+} as const)
 
 export type CardsActionType = ReturnType<typeof getCards>
     | ReturnType<typeof setNewCard>
@@ -64,6 +94,10 @@ export type CardsActionType = ReturnType<typeof getCards>
     | ReturnType<typeof disableButton>
     | ReturnType<typeof setIdActualCard>
     | ReturnType<typeof setNewValueCard>
+    | ReturnType<typeof setIdUserCards>
+    | ReturnType<typeof setPageCountCards>
+    | ReturnType<typeof setCurrentPageCards>
+    | ReturnType<typeof setTotalCardsCount>
 
 export enum cardsActionsTypes {
     'SET-CARDS' = 'CARDS/CARDS/SET-CARDS',
@@ -71,17 +105,32 @@ export enum cardsActionsTypes {
     'DELETE-CARD' = 'CARDS/CARDS/DELETE-CARD',
     'DISABLE' = 'CARDS/CARDS/BUTTON',
     'SET-ID-ACTUAL-CARD' = 'CARDS/CARDS/SET-ID-ACTUAL-CARD',
-    "SET-NEW-VALUE-CARD" = 'CARDS/CARDS/SET-NEW-VALUE-CARD'
+    "SET-NEW-VALUE-CARD" = 'CARDS/CARDS/SET-NEW-VALUE-CARD',
+    "SET-ID-USER-CARDS" = 'CARDS/CARDS/SET-ID-USER-CARDS',
+    "SET-PAGE-COUNT-CARDS" = 'CARDS/CARDS/SET-PAGE-COUNT-CARDS',
+    "SET-CURRENT-PAGE-CARDS" = 'CARDS/CARDS/SET-CURRENT-PAGE-CARDS',
+    "SET-TOTAL-CARDS-COUNT" = 'CARDS/CARDS/SET-TOTAL-CARDS-COUNT'
 }
 
 //TC
 export const getNewCardsTC = (id: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
+
+        // const payload = {
+        //     min: getState().cards.min,
+        //     max: getState().cards.max,
+        //     sortCards: getState().cards.sortCards,
+        //     page: getState().cards.page,
+        //     pageCount: getState().cards.pageCount,
+        // }
+
         dispatch(setRequestStatusAC('loading'))
         dispatch(disableButton(true))
         dispatch(setIdActualCard(id))
-        cardsAPI.getCards(id)
+        cardsAPI.getCards(id /*payload.min, payload.max, payload.sortCards, payload.page, payload.pageCount*/)
             .then(res => {
+                dispatch(setTotalCardsCount(res.data.cardsTotalCount))
+                dispatch(setIdUserCards(res.data.packUserId))
                 dispatch(getCards(res.data.cards))
                 dispatch(disableButton(false))
             })

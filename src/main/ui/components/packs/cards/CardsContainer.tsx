@@ -4,18 +4,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useHistory, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
-import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {createNewCardTC, deleteCardTC, getNewCardsTC, getNewValueForCard} from '../../../../bll/reducers/cards-reducer';
 import {Cards} from "./Cards";
 import {CardType, newValueCardType} from "../../../../dal/packs/cardsAPI";
 import {NewCardType} from "./AddNewCard/AddNewCardContainer";
+import s from "../../../common/Table/Table.module.scss";
+import Search from "../../../common/Search/Search";
 
 export const CardsContainer = () => {
 
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
-    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
+    const idUserPack = useSelector<AppRootStateType, string>(state => state.cards.idUserCards)
+    const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
 
     //createNewCard
     const [question, setQuestion] = useState('')
@@ -92,19 +94,35 @@ export const CardsContainer = () => {
     }
 
     return (
-        <Cards loading={loading}
-               cards={cards}
-               deleteCard={deleteCard}
-               back={back}
-               idUser={auth.dataUser?._id}
+        <table className={s.table}>
+            <tr className={s.title}>
+                <th className={s.col}>Question</th>
+                <th className={s.col}>Answer</th>
+                <th className={s.col}>
+                    <select className={s.select}>
+                        <option>Last Updated</option>
+                        <option>One Updated</option>
+                    </select>
+                </th>
+                <th className={s.col}>Grade</th>
+            </tr>
 
-               onChangeNewValueAnswerHandler={onChangeValueQuestionHandler}
-               onChangeNewValueQuestionHandler={onChangeValueAnswerHandler}
-               addNewCard={addNewCard}
+            <Cards cards={cards}
+                   deleteCard={deleteCard}
+                   back={back}
+                   idUser={auth.dataUser?._id}
+                   idUserPack={idUserPack}
+                   disableButton={disableButton}
 
-               onChangeChangeValueQuestionHandler={onChangeChangeValueQuestionHandler}
-               onChangeNewCommentsHandler={onChangeNewCommentsHandler}
-               editValueCard={editValueCard}
-        />
+                   onChangeNewValueAnswerHandler={onChangeValueQuestionHandler}
+                   onChangeNewValueQuestionHandler={onChangeValueAnswerHandler}
+                   addNewCard={addNewCard}
+
+                   onChangeChangeValueQuestionHandler={onChangeChangeValueQuestionHandler}
+                   onChangeNewCommentsHandler={onChangeNewCommentsHandler}
+                   editValueCard={editValueCard}
+            />
+
+        </table>
     )
 }

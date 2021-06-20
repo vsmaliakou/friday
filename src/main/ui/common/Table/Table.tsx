@@ -1,16 +1,16 @@
 import React, {ChangeEvent, useState} from 'react'
-import s from './PacksContainer.module.scss'
-import {CardsPack} from "./CardsPack";
-import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
-import {AddWindow} from "../../../../../common/AddWindow/AddWindow";
-import {addNewCardsPackTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import s from './Table.module.scss'
+import {Row} from "./Row";
+import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {AddWindow} from "../AddWindow/AddWindow";
+import {addNewCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
 import {useDispatch} from "react-redux";
 
 type CardsPacksContainerType = {
     auth: LoginInitialStateType
 }
 
-export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) => {
+export const Table: React.FC<CardsPacksContainerType> = ({auth}) => {
 
     const [addWindow, setAddWindow] = useState(false)
     const [name, setName] = useState("")
@@ -48,7 +48,7 @@ export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) =
                 </th>
                 
             </tr>
-            <CardsPack
+            <Row
                 auth={auth}
             />
             {addWindow && <AddWindow
