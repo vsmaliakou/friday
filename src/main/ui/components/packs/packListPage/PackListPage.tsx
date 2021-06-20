@@ -8,7 +8,7 @@ import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {PacksList} from "./packList/PacksList";
 import {CardsContainer} from "../cards/CardsContainer";
-import {ProfileContainer} from "../../profile/ProfileContainer";
+import {ProfileContainerTest} from "../../profile/ProfileContainerTest";
 
 export const PackListPage = () => {
 
@@ -48,7 +48,7 @@ export const PackListPage = () => {
                 </div>
             </div>
             <div className={s.content}>
-                <Route path='/profile/:user_id?' render={() => <ProfileContainer/>}/>
+                <Route path='/profile/:user_id?' render={() => <ProfileContainerTest/>}/>
                 <Route exact path='/packs' render={() => <PacksList/>}/>
                 <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
             </div>

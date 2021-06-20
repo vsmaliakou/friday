@@ -8,7 +8,7 @@ import {createNewCardTC, deleteCardTC, getNewCardsTC, getNewValueForCard} from '
 import {Cards} from "./Cards";
 import {CardType, newValueCardType} from "../../../../dal/packs/cardsAPI";
 import {NewCardType} from "./AddNewCard/AddNewCardContainer";
-import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
+import s from "../../../common/Table/Table.module.scss";
 import Search from "../../../common/Search/Search";
 
 export const CardsContainer = () => {
