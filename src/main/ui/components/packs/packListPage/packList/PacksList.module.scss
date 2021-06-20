@@ -7,12 +7,12 @@
 
 
   .content {
-    max-width: 770px;
+    width: 100%;
     @include flex(flex, column, start, center);
 
     .packListTitle {
       align-self: flex-start;
-      margin-left: 20px;
+      margin: 30px 0 30px 35px;
     }
 
     
