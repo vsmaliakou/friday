@@ -15,10 +15,13 @@ const Search = () => {
     return (
         <div className={s.wrap}>
             <input type={'text'}
-                   placeholder='Search...'
+                //    placeholder='Search...'
                    onChange={search}
                    className={s.input}
+                   id="1"
             />
+
+            <label className={s.label} htmlFor="1">Search . . .</label>
         </div>
     )
 }
