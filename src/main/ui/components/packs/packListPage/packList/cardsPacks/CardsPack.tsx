@@ -57,14 +57,14 @@ export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
                         </th>
                         {
                             auth.dataUser?._id === p.user_id
-                                ? <div className={s.item}>
+                                ? <th className={s.item}>
                                     <button className={s.btn} onClick={deleteWindowOpened} style={{backgroundColor: "#F1453D"}}>Delete</button>
                                     <button className={s.btn} onClick={updatePack} style={{backgroundColor: "#D7D8EF"}}>Dte</button>
-                                    <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
-                                </div>
-                                : <div className={s.item}>
-                                    <NavLink to={`/packs/${p._id}`}>Cards</NavLink>
-                                </div>
+                                    <NavLink to={`/packs/${p._id}`} className={s.link} >Cards</NavLink>
+                                </th>
+                                : <th className={s.item}>
+                                    <NavLink to={`/packs/${p._id}`} className={s.link}>Cards</NavLink>
+                                </th>
                         }
                         {deleteWinOpened && <DeleteWindow
                             title="Delete Pack"

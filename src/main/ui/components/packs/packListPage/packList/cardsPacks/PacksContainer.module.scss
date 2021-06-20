@@ -2,15 +2,19 @@
 @import '../../../../../../../styles/sass/vars';
 
 .table{
-  width: 680px;
+  width: 90%;
   box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px #040303;
   border-spacing: 0;
-  margin: 50px 20px;
+  margin: 50px 0px;
+  border-collapse: collapse;
 
   .title{
     background-color: $backgroundColorLight;
     th{
       @include text (13px, 800, 12px, $textColor);
+    }
+    th:last-child{
+      text-align: center;
     }
   }
   tr{
@@ -28,7 +32,10 @@
     padding-left: 15px;
     &:hover{
       overflow:visible;
-      z-index: 9999;
+      z-index: 99999999999999;
+      // border: 1px solid;
+      // background-color: #fff;
+      // width: 100%;
 
     }
   }
@@ -68,8 +75,26 @@
     border: none;
     padding: 5px 5px;
   }
+  .btnAdd{
+    background-color: $btnAcentColor;
+    color: #fff;
+    border: none;
+    border-radius:2px;
+    padding: 10px 30px;
+    
+    &:hover{
+      background-color: change-color($btnAcentColor, $lightness: 55%);
+    }
+  }
 
-
+  .link{
+    display: inline-block;
+    background-color: #D7D8EF;
+    padding: 7px 5px;
+    border-radius: 3px;
+    color: #000;
+    
+  }
 }
 
 

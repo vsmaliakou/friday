@@ -43,7 +43,10 @@ export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) =
                     </select>
                 </th>
                 <th className={s.col}>Created by</th>
-                <button onClick={addWindowOpened}>add</button>
+                <th className={s.col}>
+                    <button className={s.btnAdd} onClick={addWindowOpened}>Add</button>
+                </th>
+                
             </tr>
             <CardsPack
                 auth={auth}
