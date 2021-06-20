@@ -4,18 +4,15 @@ import {profileAPI, ProfileDataType} from "../../dal/profile/profileApi";
 import {setRequestStatusAC} from "./app-reduser";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType, AppRootStateType} from "../store";
-import {CardsActionType} from "./cards-reducer";
 
 export const profileActionsTypes = {
-    'SET-DATA': 'CARDS/PROFILE/SET-PROFILE-DATA',
     'ERROR': 'CARDS/PROFILE/SET-ERROR-MESSAGE',
     'NEW-NAME': 'CARDS/PROFILE/SET-NEW-NAME-PROFILE',
     'NEW-AVATAR': 'CARDS/PROFILE/SET-NEW-AVATAR-PROFILE',
     'SET-USER-ID': 'CARDS/PROFILE/SET-USER-ID'
 } as const;
 
-export type ProfileActionType = ReturnType<typeof setProfileDataAC>
-    | ReturnType<typeof setErrorProfilePage>
+export type ProfileActionType = ReturnType<typeof setErrorProfilePage>
     | ReturnType<typeof setNewNameProfile>
     | ReturnType<typeof setNewAvatarProfile>
     | ReturnType<typeof setUserId>
@@ -30,11 +27,6 @@ let initialState = {
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfileInitialStateType => {
     switch (action.type) {
-        case profileActionsTypes["SET-DATA"]:
-            return {
-                ...state,
-                profileData: action.data
-            }
         case profileActionsTypes.ERROR:
             return {
                 ...state,
@@ -66,7 +58,6 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
 }
 
 //AC
-export const setProfileDataAC = (data: ProfileDataType) => ({type: profileActionsTypes["SET-DATA"], data} as const)
 export const setErrorProfilePage = (error: string) => ({type: profileActionsTypes.ERROR, error} as const)
 export const setNewNameProfile = (name: string) => ({type: profileActionsTypes["NEW-NAME"], name} as const)
 export const setNewAvatarProfile = (avatar?: string) => ({type: profileActionsTypes["NEW-AVATAR"], avatar} as const)

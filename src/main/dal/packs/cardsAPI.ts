@@ -40,8 +40,17 @@ export type newValueCardType = {
 }
 
 export const cardsAPI = {
-    getCards(id: string) {
-        return instance.get<GetCardsType>(`cards/card?cardsPack_id=${id}`)
+    getCards(id: string/*min: number, max: number, sortCards: string, page: number, pageCount: number*/) {
+        return instance.get<GetCardsType>(`cards/card?cardsPack_id=${id}`,
+            //     params: {
+            //         min,
+            //         max,
+            //         sortCards,
+            //         page,
+            //         pageCount
+            //     }
+            // })
+        )
     },
     createCard(card: NewCardType) {
         return instance.post<CardType>(`cards/card?cardsPack_id=${card.cardsPack_id}`, {card})

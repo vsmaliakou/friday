@@ -1,13 +1,9 @@
 import React, {ChangeEvent, useState} from 'react'
-import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
-import {NavLink} from "react-router-dom";
-import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardType} from '../../../../dal/packs/cardsAPI';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
 import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
 
 type CardsPropsType = {
-    loading: RequestStatusType
     cards: Array<CardType>
     deleteCard: (idCard: string) => void
     back: () => void
@@ -26,7 +22,6 @@ export const Cards: React.FC<CardsPropsType> = props => {
 
     const {
         idUser,
-        loading,
         cards,
         deleteCard,
         disableButton,
@@ -51,99 +46,78 @@ export const Cards: React.FC<CardsPropsType> = props => {
         addNewCard()
     }
     const closeWindowCallback = () => {
-        back()
+        // back()
         setAddWinOpened(false)
+        setAddWinEdit(false)
     }
 
     return (
-        <div>
+        <>
+            <div>
+                {idUserPack === idUser
+                    ? <>
+                        <button onClick={openWindowAddCard}>Add new card</button>
 
-            {loading === "loading" ? <LoadingSvg/> : null}
-
-            <div className={s.card}>
-                <div>
-
-                    <NavLink to={'/packs'}>
-                        <img src="arrow" alt=""/>
-                        Pack Name
-                    </NavLink>
-
-                    {idUserPack === idUser
-                        ? <>
-                            <button onClick={openWindowAddCard}>Add new card</button>
-
-                            {addWinOpened && <AddWindow title={'Add new card'}
-                                                        placeholder={'Name'}
-                                                        newTitleCallback={onChangeNewValueQuestionHandler}
-                                                        answerCallback={onChangeNewValueAnswerHandler}
-                                                        closeCallback={closeWindowCallback}
-                                                        addCallback={addCardCallback}
-                            />}
-                        </>
-                        : null
-                    }
-                </div>
-                <div>
-                    <input placeholder="search..."/>
-                </div>
-
-                {cards?.length <= 0
-
-                    ? <p>This pack is empty. Click add new card to fill this pack</p>
-
-                    : cards?.map(cards => {
-
-                            const onClickHandleDelete = () => {
-                                deleteCard(cards._id)
-                            }
-                            const onClickHandleEdit = () => {
-                                editValueCard(cards._id)
-                                setAddWinEdit(false)
-                            }
-
-                            return (
-
-                                <div key={cards._id}
-                                     className={s.rowColor} style={{backgroundColor: "rgb(238, 218, 218)"}}>
-
-                                    <div className={s.item}>Question:{cards.question}</div>
-                                    <div className={s.item}>Answer:{cards.answer}</div>
-                                    <div className={s.item}>Last Updated:{cards.updated}</div>
-                                    <div className={s.item}>Grade:{cards.grade}</div>
-
-                                    {idUserPack === idUser
-
-                                        ? <div className={s.item}> Actions:
-
-                                            <button onClick={onClickHandleDelete}
-                                                    disabled={disableButton}
-                                            >Delete
-                                            </button>
-
-                                            <button onClick={openWindowEditCard}
-                                                    disabled={disableButton}
-                                            >Edit
-                                            </button>
-
-                                            {addWinEdit && <AddWindow title={'Change card'}
-                                                                      placeholder={'Name'}
-                                                                      newTitleCallback={onChangeChangeValueQuestionHandler}
-                                                                      answerCallback={onChangeNewCommentsHandler}
-                                                                      closeCallback={closeWindowCallback}
-                                                                      addCallback={onClickHandleEdit}
-                                            />}
-
-                                        </div>
-
-                                        : null
-                                    }
-
-                                </div>
-                            )
-                        }
-                    )
+                        {addWinOpened && <AddWindow title={'Add new card'}
+                                                    placeholder={'Name'}
+                                                    newTitleCallback={onChangeNewValueQuestionHandler}
+                                                    answerCallback={onChangeNewValueAnswerHandler}
+                                                    closeCallback={closeWindowCallback}
+                                                    addCallback={addCardCallback}
+                        />}
+                    </>
+                    : null
                 }
             </div>
-        </div>
+            {cards?.length <= 0
+
+                ? <p>This pack is empty. Click add new card to fill this pack</p>
+
+                : cards?.map(cards => {
+
+                    const onClickHandleDelete = () => {
+                        deleteCard(cards._id)
+                    }
+                    const onClickHandleEdit = () => {
+                        editValueCard(cards._id)
+                        setAddWinEdit(false)
+                    }
+
+                    return <tr className={s.row}
+                               key={cards._id}>
+                        <th className={s.col}><span className={s.colSpan}>{cards.question}</span></th>
+                        <th className={s.col}><span className={s.colSpan}>{cards.answer}</span></th>
+                        <th className={s.col}><span className={s.colSpan}>{cards.updated}</span></th>
+                        <th className={s.col}><span className={s.colSpan}>{cards.grade}</span></th>
+
+                        {idUserPack === idUser
+
+                            ? <div className={s.item}>
+
+                                <button onClick={onClickHandleDelete}
+                                        disabled={disableButton}>Delete
+                                </button>
+
+                                <button onClick={openWindowEditCard}
+                                        disabled={disableButton}>Edit
+                                </button>
+
+                                {addWinEdit && <AddWindow title={'Change card'}
+                                                          placeholder={'Name'}
+                                                          newTitleCallback={onChangeChangeValueQuestionHandler}
+                                                          answerCallback={onChangeNewCommentsHandler}
+                                                          closeCallback={closeWindowCallback}
+                                                          addCallback={onClickHandleEdit}
+                                />}
+
+                            </div>
+
+                            : null
+                        }
+                    </tr>
+
+                })
+            }
+        </>
     )
 }
