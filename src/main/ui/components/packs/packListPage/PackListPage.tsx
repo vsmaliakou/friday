@@ -1,30 +1,37 @@
 import React, {useEffect} from 'react';
 import s from './PackList.module.scss'
 import logo from '../../../../../assets/img/logo.png'
-import {PacksList} from "./packList/PacksList";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
-import {Redirect} from "react-router-dom";
+import {Redirect, Route, useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
-import {getCardsPacksTC} from "../../../../bll/reducers/cardsPacks-reducer";
+import {PacksList} from "./packList/PacksList";
+import {CardsContainer} from "../cards/CardsContainer";
+import {ProfileContainer} from "../../profile/ProfileContainer";
 
 export const PackListPage = () => {
 
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         if (!auth.auth) {
             dispatch(authTC())
-        } else {
-            dispatch(getCardsPacksTC())
         }
     }, [])
 
     if (!auth.auth) {
         return <Redirect to={'/login'}/>
+    }
+
+    const redirectToPacks = () => {
+        history.push('/packs')
+    }
+    const redirectToProfile = () => {
+        history.push('/profile')
     }
 
     return (
@@ -35,13 +42,15 @@ export const PackListPage = () => {
                         <img className={s.logo} src={logo}/>
                     </div>
                     <div className={s.btnWrap}>
-                        <button className={s.btnPackList}>PackList</button>
-                        <button className={s.btnProfile}>Profile</button>
+                        <button className={s.btnPackList} onClick={redirectToPacks}>PackList</button>
+                        <button className={s.btnProfile} onClick={redirectToProfile}>Profile</button>
                     </div>
                 </div>
             </div>
             <div className={s.content}>
-                <PacksList auth={auth}/>
+                <Route path='/profile/:user_id?' render={() => <ProfileContainer/>}/>
+                <Route exact path='/packs' render={() => <PacksList/>}/>
+                <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
             </div>
         </div>
     )

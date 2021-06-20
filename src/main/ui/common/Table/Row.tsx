@@ -1,23 +1,26 @@
-import React, {useState} from 'react'
-import s from './PacksContainer.module.scss'
+import React, {ChangeEvent, useState} from 'react'
+import s from './Table.module.scss'
 import {NavLink} from 'react-router-dom';
-import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
-import {DeleteWindow} from "../../../../../common/DeleteWindow/DeleteWindow";
-import {CardsPacksType} from "../../../../../../dal/packs/cardsPacksAPI";
+import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {DeleteWindow} from "../DeleteWindow/DeleteWindow";
+import {CardsPacksType} from "../../../dal/packs/cardsPacksAPI";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../../../../bll/store";
-import {removeCardsPackTC, updateCardsPackTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {AppRootStateType} from "../../../bll/store";
+import {removeCardsPackTC, updateCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
+import {AddWindow} from "../AddWindow/AddWindow";
 
 type CardsPackPropsType = {
     auth: LoginInitialStateType
 }
 
-export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
+export const Row: React.FC<CardsPackPropsType> = ({auth}) => {
 
     const cardsPacks = useSelector<AppRootStateType, Array<CardsPacksType>>(state => state.packs.cardsPacks)
 
     const [deleteWinOpened, setDeleteWinOpened] = useState(false)
+    const [updateWinOpened, setUpdateWinOpened] = useState(false)
     const [removePackId, setRemovePackId] = useState("")
+    const [name, setName] = useState("")
 
     const dispatch = useDispatch()
 
@@ -25,8 +28,16 @@ export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
         dispatch(removeCardsPackTC(removePackId))
         setDeleteWinOpened(false)
     }
+    const newTitleCallback = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.currentTarget.value)
+    }
+    const updateCallback = () => {
+        dispatch(updateCardsPackTC(removePackId, name))
+        setUpdateWinOpened(false)
+    }
     const closeCallback = () => {
         setDeleteWinOpened(false)
+        setUpdateWinOpened(false)
     }
 
     return (
@@ -39,7 +50,8 @@ export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
                         setRemovePackId(p._id)
                     }
                     const updatePack = () => {
-                        dispatch(updateCardsPackTC(p._id, "new name"))
+                        setUpdateWinOpened(true)
+                        setRemovePackId(p._id)
                     }
 
                     return <tr className={s.row}>
@@ -53,14 +65,18 @@ export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
                             <span className={s.colSpan}>{p.updated}</span>
                         </th>
                         <th className={s.col}>
-                            <span className={s.colSpan}>{p.user_name}</span>
+                            <NavLink to={`/profile/${p.user_id}`} className={s.colSpan}>{p.user_name}</NavLink>
                         </th>
                         {
                             auth.dataUser?._id === p.user_id
                                 ? <th className={s.item}>
-                                    <button className={s.btn} onClick={deleteWindowOpened} style={{backgroundColor: "#F1453D"}}>Delete</button>
-                                    <button className={s.btn} onClick={updatePack} style={{backgroundColor: "#D7D8EF"}}>Dte</button>
-                                    <NavLink to={`/packs/${p._id}`} className={s.link} >Cards</NavLink>
+                                    <button className={s.btn} onClick={deleteWindowOpened}
+                                            style={{backgroundColor: "#F1453D"}}>Delete
+                                    </button>
+                                    <button className={s.btn} onClick={updatePack}
+                                            style={{backgroundColor: "#D7D8EF"}}>Edit
+                                    </button>
+                                    <NavLink to={`/packs/${p._id}`} className={s.link}>Cards</NavLink>
                                 </th>
                                 : <th className={s.item}>
                                     <NavLink to={`/packs/${p._id}`} className={s.link}>Cards</NavLink>
@@ -71,6 +87,13 @@ export const CardsPack: React.FC<CardsPackPropsType> = ({auth}) => {
                             name="pack"
                             closeCallback={closeCallback}
                             removeCallback={removeCallback}
+                        />}
+                        {updateWinOpened && <AddWindow
+                            title={'Edit pack name'}
+                            placeholder={'New pack name'}
+                            newTitleCallback={newTitleCallback}
+                            closeCallback={closeCallback}
+                            addCallback={updateCallback}
                         />}
                     </tr>
                 })

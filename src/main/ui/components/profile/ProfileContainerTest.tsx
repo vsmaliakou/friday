@@ -10,7 +10,7 @@ import {Redirect} from "react-router-dom";
 import {LoadingSvg} from "../../common/Loading/LoadingSvg";
 import {RequestStatusType} from "../../../bll/reducers/app-reduser";
 
-export const ProfileContainer = () => {
+export const ProfileContainerTest = () => {
 
     const dispatch = useDispatch()
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)

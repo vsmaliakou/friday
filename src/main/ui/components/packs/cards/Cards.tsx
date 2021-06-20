@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react'
 import {CardType} from '../../../../dal/packs/cardsAPI';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
-import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
+import s from "../../../common/Table/Table.module.scss";
 
 type CardsPropsType = {
     cards: Array<CardType>
