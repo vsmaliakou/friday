@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/packListPage/packList/cardsPacks/CardsPacksContainer';
+import { Table } from '../../../common/Table/Table';
 import { Filter } from '../../packs/packListPage/packList/filter/Filter';
 import { FilterProfile } from '../FilterProfile';
 
@@ -26,7 +26,7 @@ export const FirstPage = () => {
                                         
                 </form>
 
-                {/*<CardsPacksContainer/>*/}
+                {/*<Table/>*/}
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardsPacksContainer } from '../../packs/packListPage/packList/cardsPacks/CardsPacksContainer';
+import { Table } from '../../../common/Table/Table';
 import s from './_myListCard.module.scss'
 
 
@@ -22,7 +22,7 @@ export const MyListCard = () => {
             </form>
 
             <div className={s.wrap}>
-                {/*<CardsPacksContainer/>*/}
+                {/*<Table/>*/}
             </div>
 
         </div>

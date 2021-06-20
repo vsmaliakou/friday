@@ -6,7 +6,7 @@ import {CardType} from '../../../../dal/packs/cardsAPI';
 import {AppRootStateType} from "../../../../bll/store";
 import {useSelector} from 'react-redux';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
-import s from "../packListPage/packList/cardsPacks/PacksContainer.module.scss";
+import s from "../../../common/Table/Table.module.scss";
 
 type CardsPropsType = {
     loading: RequestStatusType

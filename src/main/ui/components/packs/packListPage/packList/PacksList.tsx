@@ -1,25 +1,32 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import s from './PacksList.module.scss'
 import {Filter} from "./filter/Filter";
-import {CardsPacksContainer} from "./cardsPacks/CardsPacksContainer";
+import {Table} from "../../../../common/Table/Table";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../../bll/store";
-import {getCardsPacksTC, setCurrentPageAC, setPageCountAC} from "../../../../../bll/reducers/cardsPacks-reducer";
+import {
+    getCardsPacksTC,
+    setCurrentPageAC,
+    setPageCountAC,
+    setUserIdAC
+} from "../../../../../bll/reducers/cardsPacks-reducer";
 import {Paginator} from "../../../../common/Paginator/Paginator";
 import {LoginInitialStateType} from "../../../../../bll/reducers/login-reducer";
 import Search from "../../../../common/Search/Search";
 
-type PacksListPropsType = {
-    auth: LoginInitialStateType
-}
+export const PacksList = () => {
 
-export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
-
+    const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const pageSize = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const totalPacksCount = useSelector<AppRootStateType, number>(state => state.packs.totalPacksCount)
     const currentPage = useSelector<AppRootStateType, number>(state => state.packs.page)
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(setUserIdAC(""))
+        dispatch(getCardsPacksTC())
+    }, [])
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageAC(pageNumber))
@@ -36,13 +43,14 @@ export const PacksList: React.FC<PacksListPropsType> = ({auth}) => {
             <div className={s.content}>
                 <h2 className={s.packListTitle}>Packs list</h2>
                 <Search/>
-                <CardsPacksContainer auth={auth}/>
+                <Table auth={auth}/>
                 <Paginator
                     pageSize={pageSize}
                     totalItemCounts={totalPacksCount}
                     currentPage={currentPage}
                     onPageChanged={onPageChanged}
-                    setPageCount={setPageCount}/>
+                    setPageCount={setPageCount}
+                />
             </div>
         </div>
     )
