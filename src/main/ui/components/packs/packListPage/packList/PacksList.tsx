@@ -7,7 +7,7 @@ import {AppRootStateType} from "../../../../../bll/store";
 import {
     getCardsPacksTC,
     setCurrentPageAC,
-    setPageCountAC,
+    setPageCountAC, setSearchAC,
     setUserIdAC
 } from "../../../../../bll/reducers/cardsPacks-reducer";
 import {Paginator} from "../../../../common/Paginator/Paginator";
@@ -28,6 +28,11 @@ export const PacksList = () => {
         dispatch(getCardsPacksTC())
     }, [])
 
+    const searchCallback = (title: string) => {
+        dispatch(setSearchAC(title))
+        dispatch(getCardsPacksTC())
+    }
+
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageAC(pageNumber))
         dispatch(getCardsPacksTC())
@@ -42,7 +47,7 @@ export const PacksList = () => {
             <Filter auth={auth}/>
             <div className={s.content}>
                 <h2 className={s.packListTitle}>Packs list</h2>
-                <Search/>
+                <Search searchCallback={searchCallback}/>
                 <Table auth={auth}/>
                 <Paginator
                     pageSize={pageSize}

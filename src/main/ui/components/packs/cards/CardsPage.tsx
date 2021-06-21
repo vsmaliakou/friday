@@ -7,6 +7,7 @@ import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardsContainer} from "./CardsContainer";
 import {NavLink} from "react-router-dom";
+import Search from "../../../common/Search/Search";
 
 export const CardsPage: React.FC = () => {
 
@@ -18,6 +19,11 @@ export const CardsPage: React.FC = () => {
     const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
 
     const dispatch = useDispatch()
+
+    // const searchCallback = (title: string) => {
+    //     dispatch(setSearchCards(title))
+    //     dispatch(getNewCardsTC(idUserPack))
+    // }
 
     //pagination
     const onPageChanged = (pageNumber: number) => {
@@ -38,7 +44,7 @@ export const CardsPage: React.FC = () => {
                     Pack Name
                 </NavLink>
                 <h2 className={s.packListTitle}>Cards</h2>
-                {/*<Search/>*/}
+                {/*<Search searchCallback={searchCallback}/>*/}
                 <CardsContainer/>
                 {/*<Paginator*/}
                 {/*    pageSize={pageSize}*/}

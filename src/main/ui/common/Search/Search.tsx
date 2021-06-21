@@ -1,26 +1,23 @@
 import React, {ChangeEvent} from "react";
-import {getCardsPacksTC, setSearchAC} from "../../../bll/reducers/cardsPacks-reducer";
-import {useDispatch} from 'react-redux'
 import s from './Search.module.scss'
 
-const Search = () => {
+type PropsType = {
+    searchCallback: (title: string) => void
+}
 
-    const dispatch = useDispatch()
+const Search: React.FC<PropsType> = ({searchCallback}) => {
 
     const search = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearchAC(e.currentTarget.value))
-        dispatch(getCardsPacksTC())
+        searchCallback(e.currentTarget.value)
     }
 
     return (
         <div className={s.wrap}>
             <input type={'text'}
-                //    placeholder='Search...'
                    onChange={search}
                    className={s.input}
                    id="1"
             />
-
             <label className={s.label} htmlFor="1">Search . . .</label>
         </div>
     )

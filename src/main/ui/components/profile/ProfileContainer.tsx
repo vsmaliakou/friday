@@ -13,7 +13,13 @@ import {ProfileInfo} from "./ProfileInfo";
 import Search from "../../common/Search/Search";
 import {Table} from "../../common/Table/Table";
 import {Paginator} from "../../common/Paginator/Paginator";
-import {getCardsPacksTC, setCurrentPageAC, setPageCountAC, setUserIdAC} from "../../../bll/reducers/cardsPacks-reducer";
+import {
+    getCardsPacksTC,
+    setCurrentPageAC,
+    setPageCountAC,
+    setSearchAC,
+    setUserIdAC
+} from "../../../bll/reducers/cardsPacks-reducer";
 
 export const ProfileContainer = () => {
 
@@ -35,6 +41,11 @@ export const ProfileContainer = () => {
         }
     }, [])
 
+    const searchCallback = (title: string) => {
+        dispatch(setSearchAC(title))
+        dispatch(getCardsPacksTC())
+    }
+
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageAC(pageNumber))
         dispatch(getCardsPacksTC())
@@ -49,7 +60,7 @@ export const ProfileContainer = () => {
             <ProfileInfo auth={auth}/>
             <div className={s.content}>
                 <h2 className={s.packListTitle}>Packs list {auth.dataUser?.name}</h2>
-                <Search/>
+                <Search searchCallback={searchCallback}/>
                 <Table auth={auth}/>
                 <Paginator
                     pageSize={pageSize}
