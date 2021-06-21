@@ -27,7 +27,6 @@ export const CardsContainer = () => {
     const [addWinOpened, setAddWinOpened] = useState(false)
 
     const {_id} = useParams<{ _id: string }>()
-    const history = useHistory()
 
     //createNewCard
     const card: NewCardType = {
@@ -86,7 +85,9 @@ export const CardsContainer = () => {
                 </th>
                 <th className={s.col}>Grade</th>
                 {idUserPack === auth.dataUser?._id
-                    ? <button className={s.btnAdd} onClick={openWindowAddCard}>Add new card</button>
+                    ? <th className={s.col}>
+                        <button className={s.btnAdd} onClick={openWindowAddCard}>Add card</button>
+                    </th>
                     : null
                 }
             </tr>

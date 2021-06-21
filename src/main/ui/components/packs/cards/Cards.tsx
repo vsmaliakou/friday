@@ -66,22 +66,23 @@ export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, i
                         <th className={s.col}><span className={s.colSpan}>{cards.answer}</span></th>
                         <th className={s.col}><span className={s.colSpan}>{cards.updated}</span></th>
                         <th className={s.col}><span className={s.colSpan}>{cards.grade}</span></th>
-                        {idUserPack === idUser
-                            ? <div className={s.item}>
-                                <button
-                                    className={s.btn}
-                                    style={{backgroundColor: "#F1453D"}}
-                                    onClick={onClickHandleDelete}
-                                    disabled={disableButton}>Delete
-                                </button>
-                                <button
-                                    className={s.btn}
-                                    style={{backgroundColor: "#D7D8EF"}}
-                                    onClick={openWindowEditCard}
-                                    disabled={disableButton}>Edit
-                                </button>
-                            </div>
-                            : null
+                        {
+                            idUserPack === idUser
+                                ? <th className={s.item}>
+                                    <button
+                                        className={s.btn}
+                                        style={{backgroundColor: "#F1453D"}}
+                                        onClick={onClickHandleDelete}
+                                        disabled={disableButton}>Delete
+                                    </button>
+                                    <button
+                                        className={s.btn}
+                                        style={{backgroundColor: "#D7D8EF"}}
+                                        onClick={openWindowEditCard}
+                                        disabled={disableButton}>Edit
+                                    </button>
+                                </th>
+                                : null
                         }
                         {deleteWinOpened &&
                         <DeleteWindow
