@@ -7,8 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {PacksList} from "./packList/PacksList";
-import {CardsContainer} from "../cards/CardsContainer";
-import {ProfileContainerTest} from "../../profile/ProfileContainerTest";
+import {CardsPage} from "../cards/CardsPage";
+import {ProfileContainer} from "../../profile/ProfileContainer";
 
 export const PackListPage = () => {
 
@@ -48,9 +48,9 @@ export const PackListPage = () => {
                 </div>
             </div>
             <div className={s.content}>
-                <Route path='/profile/:user_id?' render={() => <ProfileContainerTest/>}/>
+                <Route path='/profile/:user_id?' render={() => <ProfileContainer/>}/>
                 <Route exact path='/packs' render={() => <PacksList/>}/>
-                <Route exact path={'/packs/:_id'} render={() => (<CardsContainer/>)}/>
+                <Route exact path={'/packs/:_id'} render={() => (<CardsPage/>)}/>
             </div>
         </div>
     )

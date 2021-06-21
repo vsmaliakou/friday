@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from '../../../common/Table/Table';
 import { Filter } from '../../packs/packListPage/packList/filter/Filter';
-import { FilterProfile } from '../FilterProfile';
+import { ProfileInfo } from '../../profile/ProfileInfo';
 
 import s from './_firstPage.module.scss'
 
@@ -15,7 +15,7 @@ export const FirstPage = () => {
     return (
         <div className={s.main}>
             {/*<Filter/>*/}
-            {/* <FilterProfile/> */}
+            {/* <ProfileInfo/> */}
             <div className={s.content}>
             
                 <h2 className={s.packListTitle}>Packs list</h2>
