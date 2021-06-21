@@ -101,11 +101,10 @@ export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispat
             console.log(e.response.data.error)
         })
 }
-export const updateCardsPackTC = (_id: string, name: string) => (dispatch: Dispatch) => {
+export const updateCardsPackTC = (_id: string, name: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
     return cardsPacksAPI.updatePack({_id, name})
         .then(response => {
-            const data = response.data.updatedCardsPack
-            dispatch(updateCardsPackAC(data._id, data.name))
+            dispatch(getCardsPacksTC())
         })
         .catch(e => {
             console.log(e.response.data.error)

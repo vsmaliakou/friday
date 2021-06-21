@@ -1,6 +1,5 @@
-@import '../../../../../../styles/sass/mixins';
-
-@import '../../../../../../styles/sass/vars';
+@import '../../../../styles/sass/mixins';
+@import '../../../../styles/sass/vars';
 
 .main {
   @include main();
@@ -109,6 +108,6 @@
       }
     }
 
-    
+
   }
 }

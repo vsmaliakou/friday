@@ -1,16 +1,19 @@
 import React, {ChangeEvent, useState} from 'react'
-import s from './PacksContainer.module.scss'
-import {CardsPack} from "./CardsPack";
-import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
-import {AddWindow} from "../../../../../common/AddWindow/AddWindow";
-import {addNewCardsPackTC} from "../../../../../../bll/reducers/cardsPacks-reducer";
-import {useDispatch} from "react-redux";
+import s from './Table.module.scss'
+import {Row} from "./Row";
+import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {AddWindow} from "../AddWindow/AddWindow";
+import {addNewCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../../bll/store";
 
 type CardsPacksContainerType = {
     auth: LoginInitialStateType
 }
 
-export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) => {
+export const Table: React.FC<CardsPacksContainerType> = ({auth}) => {
+
+    const userId = useSelector<AppRootStateType, string>(state => state.packs.user_id)
 
     const [addWindow, setAddWindow] = useState(false)
     const [name, setName] = useState("")
@@ -43,12 +46,14 @@ export const CardsPacksContainer: React.FC<CardsPacksContainerType> = ({auth}) =
                     </select>
                 </th>
                 <th className={s.col}>Created by</th>
-                <th className={s.col}>
-                    <button className={s.btnAdd} onClick={addWindowOpened}>Add</button>
-                </th>
-                
+                {userId === auth.dataUser?._id
+                    ? <th className={s.col}>
+                        <button className={s.btnAdd} onClick={addWindowOpened}>Add</button>
+                    </th>
+                    : <th className={s.col}>Actions</th>
+                }
             </tr>
-            <CardsPack
+            <Row
                 auth={auth}
             />
             {addWindow && <AddWindow
