@@ -5,6 +5,7 @@ import {AddWindow} from "../../../common/AddWindow/AddWindow";
 import {DeleteWindow} from "../../../common/DeleteWindow/DeleteWindow";
 import {useDispatch} from "react-redux";
 import {deleteCardTC, getNewValueForCard} from "../../../../bll/reducers/cards-reducer";
+import RatingCard from '../../../common/Rating/RatingCard';
 
 type CardsPropsType = {
     cards: Array<CardType>
@@ -13,7 +14,7 @@ type CardsPropsType = {
     idUserPack: string
 }
 
-export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, idUserPack,}) => {
+export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, idUserPack}) => {
 
     const [deleteWinOpened, setDeleteWinOpened] = useState(false)
     const [addWinEdit, setAddWinEdit] = useState(false)
@@ -65,7 +66,12 @@ export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, i
                         <th className={s.col}><span className={s.colSpan}>{cards.question}</span></th>
                         <th className={s.col}><span className={s.colSpan}>{cards.answer}</span></th>
                         <th className={s.col}><span className={s.colSpan}>{cards.updated}</span></th>
-                        <th className={s.col}><span className={s.colSpan}>{cards.grade}</span></th>
+                        <th className={s.col}><span className={s.colSpan}>
+                            <RatingCard card_id={cards._id}
+                                        grade={cards.grade}
+                            />
+                            {/*{cards.grade}*/}
+                        </span></th>
                         {
                             idUserPack === idUser
                                 ? <th className={s.item}>

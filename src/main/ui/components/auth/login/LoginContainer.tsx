@@ -22,8 +22,8 @@ export const LoginContainer = () => {
 
     const addUserData = () => {
         // dispatch(newUserDataTC(email, password, rememberMe))
-        // dispatch(newUserDataTC('kwin649011@gmail.com', 'qwerasdf', rememberMe))
-        dispatch(newUserDataTC('vsmaliakou@yandex.by', 'VS9121993', rememberMe))
+        dispatch(newUserDataTC('kwin649011@gmail.com', 'qwerasdf', rememberMe))
+        // dispatch(newUserDataTC('vsmaliakou@yandex.by', 'VS9121993', rememberMe))
     }
     const addNewEmail = (newEmail: string) => {
         setEmail(newEmail)

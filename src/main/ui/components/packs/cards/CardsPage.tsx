@@ -7,7 +7,7 @@ import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
 import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardsContainer} from "./CardsContainer";
 import {NavLink} from "react-router-dom";
-import Search from "../../../common/Search/Search";
+import {Paginator} from "../../../common/Paginator/Paginator";
 
 export const CardsPage: React.FC = () => {
 
@@ -26,14 +26,14 @@ export const CardsPage: React.FC = () => {
     // }
 
     //pagination
-    const onPageChanged = (pageNumber: number) => {
-        dispatch(setCurrentPageCards(pageNumber))
-        dispatch(getNewCardsTC(idUserPack))
-    }
-    const setPageCount = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setPageCountCards(Number(e.currentTarget.value)))
-        dispatch(getNewCardsTC(idUserPack))
-    }
+    // const onPageChanged = (pageNumber: number) => {
+    //     dispatch(setCurrentPageCards(pageNumber))
+    //     dispatch(getNewCardsTC(idUserPack))
+    // }
+    // const setPageCount = (e: ChangeEvent<HTMLSelectElement>) => {
+    //     dispatch(setPageCountCards(Number(e.currentTarget.value)))
+    //     dispatch(getNewCardsTC(idUserPack))
+    // }
 
     return (
         <div className={s.main}>

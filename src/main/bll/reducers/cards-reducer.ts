@@ -1,4 +1,4 @@
-import {cardsAPI, CardType, newValueCardType} from "../../dal/packs/cardsAPI";
+import {cardsAPI, CardType, newGradeCardType, newValueCardType} from "../../dal/packs/cardsAPI";
 import {setErrorProfilePage} from "./profile-reducer";
 import {NewCardType} from "../../ui/components/packs/cards/AddNewCard/AddNewCardContainer";
 import {setRequestStatusAC} from "./app-reduser";
@@ -199,6 +199,24 @@ export const getNewValueForCard = (card: newValueCardType) => {
                     : (e.message + ', more details in the console')
                 ))
                 dispatch(disableButtonAC(false))
+            })
+            .finally(() => {
+                    dispatch(setRequestStatusAC('success'))
+                }
+            )
+    }
+}
+
+export const changeGradeCard = (card_id: string, grade: null | number) => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
+        cardsAPI.changeGradeCard(card_id, grade)
+            .then(res => {
+            })
+            .catch((e) => {
+                dispatch(setErrorProfilePage(e.response
+                    ? e.response.data.error
+                    : (e.message + ', more details in the console')
+                ))
             })
             .finally(() => {
                     dispatch(setRequestStatusAC('success'))

@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from "../../../common/Table/Table.module.scss";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect, useHistory, useParams} from "react-router-dom";
+import {Redirect, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
 import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {createNewCardTC, getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
@@ -23,7 +23,6 @@ export const CardsContainer = () => {
     //createNewCard
     const [question, setQuestion] = useState('')
     const [answer, setAnswer] = useState('')
-    const [grade, setGrade] = useState(0)
     const [addWinOpened, setAddWinOpened] = useState(false)
 
     const {_id} = useParams<{ _id: string }>()
@@ -33,7 +32,6 @@ export const CardsContainer = () => {
         cardsPack_id: _id,
         question: question,
         answer: answer,
-        grade: grade,
         shots: 0,
         rating: 0,
         answerImg: '',
