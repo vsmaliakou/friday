@@ -19,7 +19,7 @@ const App = () => {
                     <Route path='/forgot' render={() => <ForgotPasswordContainer/>}/>
                     <Route path='/check-email' render={() => <EmailPassword/>}/>
                     <Route path='/set-new-password/:token' render={() => <SetPasswordContainer/>}/>
-                    <Route path={['/profile', '/packs', '/packs/:_id']} render={() => <PackListPage/>}/>
+                    <Route path={['/profile', '/packs', '/packs/:_id', '/learn/:_id']} render={() => <PackListPage/>}/>
                     <Route path='/404' render={() => <div>404 PAGE NOT FOUND</div>}/>
                     <Route path='*' render={() => <Redirect to={'/404'}/>}/>
                 </Switch>

@@ -56,7 +56,7 @@ export const Row: React.FC<CardsPackPropsType> = ({auth}) => {
 
                     return <tr className={s.row}>
                         <th className={s.col}>
-                            <span className={s.colSpan}>{p.name}</span>
+                            <NavLink to={`/packs/${p._id}`} className={s.colSpan}>{p.name}</NavLink>
                         </th>
                         <th className={s.col}>
                             <span className={s.colSpan}>{p.cardsCount}</span>
@@ -76,10 +76,10 @@ export const Row: React.FC<CardsPackPropsType> = ({auth}) => {
                                     <button className={s.btn} onClick={updatePack}
                                             style={{backgroundColor: "#D7D8EF"}}>Edit
                                     </button>
-                                    <NavLink to={`/packs/${p._id}`} className={s.link}>Cards</NavLink>
+                                    {p.cardsCount > 0 && <NavLink to={`/learn/${p._id}`} className={s.link}>Learn</NavLink>}
                                 </th>
                                 : <th className={s.item}>
-                                    <NavLink to={`/packs/${p._id}`} className={s.link}>Cards</NavLink>
+                                    {p.cardsCount > 0 && <NavLink to={`/learn/${p._id}`} className={s.link}>Learn</NavLink>}
                                 </th>
                         }
                         {deleteWinOpened && <DeleteWindow

@@ -9,6 +9,7 @@ import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {PacksList} from "./packList/PacksList";
 import {CardsPage} from "../cards/CardsPage";
 import {ProfileContainer} from "../../profile/ProfileContainer";
+import {LearnPage} from "../learnPage/LearnPage";
 
 export const PackListPage = () => {
 
@@ -51,6 +52,7 @@ export const PackListPage = () => {
                 <Route path='/profile/:user_id?' render={() => <ProfileContainer/>}/>
                 <Route exact path='/packs' render={() => <PacksList/>}/>
                 <Route exact path={'/packs/:_id'} render={() => (<CardsPage/>)}/>
+                <Route exact path={'/learn/:_id'} render={() => (<LearnPage/>)}/>
             </div>
         </div>
     )
