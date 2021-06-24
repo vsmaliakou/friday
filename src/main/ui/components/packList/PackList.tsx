@@ -9,8 +9,6 @@ import { AddWindow } from '../../common/AddWindow/AddWindow';
 import { DeleteWindow } from '../../common/DeleteWindow/DeleteWindow';
 import { AddNewCard } from './AddNewCard';
 import { PackName } from './packListContent/PackName';
-import { LearnQuestion } from './LearnQuestion';
-import { LearnAnswer } from './LearnAnswer';
 import { EditProfile } from './EditProfile';
 
 
