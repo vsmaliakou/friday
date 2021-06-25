@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import s from './LearnPage.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {CardType} from "../../../../dal/packs/cardsAPI";
 import {AppRootStateType} from "../../../../bll/store";
 import {getNewCardsTC} from "../../../../bll/reducers/cards-reducer";
@@ -47,10 +47,11 @@ export const LearnPage = () => {
     });
 
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
         if (first) {
-            dispatch(getNewCardsTC(_id));
+            dispatch(getNewCardsTC());
             setFirst(false);
         }
         if (cards.length > 0) setCard(getCard(cards));
@@ -66,6 +67,9 @@ export const LearnPage = () => {
             setCard(getCard(cards));
         } else {
         }
+    }
+    const closeLearnPage = () => {
+        history.push('/packs')
     }
 
     return (
@@ -92,12 +96,12 @@ export const LearnPage = () => {
                         </ul>
                     </form>
                     <div className={s.btnWrap}>
-                        <button className={s.btn}>Cancel</button>
+                        <button className={s.btn} onClick={closeLearnPage}>Cancel</button>
                         <button className={s.btn} onClick={onNext}>Next</button>
                     </div>
                 </>
                 : <div className={s.btnWrap}>
-                    <button className={s.btn}>Cancel</button>
+                    <button className={s.btn} onClick={closeLearnPage}>Cancel</button>
                     <button className={s.btn} onClick={() => setIsChecked(true)}>Show answer</button>
                 </div>
             }

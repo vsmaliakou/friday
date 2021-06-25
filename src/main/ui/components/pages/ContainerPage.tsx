@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
-import s from './PackList.module.scss'
-import logo from '../../../../../assets/img/logo.png'
-import {authTC} from "../../../../bll/reducers/profile-reducer";
+import s from './ContainerPage.module.scss'
+import logo from '../../../../assets/img/logo.png'
+import {authTC} from "../../../bll/reducers/profile-reducer";
 import {Redirect, Route, useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../../bll/store";
-import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
-import {PacksList} from "./packList/PacksList";
-import {CardsPage} from "../cards/CardsPage";
-import {ProfileContainer} from "../../profile/ProfileContainer";
-import {LearnPage} from "../learnPage/LearnPage";
+import {AppRootStateType} from "../../../bll/store";
+import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {PacksPage} from "./packsPage/PacksPage";
+import {CardsPage} from "./cardsPage/CardsPage";
+import {ProfilePage} from "./profilePage/ProfilePage";
+import {LearnPage} from "./learnPage/LearnPage";
 
-export const PackListPage = () => {
+export const ContainerPage = () => {
 
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
 
@@ -49,8 +49,8 @@ export const PackListPage = () => {
                 </div>
             </div>
             <div className={s.content}>
-                <Route path='/profile/:user_id?' render={() => <ProfileContainer/>}/>
-                <Route exact path='/packs' render={() => <PacksList/>}/>
+                <Route path='/profile/:user_id?' render={() => <ProfilePage/>}/>
+                <Route exact path='/packs' render={() => <PacksPage/>}/>
                 <Route exact path={'/packs/:_id'} render={() => (<CardsPage/>)}/>
                 <Route exact path={'/learn/:_id'} render={() => (<LearnPage/>)}/>
             </div>

@@ -1,27 +1,27 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../bll/store";
-import SuperButton from "../../common/SuperButton/SuperButton";
-import s from './Profile.module.scss';
-import {logOutTC} from "../../../bll/reducers/logOut-reducer";
-import {changeAvatarProfileTC, changeNameProfileTC,} from "../../../bll/reducers/profile-reducer";
-import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
+import {AppRootStateType} from "../../../../bll/store";
+import SuperButton from "../../../common/SuperButton/SuperButton";
+import s from '../packsPage/PacksPage.module.scss';
+import {logOutTC} from "../../../../bll/reducers/logOut-reducer";
+import {changeAvatarProfileTC, changeNameProfileTC,} from "../../../../bll/reducers/profile-reducer";
+import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useParams} from "react-router-dom";
-import {LoadingSvg} from "../../common/Loading/LoadingSvg";
-import {RequestStatusType} from "../../../bll/reducers/app-reduser";
+import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
+import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {ProfileInfo} from "./ProfileInfo";
-import Search from "../../common/Search/Search";
-import {Table} from "../../common/Table/Table";
-import {Paginator} from "../../common/Paginator/Paginator";
+import Search from "../../../common/Search/Search";
+import {Table} from "../../../common/Table/Table";
+import {Paginator} from "../../../common/Paginator/Paginator";
 import {
     getCardsPacksTC,
     setCurrentPageAC,
     setPageCountAC,
     setSearchAC,
     setUserIdAC
-} from "../../../bll/reducers/cardsPacks-reducer";
+} from "../../../../bll/reducers/cardsPacks-reducer";
 
-export const ProfileContainer = () => {
+export const ProfilePage = () => {
 
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const pageSize = useSelector<AppRootStateType, number>(state => state.packs.pageCount)

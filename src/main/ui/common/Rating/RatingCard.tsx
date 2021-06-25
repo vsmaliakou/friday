@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Rating} from "@material-ui/lab";
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch} from "react-redux";
-import {changeGradeCard} from '../../../bll/reducers/cards-reducer';
+import {changeGradeCardTC} from '../../../bll/reducers/cards-reducer';
 
 const style = makeStyles({
     root: {
@@ -23,7 +23,7 @@ const RatingCard: React.FC<RatingCardType> = props => {
     const dispatch = useDispatch()
 
     const setNewGradeForCard = (e: ChangeEvent<{}>, value: number | null) => {
-        dispatch(changeGradeCard(card_id, value))
+        dispatch(changeGradeCardTC(card_id, value))
     }
 
     // useEffect(() => {

@@ -1,20 +1,21 @@
 import React, {ChangeEvent, useEffect} from 'react';
-import s from './PacksList.module.scss'
-import {Filter} from "./filter/Filter";
-import {Table} from "../../../../common/Table/Table";
+import s from './PacksPage.module.scss'
+import { Filter } from './filter/Filter';
+import {Table} from "../../../common/Table/Table";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../../../bll/store";
+import {AppRootStateType} from "../../../../bll/store";
 import {
     getCardsPacksTC,
     setCurrentPageAC,
     setPageCountAC, setSearchAC,
     setUserIdAC
-} from "../../../../../bll/reducers/cardsPacks-reducer";
-import {Paginator} from "../../../../common/Paginator/Paginator";
-import {LoginInitialStateType} from "../../../../../bll/reducers/login-reducer";
-import Search from "../../../../common/Search/Search";
+} from "../../../../bll/reducers/cardsPacks-reducer";
+import {Paginator} from "../../../common/Paginator/Paginator";
+import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
+import Search from "../../../common/Search/Search";
 
-export const PacksList = () => {
+
+export const PacksPage = () => {
 
     const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const pageSize = useSelector<AppRootStateType, number>(state => state.packs.pageCount)

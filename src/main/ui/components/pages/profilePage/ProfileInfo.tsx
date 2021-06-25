@@ -1,8 +1,8 @@
 import React from 'react';
-import s from '../packList/_packListFilterProfile.module.scss';
-import SuperDoubleRange from "../../common/SuperDoubleRange/SuperDoubleRange";
-import {LoginInitialStateType} from "../../../bll/reducers/login-reducer";
-import {logOutTC} from "../../../bll/reducers/logOut-reducer";
+import s from './ProfileInfo.module.scss';
+import SuperDoubleRange from "../../../common/SuperDoubleRange/SuperDoubleRange";
+import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
+import {logOutTC} from "../../../../bll/reducers/logOut-reducer";
 import {useDispatch} from "react-redux";
 
 type PropsType = {

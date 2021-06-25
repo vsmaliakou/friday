@@ -1,228 +1,156 @@
-import {cardsAPI, CardType, newGradeCardType, newValueCardType} from "../../dal/packs/cardsAPI";
+import {cardsAPI, CardType, newValueCardType} from "../../dal/packs/cardsAPI";
 import {setErrorProfilePage} from "./profile-reducer";
-import {NewCardType} from "../../ui/components/packs/cards/AddNewCard/AddNewCardContainer";
 import {setRequestStatusAC} from "./app-reduser";
-import {disableButtonAC} from "./login-reducer";
 import {AppActionsType, AppRootStateType} from "../store";
 import {ThunkDispatch} from "redux-thunk";
+import {Dispatch} from "redux";
 
+export type CardsActionType = ReturnType<typeof setCardsPackIdAC>
+    | ReturnType<typeof getCardsAC>
+    | ReturnType<typeof setTotalCardsCountAC>
+    | ReturnType<typeof setPackUserIdAC>
+    | ReturnType<typeof setCurrentPageCardsAC>
+    | ReturnType<typeof setPageCountCardsAC>
+    | ReturnType<typeof setSearchCardsAC>
 export type CardsInitialStateType = typeof initialState
+
+type NewCardType = {
+    cardsPack_id: string
+    question: string
+    answer: string
+}
 
 let initialState = {
     cards: [] as Array<CardType>,
-    buttonDisable: false,
-    actualIdCard: '',
-    idUserCards: '',
+    cardAnswer: '',
+    cardQuestion: '',
+    cardsPack_id: '',
+    min: 0,
+    max: 5,
+    sortCards: '',
     page: 1,
-    pageCount: 7,
-    min: 1,
-    max: 4,
-    totalCardsCount: 5,
-    sortCards: ''
+    pageCount: 5,
+    cardsTotalCount: 5,
+    packUserId: ''
 }
 
 const cardsReducer = (state = initialState, action: CardsActionType): CardsInitialStateType => {
     switch (action.type) {
-        case cardsActionsTypes["SET-CARDS"]:
-            return {
-                ...state,
-                cards: action.cards
-            }
-        case cardsActionsTypes["SET-NEW-CARD"]:
-            return {
-                ...state,
-                cards: [action.newCard, ...state.cards]
-            }
-        case cardsActionsTypes["DELETE-CARD"]:
-            return {...state, cards: [...state.cards.filter(id => id._id !== action.idCard)]}
-        case cardsActionsTypes.DISABLE:
-            return {...state, buttonDisable: action.disable}
-        case cardsActionsTypes["SET-ID-ACTUAL-CARD"]:
-            return {
-                ...state, actualIdCard: action.id
-            }
-        case cardsActionsTypes['SET-NEW-VALUE-CARD']:
-            const card = state.cards.find(id => id._id === action.newValueCard._id)
-            if (card) {
-                card.question = action.newValueCard.question
-                card.answer = action.newValueCard.comments
-            }
-            return {...state}
-        case cardsActionsTypes['SET-ID-USER-CARDS']:
-            return {
-                ...state, idUserCards: action.id
-            }
-        case cardsActionsTypes['SET-PAGE-COUNT-CARDS']:
-            return {...state, pageCount: action.newPageCount}
-        case cardsActionsTypes["SET-CURRENT-PAGE-CARDS"]:
+        case 'CARDS/CARDS/SET-CARDS-PACK-ID':
+            return {...state, cardsPack_id: action.id}
+        case 'CARDS/CARDS/SET-CARDS':
+            return {...state, cards: action.cards}
+        case "CARDS/CARDS/SET-TOTAL-CARDS-COUNT":
+            return {...state, cardsTotalCount: action.cardsTotalCount}
+        case "CARDS/CARDS/SET-PACK-USER-ID":
+            return {...state, packUserId: action.packUserId}
+        case "CARDS/CARDS/SET-CURRENT-PAGE-CARDS":
             return {...state, page: action.pageNumber}
-        case cardsActionsTypes["SET-TOTAL-CARDS-COUNT"]:
-            return {...state, totalCardsCount: action.totalCardsCount}
+        case "CARDS/CARDS/SET-PAGE-COUNT-CARDS":
+            return {...state, pageCount: action.newPageCount}
+        case "CARDS/CARDS/SET-SEARCH":
+            return {...state, sortCards: action.title}
         default:
             return state
     }
 }
 
-//AC
-export const getCards = (cards: Array<CardType>) => ({type: cardsActionsTypes["SET-CARDS"], cards} as const)
-export const setNewCard = (newCard: CardType) => ({type: cardsActionsTypes["SET-NEW-CARD"], newCard} as const)
-export const deleteCard = (idCard: string) => ({type: cardsActionsTypes["DELETE-CARD"], idCard} as const)
-export const disableButton = (disable: boolean) => ({type: cardsActionsTypes["DISABLE"], disable} as const)
-export const setIdActualCard = (id: string) => ({type: cardsActionsTypes["SET-ID-ACTUAL-CARD"], id} as const)
-export const setNewValueCard = (newValueCard: CardType) => ({
-    type: cardsActionsTypes["SET-NEW-VALUE-CARD"],
-    newValueCard
+export const setCardsPackIdAC = (id: string) => ({type: 'CARDS/CARDS/SET-CARDS-PACK-ID', id} as const)
+export const getCardsAC = (cards: Array<CardType>) => ({type: 'CARDS/CARDS/SET-CARDS', cards} as const)
+export const setTotalCardsCountAC = (cardsTotalCount: number) => ({
+    type: 'CARDS/CARDS/SET-TOTAL-CARDS-COUNT',
+    cardsTotalCount
 } as const)
-export const setIdUserCards = (id: string) => ({type: cardsActionsTypes["SET-ID-USER-CARDS"], id} as const)
+export const setPackUserIdAC = (packUserId: string) => ({type: 'CARDS/CARDS/SET-PACK-USER-ID', packUserId} as const)
+export const setCurrentPageCardsAC = (pageNumber: number) => ({type: 'CARDS/CARDS/SET-CURRENT-PAGE-CARDS', pageNumber} as const)
+export const setPageCountCardsAC = (newPageCount: number) => ({type: 'CARDS/CARDS/SET-PAGE-COUNT-CARDS', newPageCount} as const)
+export const setSearchCardsAC = (title: string) => ({type: 'CARDS/CARDS/SET-SEARCH', title} as const)
 
-//pagination
-export const setPageCountCards = (newPageCount: number) => ({
-    type: cardsActionsTypes["SET-PAGE-COUNT-CARDS"],
-    newPageCount
-} as const)
-export const setCurrentPageCards = (pageNumber: number) => ({
-    type: cardsActionsTypes["SET-CURRENT-PAGE-CARDS"], pageNumber
-} as const)
-export const setTotalCardsCount = (totalCardsCount: number) => ({
-    type: cardsActionsTypes["SET-TOTAL-CARDS-COUNT"],
-    totalCardsCount
-} as const)
+export const getNewCardsTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
-export type CardsActionType = ReturnType<typeof getCards>
-    | ReturnType<typeof setNewCard>
-    | ReturnType<typeof deleteCard>
-    | ReturnType<typeof disableButton>
-    | ReturnType<typeof setIdActualCard>
-    | ReturnType<typeof setNewValueCard>
-    | ReturnType<typeof setIdUserCards>
-    | ReturnType<typeof setPageCountCards>
-    | ReturnType<typeof setCurrentPageCards>
-    | ReturnType<typeof setTotalCardsCount>
+    const state = getState()
+    const cardAnswer = state.cards.cardAnswer
+    const cardQuestion = state.cards.cardQuestion
+    const cardsPack_id = state.cards.cardsPack_id
+    const min = state.cards.min
+    const max = state.cards.max
+    const sortCards = state.cards.sortCards
+    const page = state.cards.page
+    const pageCount = state.cards.pageCount
 
-export enum cardsActionsTypes {
-    'SET-CARDS' = 'CARDS/CARDS/SET-CARDS',
-    'SET-NEW-CARD' = 'CARDS/CARDS/SET-NEW-CARD',
-    'DELETE-CARD' = 'CARDS/CARDS/DELETE-CARD',
-    'DISABLE' = 'CARDS/CARDS/BUTTON',
-    'SET-ID-ACTUAL-CARD' = 'CARDS/CARDS/SET-ID-ACTUAL-CARD',
-    "SET-NEW-VALUE-CARD" = 'CARDS/CARDS/SET-NEW-VALUE-CARD',
-    "SET-ID-USER-CARDS" = 'CARDS/CARDS/SET-ID-USER-CARDS',
-    "SET-PAGE-COUNT-CARDS" = 'CARDS/CARDS/SET-PAGE-COUNT-CARDS',
-    "SET-CURRENT-PAGE-CARDS" = 'CARDS/CARDS/SET-CURRENT-PAGE-CARDS',
-    "SET-TOTAL-CARDS-COUNT" = 'CARDS/CARDS/SET-TOTAL-CARDS-COUNT'
+    dispatch(setRequestStatusAC('loading'))
+    cardsAPI.getCards(cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount)
+        .then(res => {
+            dispatch(getCardsAC(res.data.cards))
+            dispatch(setTotalCardsCountAC(res.data.cardsTotalCount))
+            dispatch(setPackUserIdAC(res.data.packUserId))
+            dispatch(setRequestStatusAC('success'))
+        })
+        .catch((e) => {
+            dispatch(setErrorProfilePage(e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            ))
+            dispatch(setRequestStatusAC('success'))
+        })
 }
-
-//TC
-export const getNewCardsTC = (id: string) => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
-
-        // const payload = {
-        //     min: getState().cards.min,
-        //     max: getState().cards.max,
-        //     sortCards: getState().cards.sortCards,
-        //     page: getState().cards.page,
-        //     pageCount: getState().cards.pageCount,
-        // }
-
-        dispatch(setRequestStatusAC('loading'))
-        dispatch(disableButton(true))
-        dispatch(setIdActualCard(id))
-        cardsAPI.getCards(id /*payload.min, payload.max, payload.sortCards, payload.page, payload.pageCount*/)
-            .then(res => {
-                dispatch(setTotalCardsCount(res.data.cardsTotalCount))
-                dispatch(setIdUserCards(res.data.packUserId))
-                dispatch(getCards(res.data.cards))
-                dispatch(disableButton(false))
-            })
-            .catch((e) => {
-                dispatch(setErrorProfilePage(e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console')
-                ))
-                dispatch(disableButtonAC(false))
-            })
-            .finally(() => {
-                    dispatch(setRequestStatusAC('success'))
-                }
-            )
-    }
+export const createNewCardTC = (card: NewCardType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
+    dispatch(setRequestStatusAC('loading'))
+    cardsAPI.createCard(card)
+        .then(res => {
+            dispatch(getNewCardsTC())
+            dispatch(setRequestStatusAC('success'))
+        })
+        .catch((e) => {
+            dispatch(setErrorProfilePage(e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            ))
+            dispatch(setRequestStatusAC('success'))
+        })
 }
-
-export const createNewCardTC = (card: NewCardType) => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
-        const actualIdCard = getState().cards.actualIdCard
-        cardsAPI.createCard(card)
-            .then(res => {
-                dispatch(setNewCard(res.data))
-                dispatch(getNewCardsTC(actualIdCard))
-            })
-            .catch((e) => {
-                dispatch(setErrorProfilePage(e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console')
-                ))
-            })
-    }
+export const deleteCardTC = (idCard: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
+    dispatch(setRequestStatusAC('loading'))
+    cardsAPI.deleteCard(idCard)
+        .then(res => {
+            dispatch(getNewCardsTC())
+            dispatch(setRequestStatusAC('success'))
+        })
+        .catch((e) => {
+            dispatch(setErrorProfilePage(e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            ))
+            dispatch(setRequestStatusAC('success'))
+        })
 }
-
-export const deleteCardTC = (idCard: string) => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
-        const actualIdCard = getState().cards.actualIdCard
-        cardsAPI.deleteCard(idCard)
-            .then(res => {
-                dispatch(deleteCard(res.data._id))
-                dispatch(getNewCardsTC(actualIdCard))
-            })
-            .catch((e) => {
-                dispatch(setErrorProfilePage(e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console')
-                ))
-            })
-    }
+export const getNewValueForCardTC = (card: newValueCardType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
+    dispatch(setRequestStatusAC('loading'))
+    cardsAPI.changeValueCard(card)
+        .then(res => {
+            dispatch(getNewCardsTC())
+        })
+        .catch((e) => {
+            dispatch(setErrorProfilePage(e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            ))
+            dispatch(setRequestStatusAC('success'))
+        })
 }
-
-export const getNewValueForCard = (card: newValueCardType) => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
-        const actualIdCard = getState().cards.actualIdCard
-        dispatch(setRequestStatusAC('loading'))
-        dispatch(disableButton(true))
-        cardsAPI.changeValueCard(card)
-            .then(res => {
-                dispatch(setNewValueCard(res.data))
-                dispatch(disableButton(false))
-                dispatch(getNewCardsTC(actualIdCard))
-            })
-            .catch((e) => {
-                dispatch(setErrorProfilePage(e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console')
-                ))
-                dispatch(disableButtonAC(false))
-            })
-            .finally(() => {
-                    dispatch(setRequestStatusAC('success'))
-                }
-            )
-    }
-}
-
-export const changeGradeCard = (card_id: string, grade: null | number) => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, AppActionsType>, getState: () => AppRootStateType) => {
-        cardsAPI.changeGradeCard(card_id, grade)
-            .then(res => {
-            })
-            .catch((e) => {
-                dispatch(setErrorProfilePage(e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console')
-                ))
-            })
-            .finally(() => {
-                    dispatch(setRequestStatusAC('success'))
-                }
-            )
-    }
+export const changeGradeCardTC = (card_id: string, grade: null | number) => (dispatch: Dispatch) => {
+    dispatch(setRequestStatusAC('loading'))
+    cardsAPI.changeGradeCard(card_id, grade)
+        .then(res => {
+            dispatch(setRequestStatusAC('success'))
+        })
+        .catch((e) => {
+            dispatch(setErrorProfilePage(e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
+            ))
+            dispatch(setRequestStatusAC('success'))
+        })
 }
 
 export default cardsReducer

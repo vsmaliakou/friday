@@ -4,17 +4,16 @@ import {CardType, newValueCardType} from '../../../../dal/packs/cardsAPI';
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
 import {DeleteWindow} from "../../../common/DeleteWindow/DeleteWindow";
 import {useDispatch} from "react-redux";
-import {deleteCardTC, getNewValueForCard} from "../../../../bll/reducers/cards-reducer";
+import {deleteCardTC, getNewValueForCardTC} from "../../../../bll/reducers/cards-reducer";
 import RatingCard from '../../../common/Rating/RatingCard';
 
 type CardsPropsType = {
     cards: Array<CardType>
     idUser: string | undefined
-    disableButton: boolean
-    idUserPack: string
+    packUserId: string
 }
 
-export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, idUserPack}) => {
+export const Cards: React.FC<CardsPropsType> = ({idUser, cards, packUserId}) => {
 
     const [deleteWinOpened, setDeleteWinOpened] = useState(false)
     const [addWinEdit, setAddWinEdit] = useState(false)
@@ -40,7 +39,7 @@ export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, i
             question: newQuestion,
             answer: newAnswer
         }
-        dispatch(getNewValueForCard(newValueCard))
+        dispatch(getNewValueForCardTC(newValueCard))
         setAddWinEdit(false)
     }
     const closeWindowCallback = () => {
@@ -70,22 +69,20 @@ export const Cards: React.FC<CardsPropsType> = ({idUser, cards, disableButton, i
                             <RatingCard card_id={cards._id}
                                         grade={cards.grade}
                             />
-                            {/*{cards.grade}*/}
                         </span></th>
                         {
-                            idUserPack === idUser
+                            packUserId === idUser
                                 ? <th className={s.item}>
                                     <button
                                         className={s.btn}
                                         style={{backgroundColor: "#F1453D"}}
                                         onClick={onClickHandleDelete}
-                                        disabled={disableButton}>Delete
+                                    >Delete
                                     </button>
                                     <button
                                         className={s.btn}
                                         style={{backgroundColor: "#D7D8EF"}}
-                                        onClick={openWindowEditCard}
-                                        disabled={disableButton}>Edit
+                                        onClick={openWindowEditCard}                                    >Edit
                                     </button>
                                 </th>
                                 : null

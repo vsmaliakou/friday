@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Filter.module.scss';
-import {getCardsPacksTC, setUserIdAC} from "../../../../../../bll/reducers/cardsPacks-reducer";
+import {getCardsPacksTC, setUserIdAC} from "../../../../../bll/reducers/cardsPacks-reducer";
 import {useDispatch} from "react-redux";
-import {LoginInitialStateType} from "../../../../../../bll/reducers/login-reducer";
-import SuperDoubleRange from "../../../../../common/SuperDoubleRange/SuperDoubleRange";
+import {LoginInitialStateType} from "../../../../../bll/reducers/login-reducer";
+import SuperDoubleRange from "../../../../common/SuperDoubleRange/SuperDoubleRange";
 
 type FilterPropsType = {
     auth: LoginInitialStateType

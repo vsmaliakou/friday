@@ -1,63 +1,34 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import s from "../../../common/Table/Table.module.scss";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect, useParams} from "react-router-dom";
 import {AppRootStateType} from "../../../../bll/store";
-import {authTC} from "../../../../bll/reducers/profile-reducer";
-import {createNewCardTC, getNewCardsTC} from '../../../../bll/reducers/cards-reducer';
+import {createNewCardTC} from '../../../../bll/reducers/cards-reducer';
 import {Cards} from "./Cards";
 import {CardType} from "../../../../dal/packs/cardsAPI";
-import {NewCardType} from "./AddNewCard/AddNewCardContainer";
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
 
-export const CardsContainer = () => {
+type PropsType = {
+    auth: LoginInitialStateType
+    cardsPack_id: string
+}
 
-    const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
+export const CardsContainer: React.FC<PropsType> = ({auth, cardsPack_id}) => {
+
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards)
-    const idUserPack = useSelector<AppRootStateType, string>(state => state.cards.idUserCards)
-    const disableButton = useSelector<AppRootStateType, boolean>(state => state.cards.buttonDisable)
+    const packUserId = useSelector<AppRootStateType, string>(state => state.cards.packUserId)
 
     const dispatch = useDispatch()
 
-    //createNewCard
     const [question, setQuestion] = useState('')
     const [answer, setAnswer] = useState('')
     const [addWinOpened, setAddWinOpened] = useState(false)
-
-    const {_id} = useParams<{ _id: string }>()
-
-    //createNewCard
-    const card: NewCardType = {
-        cardsPack_id: _id,
-        question: question,
-        answer: answer,
-        shots: 0,
-        rating: 0,
-        answerImg: '',
-        questionImg: '',
-        questionVideo: '',
-        answerVideo: '',
-        type: '',
-    }
-
-    useEffect(() => {
-        if (!auth.auth) {
-            dispatch(authTC())
-        } else {
-            dispatch(getNewCardsTC(_id))
-        }
-    }, [])
-
-    if (!auth.auth) {
-        return <Redirect to={'/login'}/>
-    }
 
     const openWindowAddCard = () => {
         setAddWinOpened(true)
     }
     const addCardCallback = () => {
-        dispatch(createNewCardTC(card))
+        dispatch(createNewCardTC({cardsPack_id, question, answer}))
         setAddWinOpened(false)
     }
     const closeWindowCallback = () => {
@@ -82,19 +53,17 @@ export const CardsContainer = () => {
                     </select>
                 </th>
                 <th className={s.col}>Grade</th>
-                {idUserPack === auth.dataUser?._id
+                {packUserId === auth.dataUser?._id
                     ? <th className={s.col}>
                         <button className={s.btnAdd} onClick={openWindowAddCard}>Add card</button>
                     </th>
                     : null
                 }
             </tr>
-
             <Cards
                 cards={cards}
                 idUser={auth.dataUser?._id}
-                idUserPack={idUserPack}
-                disableButton={disableButton}
+                packUserId={packUserId}
             />
             {addWinOpened &&
             <AddWindow

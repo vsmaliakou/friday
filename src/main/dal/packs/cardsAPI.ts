@@ -1,5 +1,4 @@
 import {instance} from "../instance";
-import {NewCardType} from "../../ui/components/packs/cards/AddNewCard/AddNewCardContainer";
 
 export type CardType = {
     answer: string
@@ -37,23 +36,23 @@ export type newValueCardType = {
     question: string
     answer: string
 }
-export type newGradeCardType = {
-    grade: number
-    card_id: string
+type NewCardType = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    rating?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+    type?: string
 }
 
 export const cardsAPI = {
-    getCards(id: string/*min: number, max: number, sortCards: string, page: number, pageCount: number*/) {
-        return instance.get<GetCardsType>(`cards/card?cardsPack_id=${id}`,
-            //     params: {
-            //         min,
-            //         max,
-            //         sortCards,
-            //         page,
-            //         pageCount
-            //     }
-            // })
-        )
+    getCards(cardAnswer: string, cardQuestion: string, cardsPack_id: string, min: number, max: number, sortCards: string, page: number, pageCount: number) {
+        return instance.get<GetCardsType>(`cards/card?cardsPack_id=${cardsPack_id}`,({params: {cardAnswer, cardQuestion, min, max, sortCards, page, pageCount}}))
     },
     createCard(card: NewCardType) {
         return instance.post<CardType>(`cards/card?cardsPack_id=${card.cardsPack_id}`, {card})
