@@ -1,21 +1,24 @@
 import React, {ChangeEvent, useState} from 'react'
 import {Slider} from "@material-ui/core";
-import s from './SuperRange.module.css'
+import s from './DoubleRange.module.css'
 import {useDispatch} from "react-redux";
 import {getCardsPacksTC, setMinMaxValueAC} from "../../../bll/reducers/cardsPacks-reducer";
 
-type SuperDoubleRangePropsType = {}
-
-const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = () => {
+const DoubleRange = () => {
 
     const dispatch = useDispatch()
 
     const [value, setValue] = useState<number[]>([0, 100])
+
+    let delayTimer: any
     const handleChange = (event: ChangeEvent<{}>, newValue: number | number[]) => {
-        setValue(newValue as number[])
-        dispatch(setMinMaxValueAC(newValue as number[]))
-        dispatch(getCardsPacksTC())
-    };
+        clearTimeout(delayTimer)
+        delayTimer = setTimeout(() => {
+            setValue(newValue as number[])
+            dispatch(setMinMaxValueAC(newValue as number[]))
+            dispatch(getCardsPacksTC())
+        }, 2000)
+    }
 
     return (
         <span className={s.range}>
@@ -30,4 +33,4 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = () => {
     )
 }
 
-export default SuperDoubleRange
+export default DoubleRange

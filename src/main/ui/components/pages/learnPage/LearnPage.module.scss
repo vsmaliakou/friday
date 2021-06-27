@@ -2,6 +2,7 @@
 @import '../../../../../styles/sass/vars';
 
 .card{
+  width: 500px;
   margin: 0 auto;
   @include flex(flex,column, center,center);
   max-width: 575px;
@@ -15,7 +16,7 @@
     margin: 20px 30px;
     .span{
       display: block;
-      @include text (16px, 600, 27px, $textColor);
+      @include text (16px, 400, 27px, $textColor);
       &:nth-child(2){
         margin-top: 15px;
       }

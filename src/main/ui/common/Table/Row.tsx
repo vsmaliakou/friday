@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
 import {removeCardsPackTC, updateCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
 import {AddWindow} from "../AddWindow/AddWindow";
+import Button from "../Button/Button";
 
 type CardsPackPropsType = {
     auth: LoginInitialStateType
@@ -54,7 +55,7 @@ export const Row: React.FC<CardsPackPropsType> = ({auth}) => {
                         setRemovePackId(p._id)
                     }
 
-                    return <tr className={s.row}>
+                    return <tr className={s.row} key={p._id}>
                         <th className={s.col}>
                             <NavLink to={`/packs/${p._id}`} className={s.colSpan}>{p.name}</NavLink>
                         </th>
@@ -70,12 +71,16 @@ export const Row: React.FC<CardsPackPropsType> = ({auth}) => {
                         {
                             auth.dataUser?._id === p.user_id
                                 ? <th className={s.item}>
-                                    <button className={s.btn} onClick={deleteWindowOpened}
-                                            style={{backgroundColor: "#F1453D"}}>Delete
-                                    </button>
-                                    <button className={s.btn} onClick={updatePack}
-                                            style={{backgroundColor: "#D7D8EF"}}>Edit
-                                    </button>
+                                    <Button
+                                        className={s.btn}
+                                        onClick={deleteWindowOpened}
+                                        style={{backgroundColor: "#F1453D"}}
+                                    >Delete</Button>
+                                    <Button
+                                        className={s.btn}
+                                        onClick={updatePack}
+                                        style={{backgroundColor: "#D7D8EF"}}
+                                    >Edit</Button>
                                     {p.cardsCount > 0 && <NavLink to={`/learn/${p._id}`} className={s.link}>Learn</NavLink>}
                                 </th>
                                 : <th className={s.item}>

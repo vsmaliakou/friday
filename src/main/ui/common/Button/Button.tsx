@@ -2,18 +2,7 @@ import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-type SuperButtonPropsType = DefaultButtonPropsType & {
-    red?: boolean
-    error?: string|null
-}
-
-const SuperButton: React.FC<SuperButtonPropsType> = (
-    {
-        error, red, className,
-        ...restProps
-    }
-) => {
-
+const Button: React.FC<DefaultButtonPropsType> = ({className, ...restProps}) => {
     return (
         <button
             className={className}
@@ -22,4 +11,4 @@ const SuperButton: React.FC<SuperButtonPropsType> = (
     );
 }
 
-export default SuperButton;
+export default Button;

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunk, {ThunkAction} from "redux-thunk";
+import thunk from "redux-thunk";
 import loginReducer, {LoginActionType} from "./reducers/login-reducer";
 import registerReducer, {RegisterActionType} from "./reducers/register-reducer";
 import profileReducer, {ProfileActionType} from "./reducers/profile-reducer";
@@ -35,8 +35,6 @@ export type AppActionsType = LoginActionType
     | AppActionType
     | PacksActionType
     | CardsActionType
-
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AppActionsType>
 
 //@ts-ignore
 window.store = store

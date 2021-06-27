@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {setErrorAC, setRegistrationDataTC} from "../../../../bll/reducers/register-reducer";
-import style from "./RegisterPage_vit.module.css";
+import style from "./Register.module.scss";
 import {AppRootStateType} from "../../../../bll/store";
 import {Redirect, useHistory} from "react-router-dom";
 import {Register} from "./Register";

@@ -7,6 +7,7 @@ import {createNewCardTC} from '../../../../bll/reducers/cards-reducer';
 import {Cards} from "./Cards";
 import {CardType} from "../../../../dal/packs/cardsAPI";
 import {AddWindow} from "../../../common/AddWindow/AddWindow";
+import Button from "../../../common/Button/Button";
 
 type PropsType = {
     auth: LoginInitialStateType
@@ -55,7 +56,7 @@ export const CardsContainer: React.FC<PropsType> = ({auth, cardsPack_id}) => {
                 <th className={s.col}>Grade</th>
                 {packUserId === auth.dataUser?._id
                     ? <th className={s.col}>
-                        <button className={s.btnAdd} onClick={openWindowAddCard}>Add card</button>
+                        <Button className={s.btnAdd} onClick={openWindowAddCard}>Add card</Button>
                     </th>
                     : null
                 }
@@ -75,7 +76,6 @@ export const CardsContainer: React.FC<PropsType> = ({auth, cardsPack_id}) => {
                 closeCallback={closeWindowCallback}
             />}
             {cards?.length <= 0 && <p>This pack is empty.</p>}
-
         </table>
     )
 }

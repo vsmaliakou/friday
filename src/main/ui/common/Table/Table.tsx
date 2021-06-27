@@ -6,6 +6,7 @@ import {AddWindow} from "../AddWindow/AddWindow";
 import {addNewCardsPackTC} from "../../../bll/reducers/cardsPacks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
+import Button from "../Button/Button";
 
 type CardsPacksContainerType = {
     auth: LoginInitialStateType
@@ -48,14 +49,12 @@ export const Table: React.FC<CardsPacksContainerType> = ({auth}) => {
                 <th className={s.col}>Created by</th>
                 {userId === auth.dataUser?._id
                     ? <th className={s.col}>
-                        <button className={s.btnAdd} onClick={addWindowOpened}>Add</button>
+                        <Button className={s.btnAdd} onClick={addWindowOpened}>Add</Button>
                     </th>
                     : <th className={s.col}>Actions</th>
                 }
             </tr>
-            <Row
-                auth={auth}
-            />
+            <Row auth={auth}/>
             {addWindow && <AddWindow
                 title="Add new pack"
                 placeholder="Name"

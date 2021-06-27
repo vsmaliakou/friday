@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Rating} from "@material-ui/lab";
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch} from "react-redux";
@@ -25,10 +25,6 @@ const RatingCard: React.FC<RatingCardType> = props => {
     const setNewGradeForCard = (e: ChangeEvent<{}>, value: number | null) => {
         dispatch(changeGradeCardTC(card_id, value))
     }
-
-    // useEffect(() => {
-    //     dispatch(changeGradeCard(card_id, grade))
-    // })
 
     return (
         <Rating className={classes.root}

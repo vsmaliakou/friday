@@ -4,7 +4,6 @@
 .wrap {
   display: flex;
   align-self: center;
-  // margin-left: 20px;
   width: 90%;
   position: relative;
 
@@ -17,14 +16,9 @@
     border-radius: 3px;
     position: relative;
     padding-left: 20px;
-
-    // &::placeholder {
-    //   @include text(14px, 400, 24px, $textColorLight);
-    //   margin-left: 20px;
-    // }
-    
   }
-  .label{
+
+  .label {
     display: inline;
     position: absolute;
     @include text(16px, 400, 24px, $textColorLight);
@@ -32,11 +26,9 @@
     margin-top: 10px;
     margin-left: 20px;
     transition: .5s;
-    // padding: 0 5px;
   }
 
-  .input:focus ~ .label{
+  .input:focus ~ .label {
     margin-top: -12px;
   }
-  
 }

@@ -1,11 +1,8 @@
 import React from 'react';
-import s from './_LoadingSvg.module.scss'
-
-
+import s from './LoadingSvg.module.scss'
 
 export const LoadingSvg = () => {
     return (
-
         <div className={s.loadingWrap}>
             <div className={s.cssloadDots}>
                 <div className={s.cssloadDot}></div>
@@ -14,7 +11,6 @@ export const LoadingSvg = () => {
                 <div className={s.cssloadDot}></div>
                 <div className={s.cssloadDot}></div>
             </div>
-
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter id="goo">

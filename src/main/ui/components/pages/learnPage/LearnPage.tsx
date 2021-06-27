@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
 import {CardType} from "../../../../dal/packs/cardsAPI";
 import {AppRootStateType} from "../../../../bll/store";
-import {getNewCardsTC} from "../../../../bll/reducers/cards-reducer";
+import {getNewCardsTC, setCardsPackIdAC} from "../../../../bll/reducers/cards-reducer";
+import Button from "../../../common/Button/Button";
 
 const grades = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer'];
 
@@ -51,11 +52,11 @@ export const LearnPage = () => {
 
     useEffect(() => {
         if (first) {
+            dispatch(setCardsPackIdAC(_id))
             dispatch(getNewCardsTC());
             setFirst(false);
         }
         if (cards.length > 0) setCard(getCard(cards));
-
         return () => {
             console.log('LearnContainer useEffect off');
         }
@@ -79,11 +80,12 @@ export const LearnPage = () => {
             </div>
             <div className={s.spanWrap}>
                 <span className={s.span}> <strong>Question: </strong>“{card.question}”</span>
-
             </div>
             {isChecked
                 ? <>
-                    <span className={s.span}> <strong>Answer: </strong>“{card.answer}”</span>
+                    <div className={s.spanWrap}>
+                        <span className={s.span}> <strong>Answer: </strong>“{card.answer}”</span>
+                    </div>
                     <form className={s.form}>
                         <span className={s.listSpan}>Rate yourself:</span>
                         <ul className={s.list}>
@@ -96,13 +98,13 @@ export const LearnPage = () => {
                         </ul>
                     </form>
                     <div className={s.btnWrap}>
-                        <button className={s.btn} onClick={closeLearnPage}>Cancel</button>
-                        <button className={s.btn} onClick={onNext}>Next</button>
+                        <Button className={s.btn} onClick={closeLearnPage}>Cancel</Button>
+                        <Button className={s.btn} onClick={onNext}>Next</Button>
                     </div>
                 </>
                 : <div className={s.btnWrap}>
-                    <button className={s.btn} onClick={closeLearnPage}>Cancel</button>
-                    <button className={s.btn} onClick={() => setIsChecked(true)}>Show answer</button>
+                    <Button className={s.btn} onClick={closeLearnPage}>Cancel</Button>
+                    <Button className={s.btn} onClick={() => setIsChecked(true)}>Show answer</Button>
                 </div>
             }
         </div>

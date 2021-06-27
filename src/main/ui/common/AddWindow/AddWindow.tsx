@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import s from './AddWindow.module.scss';
+import Button from "../Button/Button";
 
 type PropsType = {
     title: string
@@ -26,8 +27,8 @@ export const AddWindow: React.FC<PropsType> = ({title, placeholder, newTitleCall
                    <input className={s.input} type="text" onChange={answerCallback}/>
                </div>}
                 <div className={s.btnWrap}>
-                    <button className={s.btn} onClick={closeCallback}>Cancel</button>
-                    <button className={s.btn} onClick={addCallback}>Save</button>
+                    <Button className={s.btn} onClick={closeCallback}>Cancel</Button>
+                    <Button className={s.btn} onClick={addCallback}>Save</Button>
                 </div>
            </div>
         </div>

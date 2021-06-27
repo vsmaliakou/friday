@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './DeleteWindow.module.scss';
+import {Button} from "@material-ui/core";
 
 type PropsType = {
     title: string
@@ -19,8 +20,8 @@ export const DeleteWindow: React.FC<PropsType> = (props) => {
                     Do you really want to remove this {props.name}?
                 </span>
                 <div className={s.btnWrap}>
-                    <button className={s.btn} onClick={() => props.closeCallback()}>Cancel</button>
-                    <button className={s.btn} onClick={() => props.removeCallback()}>Delete</button>
+                    <Button className={s.btn} onClick={() => props.closeCallback()}>Cancel</Button>
+                    <Button className={s.btn} onClick={() => props.removeCallback()}>Delete</Button>
                 </div>
             </div>
         </div>

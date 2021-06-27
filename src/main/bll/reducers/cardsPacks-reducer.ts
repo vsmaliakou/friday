@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {cardsPacksAPI, CardsPacksType, NewCardsPackType} from "../../dal/packs/cardsPacksAPI";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType, AppRootStateType} from "../store";
+import {setRequestStatusAC} from "./app-reduser";
 
 export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof updateCardsPackAC>
@@ -11,6 +12,7 @@ export type PacksActionType = ReturnType<typeof getCardsPacksAC>
     | ReturnType<typeof setUserIdAC>
     | ReturnType<typeof setSearchAC>
     | ReturnType<typeof setMinMaxValueAC>
+    | ReturnType<typeof setErrorAC>
 export type PacksInitialStateType = typeof initialState
 
 let initialState = {
@@ -22,7 +24,8 @@ let initialState = {
     page: 1,
     pageCount: 5,
     user_id: "",
-    totalPacksCount: 5
+    totalPacksCount: 5,
+    error: ""
 }
 
 const cardsPacksReducer = (state = initialState, action: PacksActionType): PacksInitialStateType => {
@@ -49,6 +52,8 @@ const cardsPacksReducer = (state = initialState, action: PacksActionType): Packs
             return {...state, packName: action.title}
         case 'CARDS/PACKS/SET-MIN-MAX-VALUE':
             return {...state, min: action.newMin, max: action.newMax}
+        case 'CARDS/PACKS/SET-ERROR':
+            return {...state, error: action.error}
         default:
             return state
     }
@@ -62,6 +67,7 @@ export const setCurrentPageAC = (pageNumber: number) => ({type: 'CARDS/PACKS/SET
 export const setUserIdAC = (userId: string) => ({type: 'CARDS/PACKS/SET-USER-ID', userId} as const)
 export const setSearchAC = (title: string) => ({type: 'CARDS/PACKS/SET-SEARCH', title} as const)
 export const setMinMaxValueAC = ([newMin, newMax]: number[]) => ({type: 'CARDS/PACKS/SET-MIN-MAX-VALUE', newMin, newMax} as const)
+export const setErrorAC = (error: string) => ({type: 'CARDS/PACKS/SET-ERROR', error} as const)
 
 export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
@@ -74,13 +80,16 @@ export const getCardsPacksTC = () => (dispatch: Dispatch, getState: () => AppRoo
     const pageCount = state.packs.pageCount
     const user_id = state.packs.user_id
 
+    dispatch(setRequestStatusAC('loading'))
     return cardsPacksAPI.getCardsPacks(packName, min, max, sortPacks, page, pageCount, user_id)
         .then(response => {
             dispatch(setTotalPacksCountAC(response.data.cardPacksTotalCount))
             dispatch(getCardsPacksAC(response.data.cardPacks))
+            dispatch(setRequestStatusAC('success'))
         })
         .catch(e => {
-            console.log(e.response.data.error)
+            dispatch(setErrorAC(e.response.data.error))
+            dispatch(setRequestStatusAC('success'))
         })
 }
 export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
@@ -89,7 +98,7 @@ export const addNewCardsPackTC = (cardsPack: NewCardsPackType) => (dispatch: Thu
             dispatch(getCardsPacksTC())
         })
         .catch(e => {
-            console.log(e.response.data.error)
+            dispatch(setErrorAC(e.response.data.error))
         })
 }
 export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
@@ -98,7 +107,7 @@ export const removeCardsPackTC = (cardsPackId: string) => (dispatch: ThunkDispat
             dispatch(getCardsPacksTC())
         })
         .catch(e => {
-            console.log(e.response.data.error)
+            dispatch(setErrorAC(e.response.data.error))
         })
 }
 export const updateCardsPackTC = (_id: string, name: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
@@ -107,7 +116,7 @@ export const updateCardsPackTC = (_id: string, name: string) => (dispatch: Thunk
             dispatch(getCardsPacksTC())
         })
         .catch(e => {
-            console.log(e.response.data.error)
+            dispatch(setErrorAC(e.response.data.error))
         })
 }
 

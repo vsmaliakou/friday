@@ -6,6 +6,7 @@ import {DeleteWindow} from "../../../common/DeleteWindow/DeleteWindow";
 import {useDispatch} from "react-redux";
 import {deleteCardTC, getNewValueForCardTC} from "../../../../bll/reducers/cards-reducer";
 import RatingCard from '../../../common/Rating/RatingCard';
+import Button from "../../../common/Button/Button";
 
 type CardsPropsType = {
     cards: Array<CardType>
@@ -66,24 +67,24 @@ export const Cards: React.FC<CardsPropsType> = ({idUser, cards, packUserId}) => 
                         <th className={s.col}><span className={s.colSpan}>{cards.answer}</span></th>
                         <th className={s.col}><span className={s.colSpan}>{cards.updated}</span></th>
                         <th className={s.col}><span className={s.colSpan}>
-                            <RatingCard card_id={cards._id}
-                                        grade={cards.grade}
+                            <RatingCard
+                                card_id={cards._id}
+                                grade={cards.grade}
                             />
                         </span></th>
                         {
                             packUserId === idUser
                                 ? <th className={s.item}>
-                                    <button
+                                    <Button
                                         className={s.btn}
                                         style={{backgroundColor: "#F1453D"}}
                                         onClick={onClickHandleDelete}
-                                    >Delete
-                                    </button>
-                                    <button
+                                    >Delete</Button>
+                                    <Button
                                         className={s.btn}
                                         style={{backgroundColor: "#D7D8EF"}}
-                                        onClick={openWindowEditCard}                                    >Edit
-                                    </button>
+                                        onClick={openWindowEditCard}
+                                    >Edit</Button>
                                 </th>
                                 : null
                         }

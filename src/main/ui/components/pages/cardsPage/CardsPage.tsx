@@ -4,12 +4,11 @@ import {
     getNewCardsTC,
     setCardsPackIdAC,
     setCurrentPageCardsAC,
-    setPageCountCardsAC, setSearchCardsAC,
+    setPageCountCardsAC,
+    setSearchCardsAC,
 } from "../../../../bll/reducers/cards-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
-import {LoadingSvg} from "../../../common/Loading/LoadingSvg";
-import {RequestStatusType} from "../../../../bll/reducers/app-reduser";
 import {CardsContainer} from "./CardsContainer";
 import {NavLink, Redirect, useParams} from "react-router-dom";
 import {Paginator} from "../../../common/Paginator/Paginator";
@@ -17,30 +16,17 @@ import {authTC} from "../../../../bll/reducers/profile-reducer";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import Search from '../../../common/Search/Search';
 
-export const CardsPage: React.FC = () => {
+type PropsType = {
+    auth: LoginInitialStateType
+}
 
-    const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
+export const CardsPage: React.FC<PropsType> = ({auth}) => {
+
     const totalCardsCount = useSelector<AppRootStateType, number>(state => state.cards.cardsTotalCount)
     const pageSize = useSelector<AppRootStateType, number>(state => state.cards.pageCount)
     const currentPage = useSelector<AppRootStateType, number>(state => state.cards.page)
-    const loading = useSelector<AppRootStateType, RequestStatusType>(state => state.app.requestStatus)
 
     const dispatch = useDispatch()
-
-    const searchCallback = (title: string) => {
-        dispatch(setSearchCardsAC(title))
-        dispatch(getNewCardsTC())
-    }
-
-    const onPageChanged = (pageNumber: number) => {
-        dispatch(setCurrentPageCardsAC(pageNumber))
-        dispatch(getNewCardsTC())
-    }
-    const setPageCount = (e: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setPageCountCardsAC(Number(e.currentTarget.value)))
-        dispatch(getNewCardsTC())
-    }
-
     const {_id} = useParams<{ _id: string }>()
 
     useEffect(() => {
@@ -52,13 +38,30 @@ export const CardsPage: React.FC = () => {
         }
     }, [])
 
+    let delayTimer: any
+    const searchCallback = (title: string) => {
+        clearTimeout(delayTimer)
+        delayTimer = setTimeout(() => {
+            dispatch(setSearchCardsAC(title))
+            dispatch(getNewCardsTC())
+        }, 2000)
+    }
+
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(setCurrentPageCardsAC(pageNumber))
+        dispatch(getNewCardsTC())
+    }
+    const setPageCount = (e: ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setPageCountCardsAC(Number(e.currentTarget.value)))
+        dispatch(getNewCardsTC())
+    }
+
     if (!auth.auth) {
         return <Redirect to={'/login'}/>
     }
 
     return (
         <div className={s.main}>
-            {loading === "loading" ? <LoadingSvg/> : null}
             <div className={s.content}>
                 <NavLink to={'/packs'} className={s.packListTitle}><h2>Pack Name</h2></NavLink>
                 <Search searchCallback={searchCallback}/>

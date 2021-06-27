@@ -95,37 +95,30 @@ export const getNewCardsTC = () => (dispatch: Dispatch, getState: () => AppRootS
         })
 }
 export const createNewCardTC = (card: NewCardType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
-    dispatch(setRequestStatusAC('loading'))
     cardsAPI.createCard(card)
         .then(res => {
             dispatch(getNewCardsTC())
-            dispatch(setRequestStatusAC('success'))
         })
         .catch((e) => {
             dispatch(setErrorProfilePage(e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console')
             ))
-            dispatch(setRequestStatusAC('success'))
         })
 }
 export const deleteCardTC = (idCard: string) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
-    dispatch(setRequestStatusAC('loading'))
     cardsAPI.deleteCard(idCard)
         .then(res => {
             dispatch(getNewCardsTC())
-            dispatch(setRequestStatusAC('success'))
         })
         .catch((e) => {
             dispatch(setErrorProfilePage(e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console')
             ))
-            dispatch(setRequestStatusAC('success'))
         })
 }
 export const getNewValueForCardTC = (card: newValueCardType) => (dispatch: ThunkDispatch<AppRootStateType, null, AppActionsType>) => {
-    dispatch(setRequestStatusAC('loading'))
     cardsAPI.changeValueCard(card)
         .then(res => {
             dispatch(getNewCardsTC())
@@ -135,7 +128,6 @@ export const getNewValueForCardTC = (card: newValueCardType) => (dispatch: Thunk
                 ? e.response.data.error
                 : (e.message + ', more details in the console')
             ))
-            dispatch(setRequestStatusAC('success'))
         })
 }
 export const changeGradeCardTC = (card_id: string, grade: null | number) => (dispatch: Dispatch) => {

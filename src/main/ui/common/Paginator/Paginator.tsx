@@ -35,20 +35,20 @@ export const Paginator: React.FC<PaginatorType> = ({
                 {portionNumber > 1 &&
                 <a className={s.arrow} onClick={() => {
                     setPortionNumber(portionNumber - 1)
-                }}></a>}
+                }}/>}
                 {pages
                     .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map((p) => {
                         return <span key={p}
                             className={currentPage === p ? s.active : s.numb}
-                                     onClick={(e) => {
+                                     onClick={() => {
                                          onPageChanged(p)
                                      }}>{p}</span>
                     })}
                 {portionCount > portionNumber &&
                 <a className={s.arrowEnd} onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}></a>}
+                }}/>}
             </div>
 
             <div className={s.selectWrap}>
@@ -60,7 +60,6 @@ export const Paginator: React.FC<PaginatorType> = ({
                 </select>
                 <span className={s.selectSpan}>Cards per Page</span>
             </div>
-
         </div>
     )
 }

@@ -1,23 +1,26 @@
 import React, {ChangeEvent, useEffect} from 'react';
 import s from './PacksPage.module.scss'
-import { Filter } from './filter/Filter';
+import {Filter} from './filter/Filter';
 import {Table} from "../../../common/Table/Table";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../../bll/store";
 import {
     getCardsPacksTC,
     setCurrentPageAC,
-    setPageCountAC, setSearchAC,
+    setPageCountAC,
+    setSearchAC,
     setUserIdAC
 } from "../../../../bll/reducers/cardsPacks-reducer";
 import {Paginator} from "../../../common/Paginator/Paginator";
 import {LoginInitialStateType} from "../../../../bll/reducers/login-reducer";
 import Search from "../../../common/Search/Search";
 
+type PropsType = {
+    auth: LoginInitialStateType
+}
 
-export const PacksPage = () => {
+export const PacksPage: React.FC<PropsType> = ({auth}) => {
 
-    const auth = useSelector<AppRootStateType, LoginInitialStateType>(state => state.login)
     const pageSize = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const totalPacksCount = useSelector<AppRootStateType, number>(state => state.packs.totalPacksCount)
     const currentPage = useSelector<AppRootStateType, number>(state => state.packs.page)
@@ -29,9 +32,13 @@ export const PacksPage = () => {
         dispatch(getCardsPacksTC())
     }, [])
 
+    let delayTimer: any
     const searchCallback = (title: string) => {
-        dispatch(setSearchAC(title))
-        dispatch(getCardsPacksTC())
+        clearTimeout(delayTimer)
+        delayTimer = setTimeout(() => {
+            dispatch(setSearchAC(title))
+            dispatch(getCardsPacksTC())
+        }, 2000)
     }
 
     const onPageChanged = (pageNumber: number) => {

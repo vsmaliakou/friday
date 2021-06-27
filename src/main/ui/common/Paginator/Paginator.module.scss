@@ -1,5 +1,4 @@
 @import '../../../../styles/sass/mixins';
-
 @import '../../../../styles/sass/vars';
 
 a {
@@ -37,28 +36,24 @@ a {
       @include flex(flex, row, center, center);
       margin-right: 10px;
       font-size: 12px;
-      border-radius:2px;
+      border-radius: 2px;
       transition: .5s;
 
       &:hover {
         color: #fff;
         background-color: rgb(53, 61, 184);
-
-        
-        
       }
-      
     }
+
     .active {
       width: 24px;
       height: 24px;
       @include flex(flex, row, center, center);
       margin-right: 10px;
       font-size: 12px;
-      border-radius:2px;
+      border-radius: 2px;
       color: #fff;
       background-color: rgb(53, 61, 184);
-      
     }
 
     .arrowEnd {
@@ -76,21 +71,22 @@ a {
         top: 8px;
         right: -15px;
       }
-    ;
     }
   }
-  .selectWrap{
-    .selectSpan{
+
+  .selectWrap {
+    .selectSpan {
       margin-right: 10px;
       font-size: 12px;
-      &:nth-child(3){
+
+      &:nth-child(3) {
         margin-left: 10px;
       }
     }
-    .select{
-      font-size: 12px;
-      border: 2px solid  #635D80;
 
+    .select {
+      font-size: 12px;
+      border: 2px solid #635D80;
     }
   }
 }
